@@ -994,21 +994,8 @@
                     <div class="wheel-center">✨</div>
                 </div>
 
-                <div class="controls">
-                    <button class="game-btn" onclick="openCodeModal('SWEET', 5, '💗 Naye&apos;s Sweet Scoop')">💗 Sweet
-                        Scoop</button>
-                    <button class="game-btn" onclick="openCodeModal('GLAM', 10, '💖 Naye&apos;s Glam Scoop')">💖 Glam
-                        Scoop</button>
-                    <button class="game-btn" onclick="openCodeModal('GLOW', 15, '✨ Naye&apos;s Glow Scoop')">✨ Glow
-                        Scoop</button>
-                    <button class="game-btn" onclick="openCodeModal('MEGA', 22, '👑 Mega Naye Scoop')">👑 Mega
-                        Scoop</button>
-                    <button class="game-btn" onclick="openCodeModal('ULTRA', 26, '🌟 Ultimate Naye Scoop')">🌟 Ultimate
-                        Scoop</button>
-                    <button class="game-btn" onclick="openCodeModal('QUEEN', 32, '👑 Naye&apos;s Queen Luxe')">👑 Queen
-                        Luxe</button>
-                    <button class="game-btn" onclick="openCodeModal('VIPD', 40, '💎 Naye&apos;s VIP Diamond')">💎 VIP
-                        Diamond</button>
+                <div class="controls" id="gameButtonsControls">
+                    <!-- Se llena con JS a partir de db.promo.tiers (los mismos niveles del panel admin) -->
                 </div>
                 <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:8px;">🔒 Se te pedirá el código
                     que te dio Naye al comprar tu scoop</p>
@@ -1140,6 +1127,19 @@
         const db = loadDB();
         const catalogProducts = db.products;
 
+        // Asegura que cada nivel de la promoción tenga código y cantidad de premios,
+        // igual que en el panel admin, para que ambas páginas queden sincronizadas.
+        function ensureTierCodeFields() {
+            (db.promo.tiers || []).forEach((tier, i) => {
+                if (!tier.code) tier.code = 'NIVEL' + (i + 1);
+                if (!tier.count) {
+                    const match = (tier.desc || '').match(/(\d+)/);
+                    tier.count = match ? parseInt(match[1], 10) : 10;
+                }
+            });
+        }
+        ensureTierCodeFields();
+
         function productVisual(prod, sizeClass) {
             if (prod.image) return `<img src="${prod.image}" alt="${prod.name}">`;
             return prod.emoji || '🎁';
@@ -1172,6 +1172,18 @@
                     </button>
                 `;
                 container.appendChild(card);
+            });
+        }
+
+        function renderGameButtons() {
+            const wrap = document.getElementById('gameButtonsControls');
+            wrap.innerHTML = '';
+            (db.promo.tiers || []).forEach(tier => {
+                const btn = document.createElement('button');
+                btn.className = 'game-btn';
+                btn.innerHTML = tier.name;
+                btn.onclick = () => openCodeModal(tier.code, tier.count, tier.name);
+                wrap.appendChild(btn);
             });
         }
 
@@ -1496,6 +1508,7 @@
 
         renderEditableTexts();
         renderPromo();
+        renderGameButtons();
         renderVisualBoard();
         renderProducts();
         buildWheel();
