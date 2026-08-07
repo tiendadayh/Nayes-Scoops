@@ -792,7 +792,7 @@
         fillWheelEggForm();
     }
 
-    function saveAll() {
+    async function saveAll() {
         db.announcement = document.getElementById('f-announcement').value;
         db.whatsapp = document.getElementById('f-whatsapp').value.replace(/[^0-9]/g, '');
         db.hero.title = document.getElementById('f-hero-title').value;
@@ -807,9 +807,22 @@
 
         try {
             localStorage.setItem(DB_KEY, JSON.stringify(db));
-            showToast('✅ Cambios guardados');
         } catch (e) {
-            alert('No se pudo guardar. Es posible que las fotos ocupen demasiado espacio — intenta usar fotos más ligeras.');
+            alert('No se pudo guardar en este dispositivo. Es posible que las fotos ocupen demasiado espacio — intenta usar fotos más ligeras.');
+            console.error(e);
+            return;
+        }
+
+        // Sube la misma información a la nube (Firestore) para que la página
+        // pública (index.html), sin importar en qué celular o computadora se
+        // abra, siempre muestre los mismos niveles, precios y códigos que
+        // configuraste aquí. Sin esto, cada dispositivo solo vería sus propios
+        // valores guardados localmente y los códigos generados no coincidirían.
+        try {
+            await dbFirestore.collection('site_config').doc('main').set(db);
+            showToast('✅ Cambios guardados y sincronizados');
+        } catch (e) {
+            showToast('⚠️ Se guardó en este dispositivo, pero no se sincronizó (revisa tu internet)');
             console.error(e);
         }
     }
@@ -978,13 +991,32 @@
         renderCodesHistory();
     }
 
-    fillGeneralForm();
-    renderTiers();
-    renderProductsAdmin();
-    renderWheelProductsList();
-    fillWheelEggForm();
-    renderCodeTierGrid();
-    renderCodesHistory();
+    // Al abrir el panel, primero intenta traer la última versión guardada en la
+    // nube (por si guardaste cambios desde otro celular o computadora) y si no
+    // hay internet o aún no existe, usa lo guardado en este dispositivo.
+    async function initAdmin() {
+        try {
+            const snap = await dbFirestore.collection('site_config').doc('main').get();
+            if (snap.exists) {
+                const remote = snap.data();
+                if (remote && remote.promo && Array.isArray(remote.promo.tiers) && remote.promo.tiers.length) {
+                    db = remote;
+                    ensureTierCodeFields();
+                    ensureWheelConfig();
+                }
+            }
+        } catch (e) {
+            console.warn('No se pudo obtener la configuración en línea, se usa la guardada en este dispositivo.', e);
+        }
+        fillGeneralForm();
+        renderTiers();
+        renderProductsAdmin();
+        renderWheelProductsList();
+        fillWheelEggForm();
+        renderCodeTierGrid();
+        renderCodesHistory();
+    }
+    initAdmin();
 </script>
 </body>
 </html>

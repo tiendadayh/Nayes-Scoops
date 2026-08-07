@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nayes Beauty & Scoops - Acapulco</title>
 
     <!-- Fuentes e Íconos -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <!-- Librería de Confeti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -95,9 +92,7 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--pink-main);
-        }
+        .nav-links a:hover { color: var(--pink-main); }
 
         .cart-icon-btn {
             position: relative;
@@ -110,14 +105,10 @@
             cursor: pointer;
             font-size: 1.1rem;
             transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(255, 107, 158, 0.2);
+            box-shadow: 0 4px 10px rgba(255,107,158,0.2);
         }
 
-        .cart-icon-btn:hover {
-            transform: scale(1.05);
-            background: var(--pink-main);
-            color: white;
-        }
+        .cart-icon-btn:hover { transform: scale(1.05); background: var(--pink-main); color: white; }
 
         .cart-badge {
             position: absolute;
@@ -159,7 +150,7 @@
             background: white;
             padding: 10px 20px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border: 2px solid var(--pink-light);
         }
 
@@ -220,7 +211,7 @@
             font-family: 'Fredoka', cursive;
             font-size: 1.5rem;
             border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .step-icon {
@@ -261,44 +252,16 @@
             transition: transform 0.2s;
         }
 
-        .scoop-card:hover {
-            transform: translateY(-8px);
-        }
+        .scoop-card:hover { transform: translateY(-8px); }
+        .card-mini { border-color: #ff9fb8; }
+        .card-std { border-color: #81d4fa; }
+        .card-prem { border-color: #ce93d8; }
+        .card-glam { border-color: #ffd54f; }
 
-        .card-mini {
-            border-color: #ff9fb8;
-        }
-
-        .card-std {
-            border-color: #81d4fa;
-        }
-
-        .card-prem {
-            border-color: #ce93d8;
-        }
-
-        .card-glam {
-            border-color: #ffd54f;
-        }
-
-        .scoop-icon {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-
-        .scoop-title {
-            font-family: 'Fredoka', cursive;
-            font-size: 1.5rem;
-            color: var(--text-dark);
-        }
-
-        .scoop-price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--pink-dark);
-            margin: 5px 0;
-        }
-
+        .scoop-icon { font-size: 4rem; margin-bottom: 10px; }
+        .scoop-title { font-family: 'Fredoka', cursive; font-size: 1.5rem; color: var(--text-dark); }
+        .scoop-price { font-size: 2.2rem; font-weight: 700; color: var(--pink-dark); margin: 5px 0; }
+        
         .scoop-items-badge {
             background: var(--pink-light);
             color: var(--pink-dark);
@@ -323,10 +286,7 @@
             box-shadow: 0 4px 15px rgba(255, 107, 158, 0.4);
             transition: transform 0.2s;
         }
-
-        .buy-btn:hover {
-            transform: scale(1.05);
-        }
+        .buy-btn:hover { transform: scale(1.05); }
 
         /* --- TABLA VISUAL DE FIGURITAS (COMO LA IMAGEN) --- */
         .game-wrapper {
@@ -339,13 +299,10 @@
         }
 
         @media (max-width: 900px) {
-            .game-wrapper {
-                grid-template-columns: 1fr;
-            }
+            .game-wrapper { grid-template-columns: 1fr; }
         }
 
-        .board-section,
-        .game-section {
+        .board-section, .game-section {
             background: white;
             border-radius: 30px;
             padding: 30px;
@@ -384,20 +341,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        .visual-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-        }
-
-        .visual-name {
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            line-height: 1.1;
-        }
+        .visual-emoji { font-size: 2.5rem; margin-bottom: 5px; }
+        .visual-name { font-size: 0.75rem; font-weight: bold; color: var(--text-dark); line-height: 1.1; }
 
         /* --- RULETA DE LA SUERTE --- */
         .wheel-wrap {
@@ -413,7 +361,7 @@
             border-radius: 50%;
             border: 8px solid var(--pink-main);
             position: relative;
-            box-shadow: 0 10px 25px rgba(255, 107, 158, 0.35), inset 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(255, 107, 158, 0.35), inset 0 0 15px rgba(0,0,0,0.1);
             transition: transform 3.2s cubic-bezier(0.15, 0.75, 0.2, 1);
         }
 
@@ -429,7 +377,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
-            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
         }
 
         .wheel-pointer {
@@ -440,7 +388,7 @@
             font-size: 1.8rem;
             color: var(--pink-dark);
             z-index: 5;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .wheel-center {
@@ -457,7 +405,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             z-index: 4;
         }
 
@@ -466,21 +414,11 @@
         }
 
         @keyframes pulseCenter {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) scale(1.15);
-            }
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.15); }
         }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        .controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
 
         .game-btn {
             background: white;
@@ -494,17 +432,94 @@
             transition: all 0.2s;
         }
 
-        .game-btn:hover:not(:disabled) {
-            background: var(--pink-light);
-            border-color: var(--pink-main);
-        }
+        .game-btn:hover:not(:disabled) { background: var(--pink-light); border-color: var(--pink-main); }
+        .game-btn:disabled { background: #eee !important; border-color:#ccc; cursor: not-allowed; opacity: 0.7; }
 
-        .game-btn:disabled {
-            background: #eee !important;
-            border-color: #ccc;
-            cursor: not-allowed;
-            opacity: 0.7;
+        /* --- CANJE DE CÓDIGO (Naye Scoop pagado) --- */
+        .redeem-code-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--pink-dark), var(--pink-main));
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 15px rgba(255,107,158,0.35);
+            transition: transform 0.15s;
         }
+        .redeem-code-btn:hover { transform: translateY(-2px); }
+
+        .code-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(74,74,74,0.55);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .code-modal-overlay.open { display: flex; }
+        .code-modal-box {
+            background: white;
+            border-radius: 22px;
+            padding: 28px 24px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            border: 3px solid var(--pink-light);
+            position: relative;
+        }
+        .code-modal-box h3 {
+            font-family: 'Fredoka', cursive;
+            color: var(--pink-dark);
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+        .code-modal-box p { color: #777; font-size: 0.9rem; margin-bottom: 16px; }
+        .code-modal-close {
+            position: absolute;
+            top: 12px; right: 14px;
+            background: none; border: none;
+            font-size: 1.3rem; color: #aaa; cursor: pointer;
+        }
+        #codeModalInput {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--pink-light);
+            border-radius: 14px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--pink-dark);
+            margin-bottom: 8px;
+        }
+        #codeModalInput:focus { outline: none; border-color: var(--pink-main); }
+        .code-modal-error {
+            color: #e53935;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-height: 18px;
+            margin-bottom: 10px;
+        }
+        .code-modal-confirm-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .code-modal-confirm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .basket-container {
             background: #fff;
@@ -532,21 +547,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             border: 2px solid var(--pink-light);
         }
 
         @keyframes popIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         /* --- PRODUCTOS / MERCANCÍA --- */
@@ -564,7 +572,7 @@
             border-radius: 20px;
             padding: 20px 15px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             border: 2px solid var(--pink-light);
             display: flex;
             flex-direction: column;
@@ -582,153 +590,20 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 15px auto;
-            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .product-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .visual-item img {
-            width: 45px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 5px;
-        }
-
-        .wheel-seg img {
-            width: 26px;
-            height: 26px;
-            object-fit: cover;
-            border-radius: 50%;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 100%;
-            max-width: 380px;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
-            z-index: 2000;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+            position: fixed; top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%;
+            background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.15); z-index: 2000;
+            transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px;
         }
-
-        .cart-drawer.open {
-            right: 0;
-        }
-
-        /* --- MODAL DE CÓDIGO PARA GIRAR LA RULETA --- */
-        .code-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(74, 74, 74, 0.55);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .code-modal-overlay.open {
-            display: flex;
-        }
-
-        .code-modal-box {
-            background: white;
-            border-radius: 25px;
-            padding: 30px 25px;
-            max-width: 380px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-            border: 3px solid var(--pink-light);
-            position: relative;
-        }
-
-        .code-modal-box .close-modal-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: none;
-            border: none;
-            font-size: 1.4rem;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        .code-modal-box h3 {
-            font-family: 'Fredoka', cursive;
-            color: var(--pink-dark);
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-        }
-
-        .code-modal-box p {
-            color: #777;
-            font-size: 0.9rem;
-            margin-bottom: 18px;
-        }
-
-        .code-modal-box input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid var(--pink-light);
-            border-radius: 15px;
-            text-align: center;
-            font-size: 1.3rem;
-            letter-spacing: 3px;
-            font-weight: 700;
-            color: var(--pink-dark);
-            text-transform: uppercase;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .code-modal-box input:focus {
-            outline: none;
-            border-color: var(--pink-main);
-        }
-
-        .code-modal-error {
-            color: #e53935;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 10px;
-            min-height: 18px;
-        }
-
-        .code-modal-box .buy-btn {
-            margin-top: 18px;
-        }
-
-        .code-modal-hint {
-            margin-top: 14px;
-            font-size: 0.8rem;
-            color: #999;
-        }
-
+        .cart-drawer.open { right: 0; }
+        
         .whatsapp-share-btn {
-            background: #25D366;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            display: none;
-            text-align: center;
+            background: #25D366; color: white; border: none; width: 100%; padding: 12px;
+            margin-top: 15px; border-radius: 15px; font-weight: bold; font-size: 1rem;
+            cursor: pointer; display: none; text-align:center;
         }
 
         /* --- PROMO DESTACADA: NAYES SCOOPS --- */
@@ -753,7 +628,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
+            background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px);
             background-size: 22px 22px;
             pointer-events: none;
         }
@@ -773,7 +648,7 @@
         .promo-banner-inner h2 {
             font-family: 'Fredoka', cursive;
             font-size: 2.3rem;
-            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.15);
             margin-bottom: 8px;
         }
 
@@ -804,9 +679,7 @@
             position: relative;
         }
 
-        .promo-card:hover {
-            transform: translateY(-6px);
-        }
+        .promo-card:hover { transform: translateY(-6px); }
 
         .promo-card.featured {
             border-color: var(--gold-accent);
@@ -825,7 +698,7 @@
             font-weight: 700;
             padding: 4px 12px;
             border-radius: 20px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
             white-space: nowrap;
         }
 
@@ -873,262 +746,13 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
+        .promo-btn:hover { transform: scale(1.05); }
 
-        .promo-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* ============================================= */
-        /* --- AJUSTES DE DISEÑO PARA CELULAR (MÓVIL) --- */
-        /* ============================================= */
-        @media (max-width: 640px) {
-
-            .announcement-bar {
-                font-size: 0.72rem;
-                padding: 8px 10px;
-                line-height: 1.3;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                padding: 10px 4%;
-                gap: 8px;
-            }
-
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .nav-links {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                gap: 10px 14px;
-                flex-wrap: wrap;
-                padding-top: 6px;
-                border-top: 1px solid var(--pink-light);
-            }
-
-            .nav-links a {
-                font-size: 0.78rem;
-            }
-
-            .cart-icon-btn {
-                padding: 6px 12px;
-                font-size: 0.95rem;
-            }
-
-            .hero {
-                padding: 30px 5% 25px 5%;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-                text-shadow: 2px 2px 0px #fff, 3px 3px 0px var(--pink-light);
-            }
-
-            .hero p {
-                font-size: 0.92rem;
-                padding: 10px 16px;
-            }
-
-            .buy-btn {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                margin: 32px 0 18px 0;
-                padding: 0 8px;
-            }
-
-            .section-title h2 {
-                font-size: 1.6rem;
-            }
-
-            .section-title p {
-                font-size: 0.9rem;
-            }
-
-            .steps-container {
-                gap: 14px;
-                padding: 0 12px;
-            }
-
-            .step-card {
-                width: 100%;
-                max-width: 320px;
-                padding: 16px;
-            }
-
-            .step-icon {
-                font-size: 2.8rem;
-                margin: 10px 0;
-            }
-
-            .promo-banner {
-                margin: 25px auto 0 auto;
-                padding: 0 12px;
-            }
-
-            .promo-banner-inner {
-                padding: 24px 16px;
-                border-radius: 22px;
-            }
-
-            .promo-banner-inner h2 {
-                font-size: 1.6rem;
-            }
-
-            .promo-banner-inner p {
-                font-size: 0.88rem;
-            }
-
-            .promo-eyebrow {
-                font-size: 0.72rem;
-                padding: 5px 12px;
-            }
-
-            .promo-container {
-                gap: 16px;
-                padding: 0 12px;
-                margin-top: 22px;
-            }
-
-            .promo-card {
-                padding: 20px 14px;
-                border-radius: 20px;
-            }
-
-            .promo-price {
-                font-size: 1.7rem;
-            }
-
-            .game-wrapper {
-                padding: 0 12px;
-                margin: 20px auto;
-                gap: 16px;
-            }
-
-            .board-section,
-            .game-section {
-                padding: 16px;
-                border-radius: 22px;
-            }
-
-            .board-title {
-                font-size: 1.1rem;
-                padding: 8px;
-            }
-
-            .equivalents-visual-grid {
-                grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
-                gap: 10px;
-                max-height: 320px;
-                padding: 6px;
-            }
-
-            .visual-emoji {
-                font-size: 1.7rem;
-            }
-
-            .visual-name {
-                font-size: 0.62rem;
-            }
-
-            .wheel-wrap {
-                width: 190px;
-                height: 190px;
-                margin: 8px auto 20px auto;
-            }
-
-            .wheel-center {
-                width: 38px;
-                height: 38px;
-                font-size: 1.1rem;
-            }
-
-            .wheel-pointer {
-                font-size: 1.5rem;
-            }
-
-            .controls {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-
-            .game-btn {
-                font-size: 0.8rem;
-                padding: 10px 6px;
-            }
-
-            .basket-container {
-                padding: 12px;
-                min-height: 200px;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 12px;
-                padding: 0 12px;
-            }
-
-            .product-card {
-                padding: 14px 10px;
-                border-radius: 16px;
-            }
-
-            .product-img-box {
-                width: 90px;
-                height: 90px;
-                font-size: 2.8rem;
-                margin-bottom: 10px;
-            }
-
-            .product-card h4 {
-                font-size: 0.85rem;
-            }
-
-            .code-modal-box {
-                padding: 24px 18px;
-                border-radius: 20px;
-            }
-
-            .code-modal-box h3 {
-                font-size: 1.2rem;
-            }
-
-            .code-modal-box input {
-                font-size: 1.1rem;
-                letter-spacing: 2px;
-                padding: 12px;
-            }
-
-            .cart-drawer {
-                padding: 16px;
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .controls {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 1.7rem;
-            }
-
-            .wheel-wrap {
-                width: 165px;
-                height: 165px;
-            }
-        }
     </style>
 </head>
-
 <body>
 
-    <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-bar">
         ✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨
     </div>
 
@@ -1139,6 +763,7 @@
         <ul class="nav-links">
             <li><a href="#nayes-promo">🔥 Promoción</a></li>
             <li><a href="#dinamica">¿Cómo Funciona?</a></li>
+            <li><a href="#scoops">Cucharitas</a></li>
             <li><a href="#juego">🎡 Ruleta</a></li>
             <li><a href="#productos">Catálogo</a></li>
         </ul>
@@ -1149,26 +774,92 @@
     </nav>
 
     <section class="hero">
-        <h1 id="heroTitle">Makeup Sorpresa 💖</h1>
-        <p id="heroSubtitle">Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en
-            tu cucharada mágica!</p>
-        <a href="#nayes-promo" class="buy-btn" style="display:inline-block; width:auto; padding:15px 40px;"
-            id="heroButton">¡Quiero mi Cucharita! ✨</a>
+        <h1>Makeup Sorpresa 💖</h1>
+        <p>Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!</p>
+        <a href="#scoops" class="buy-btn" style="display:inline-block; width:auto; padding:15px 40px;">¡Quiero mi Cucharita! ✨</a>
     </section>
 
     <!-- PROMOCIÓN NAYES SCOOPS -->
     <section id="nayes-promo" style="margin-top: 50px; padding-bottom: 10px;">
         <div class="promo-banner">
             <div class="promo-banner-inner">
-                <span class="promo-eyebrow" id="promoEyebrow">✨ LLEGÓ LA NUEVA EXPERIENCIA ✨</span>
-                <h2 id="promoTitle">Nayes Scoops 🎉</h2>
-                <p id="promoDescription">¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa
-                    (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles.</p>
+                <span class="promo-eyebrow">✨ LLEGÓ LA NUEVA EXPERIENCIA ✨</span>
+                <h2>Nayes Scoops 🎉</h2>
+                <p>¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. Elige el nivel que más te guste y vive la experiencia 💄✨</p>
             </div>
         </div>
 
-        <div class="promo-container" id="promoContainer">
-            <!-- Se llena con JS desde la base de datos editable -->
+        <div class="promo-container">
+            <div class="promo-card">
+                <div class="promo-name">💗 Naye's Sweet Scoop</div>
+                <div class="promo-price">$100</div>
+                <div class="promo-desc">Mínimo 5 tesoros de belleza</div>
+                <div class="promo-gift">🎁 Incluye regalo adicional</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Sweet Scoop', '$100')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-name">💖 Naye's Glam Scoop</div>
+                <div class="promo-price">$195</div>
+                <div class="promo-desc">Mínimo 10 tesoros de belleza</div>
+                <div class="promo-gift">🎁 Incluye regalo adicional</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Glam Scoop', '$195')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card featured">
+                <span class="promo-fav-tag">⭐ FAVORITO DE LA CASA</span>
+                <div class="promo-name">✨ Naye's Glow Scoop</div>
+                <div class="promo-price">$250</div>
+                <div class="promo-desc">Mínimo 15 tesoros VIP de belleza y cuidado personal</div>
+                <div class="promo-gift">🎁 Incluye regalo adicional especial</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Glow Scoop', '$250')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-name">👑 Mega Naye Scoop</div>
+                <div class="promo-price">$350</div>
+                <div class="promo-desc">Mínimo 22 tesoros + 1 producto estelar</div>
+                <div class="promo-gift">🎁 Incluye regalo sorpresa premium</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Mega Naye Scoop', '$350')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-name">🌟 Ultimate Naye Scoop</div>
+                <div class="promo-price">$400</div>
+                <div class="promo-desc">Mínimo 26 tesoros + 2 productos estelares</div>
+                <div class="promo-gift">🎁 Incluye regalo sorpresa deluxe</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Ultimate Naye Scoop', '$400')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-name">👑 Naye's Queen Luxe</div>
+                <div class="promo-price">$500</div>
+                <div class="promo-desc">Mínimo 32 tesoros + 3 productos estelares</div>
+                <div class="promo-gift">🎁 Regalo super deluxe + empaque especial</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Queen Luxe', '$500')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-name">💎 Naye's VIP Diamond</div>
+                <div class="promo-price">$600</div>
+                <div class="promo-desc">Mínimo 40 tesoros + Set estelar completo</div>
+                <div class="promo-gift">🎁 La experiencia más grande y con más sorpresas</div>
+                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s VIP Diamond', '$600')">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir
+                </button>
+            </div>
         </div>
 
         <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:20px;">
@@ -1211,6 +902,52 @@
         </div>
     </section>
 
+    <!-- NUEVA SECCIÓN DE PAQUETES (CUCHARITAS) -->
+    <section id="scoops">
+        <div class="section-title">
+            <h2>¡Tenemos 4 tipos de cucharitas! 🥄</h2>
+            <p>Entre más grande tu cucharita, más oportunidades de ganar premios especiales</p>
+        </div>
+
+        <div class="scoops-container">
+            <div class="scoop-card card-mini">
+                <div class="scoop-icon">🥄</div>
+                <div class="scoop-title">Naye's Sweet Scoop</div>
+                <div class="scoop-price">$100</div>
+                <div class="scoop-items-badge">INCLUYE 5 a 7 PRODUCTOS</div>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Ideal para probar tu suerte.</p>
+                <button class="buy-btn" onclick="addToCart('Naye\'s Sweet Scoop', 95)">Agregar al carrito</button>
+            </div>
+
+            <div class="scoop-card card-std">
+                <div class="scoop-icon">🥣</div>
+                <div class="scoop-title">Cucharita Estándar</div>
+                <div class="scoop-price">$190</div>
+                <div class="scoop-items-badge">INCLUYE 10 PRODUCTOS</div>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">La favorita de nuestras clientas.</p>
+                <button class="buy-btn" onclick="addToCart('Cucharita Estándar', 190)">Agregar al carrito</button>
+            </div>
+
+            <div class="scoop-card card-prem">
+                <div class="scoop-icon">💖</div>
+                <div class="scoop-title">Cucharita Premium</div>
+                <div class="scoop-price">$380</div>
+                <div class="scoop-items-badge">INCLUYE 20 PRODUCTOS</div>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Doble porción de magia y color.</p>
+                <button class="buy-btn" onclick="addToCart('Cucharita Premium', 380)">Agregar al carrito</button>
+            </div>
+
+            <div class="scoop-card card-glam">
+                <div class="scoop-icon">👑</div>
+                <div class="scoop-title">Cucharita Glam VIP</div>
+                <div class="scoop-price">$580</div>
+                <div class="scoop-items-badge">INCLUYE 30 PRODUCTOS</div>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Full sorpresas + Huevito Dorado.</p>
+                <button class="buy-btn" onclick="addToCart('Cucharita Glam VIP', 580)">Agregar al carrito</button>
+            </div>
+        </div>
+    </section>
+
     <!-- SIMULADOR CON MENÚ VISUAL DE FIGURITAS -->
     <section id="juego">
         <div class="section-title">
@@ -1221,8 +958,7 @@
         <div class="game-wrapper">
             <div class="board-section">
                 <div class="board-title">CADA FIGURITA REPRESENTA UN PRODUCTO 💕</div>
-                <p style="text-align:center; font-size:0.85rem; color:#666; margin-bottom:15px;">Revisa nuestra tabla de
-                    equivalencias mágicas:</p>
+                <p style="text-align:center; font-size:0.85rem; color:#666; margin-bottom:15px;">Revisa nuestra tabla de equivalencias mágicas:</p>
                 <div class="equivalents-visual-grid" id="boardGrid">
                     <!-- Se llena con JS -->
                 </div>
@@ -1230,8 +966,7 @@
 
             <div class="game-section">
                 <div style="text-align:center; margin-bottom:10px;">
-                    <span style="font-family:'Fredoka'; font-size:1.5rem; color:var(--pink-dark);">🎡 Gira y
-                        descubre</span>
+                    <span style="font-family:'Fredoka'; font-size:1.5rem; color:var(--pink-dark);">🎡 Gira y descubre</span>
                 </div>
 
                 <div class="wheel-wrap">
@@ -1240,28 +975,29 @@
                     <div class="wheel-center">✨</div>
                 </div>
 
-                <div class="controls" id="gameButtonsControls">
-                    <!-- Se llena con JS a partir de db.promo.tiers (los mismos niveles del panel admin) -->
+                <button class="redeem-code-btn" onclick="openCodeModal()"><i class="fa-solid fa-ticket"></i> 🎟️ Ya tengo mi código, ¡canjéalo aquí!</button>
+
+                <p style="text-align:center; font-size:0.8rem; color:#999; margin:-10px 0 12px 0;">O prueba la ruleta gratis sin comprar (demo):</p>
+
+                <div class="controls">
+                    <button class="game-btn" onclick="takeScoop(7)">🥄 Mini Scoop</button>
+                    <button class="game-btn" onclick="takeScoop(10)">🥣 Estándar</button>
+                    <button class="game-btn" onclick="takeScoop(20)">💖 Premium</button>
+                    <button class="game-btn" onclick="takeScoop(30)">👑 Glam VIP</button>
                 </div>
-                <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:8px;">🔒 Se te pedirá el código
-                    que te dio Naye al comprar tu scoop</p>
 
                 <div class="basket-container">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                         <h3 style="font-family:'Fredoka'; color:var(--pink-dark);">🛒 Te tocó:</h3>
-                        <span id="basketTotal"
-                            style="display:none; font-weight:700; color:var(--pink-dark); background:var(--pink-light); padding:4px 12px; border-radius:15px; font-size:0.9rem;"></span>
+                        <span id="basketTotal" style="display:none; font-weight:700; color:var(--pink-dark); background:var(--pink-light); padding:4px 12px; border-radius:15px; font-size:0.9rem;"></span>
                     </div>
-
-                    <div id="loadingStatus"
-                        style="display:none; text-align:center; color:var(--pink-main); font-weight:bold; margin-bottom:10px;">
+                    
+                    <div id="loadingStatus" style="display:none; text-align:center; color:var(--pink-main); font-weight:bold; margin-bottom:10px;">
                         <i class="fa-solid fa-spinner fa-spin"></i> Girando la ruleta...
                     </div>
 
                     <ul class="basket-items" id="basketList">
-                        <li
-                            style="color:#888; justify-content:center; border:none; box-shadow:none; background:transparent;">
-                            Presiona un botón arriba para girar la ruleta ✨</li>
+                        <li style="color:#888; justify-content:center; border:none; box-shadow:none; background:transparent;">Presiona un botón arriba para girar la ruleta ✨</li>
                     </ul>
 
                     <button class="whatsapp-share-btn" id="wsShareBtn" onclick="sendScoopToWhatsApp()">
@@ -1281,34 +1017,29 @@
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
-    <!-- MODAL: PEDIR CÓDIGO PARA GIRAR LA RULETA -->
+    <!-- MODAL: CANJEAR CÓDIGO -->
     <div class="code-modal-overlay" id="codeModalOverlay">
         <div class="code-modal-box">
-            <button class="close-modal-btn" onclick="closeCodeModal()">✕</button>
-            <h3 id="codeModalTitle">Ingresa tu código</h3>
-            <p id="codeModalSubtitle">Escribe el código que te dio Naye para tu scoop</p>
-            <input type="text" id="codeModalInput" placeholder="EJ: MINI-K7X9-Q" maxlength="14" autocomplete="off">
+            <button class="code-modal-close" onclick="closeCodeModal()">✕</button>
+            <h3>🎟️ Canjea tu código</h3>
+            <p>Escribe el código que te dio Naye cuando pagaste tu Scoop</p>
+            <input type="text" id="codeModalInput" placeholder="EJ: SWEET-A1B2-C" maxlength="14">
             <div class="code-modal-error" id="codeModalError"></div>
-            <button class="buy-btn" id="codeModalConfirmBtn" onclick="confirmCodeAndSpin()">🎡 Girar la ruleta</button>
-            <div class="code-modal-hint">¿No tienes código? Pide tu Naye Scoop por WhatsApp para conseguirlo.</div>
+            <button class="code-modal-confirm-btn" id="codeModalConfirmBtn" onclick="confirmCodeAndSpin()">🎡 Canjear y girar</button>
         </div>
     </div>
 
     <!-- CARRITO OCULTO -->
     <div class="cart-drawer" id="cartDrawer">
-        <div
-            style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--pink-light); padding-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--pink-light); padding-bottom:10px;">
             <h3 style="font-family:'Fredoka'; color:var(--pink-dark);">Tu Bolsita 🛍️</h3>
-            <button onclick="toggleCart()"
-                style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+            <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
         </div>
-
-        <div id="cartItemsList"
-            style="flex:1; overflow-y:auto; padding:15px 0; display:flex; flex-direction:column; gap:10px;"></div>
+        
+        <div id="cartItemsList" style="flex:1; overflow-y:auto; padding:15px 0; display:flex; flex-direction:column; gap:10px;"></div>
 
         <div style="border-top:2px solid var(--pink-light); padding-top:15px;">
-            <div
-                style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:15px;">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:15px;">
                 <span>Total:</span>
                 <span id="cartTotal">$0 MXN</span>
             </div>
@@ -1319,168 +1050,48 @@
     </div>
 
     <script>
-        const DB_KEY = 'nayes_beauty_db';
+        // --- 1. BASE DE DATOS DE PRODUCTOS Y "FIGURITAS" ---
+        // Actualizamos para que los emojis sean las "Figuritas" llamativas
+        const catalogProducts = [
+            { id: 1, name: "Gloss de Labios", price: 35, emoji: "💖", cat: "labios" },
+            { id: 2, name: "Máscara Pestañas", price: 45, emoji: "🌸", cat: "ojos" },
+            { id: 3, name: "Labial en Barra", price: 40, emoji: "⭐", cat: "labios" },
+            { id: 4, name: "Delineador", price: 30, emoji: "🎀", cat: "ojos" },
+            { id: 5, name: "Tinta de Labios", price: 35, emoji: "🌼", cat: "labios" },
+            { id: 6, name: "Lápiz de Cejas", price: 25, emoji: "👑", cat: "ojos" },
+            { id: 7, name: "Sombras de Ojos", price: 65, emoji: "🦋", cat: "ojos" },
+            { id: 8, name: "Rubor Mágico", price: 40, emoji: "💮", cat: "skincare" },
+            { id: 9, name: "Iluminador Shine", price: 50, emoji: "🍒", cat: "skincare" },
+            { id: 10, name: "Fijador Makeup", price: 55, emoji: "🍓", cat: "skincare" },
+            { id: 11, name: "Base Líquida", price: 70, emoji: "☁️", cat: "skincare" },
+            { id: 12, name: "Primer Facial", price: 45, emoji: "💎", cat: "skincare" },
+            { id: 13, name: "Corrector", price: 35, emoji: "🌙", cat: "skincare" },
+            { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", cat: "accesorios" },
+            { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", cat: "accesorios" }
+        ];
 
-        const DEFAULT_DB = {
-            announcement: "✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨",
-            whatsapp: "527443196897",
-            hero: {
-                title: "Makeup Sorpresa 💖",
-                subtitle: "Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!",
-                button: "¡Quiero mi Cucharita! ✨"
-            },
-            promo: {
-                eyebrow: "✨ LLEGÓ LA NUEVA EXPERIENCIA ✨",
-                title: "Nayes Scoops 🎉",
-                description: "¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles.",
-                tiers: [
-                    { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Mínimo 5 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false },
-                    { name: "💖 Naye's Glam Scoop", price: 195, desc: "Mínimo 10 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false },
-                    { name: "✨ Naye's Glow Scoop", price: 250, desc: "Mínimo 15 tesoros VIP de belleza y cuidado personal", gift: "🎁 Incluye regalo adicional especial", featured: true },
-                    { name: "👑 Mega Naye Scoop", price: 350, desc: "Mínimo 22 tesoros + 1 producto estelar", gift: "🎁 Incluye regalo sorpresa premium", featured: false },
-                    { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Mínimo 26 tesoros + 2 productos estelares", gift: "🎁 Incluye regalo sorpresa deluxe", featured: false },
-                    { name: "👑 Naye's Queen Luxe", price: 500, desc: "Mínimo 32 tesoros + 3 productos estelares", gift: "🎁 Regalo super deluxe + empaque especial", featured: false },
-                    { name: "💎 Naye's VIP Diamond", price: 600, desc: "Mínimo 40 tesoros + Set estelar completo", gift: "🎁 La experiencia más grande y con más sorpresas", featured: false }
-                ]
-            },
-            products: [
-                { id: 1, name: "Gloss de Labios", price: 35, emoji: "💖", image: null, cat: "labios" },
-                { id: 2, name: "Máscara Pestañas", price: 45, emoji: "🌸", image: null, cat: "ojos" },
-                { id: 3, name: "Labial en Barra", price: 40, emoji: "⭐", image: null, cat: "labios" },
-                { id: 4, name: "Delineador", price: 30, emoji: "🎀", image: null, cat: "ojos" },
-                { id: 5, name: "Tinta de Labios", price: 35, emoji: "🌼", image: null, cat: "labios" },
-                { id: 6, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
-                { id: 7, name: "Sombras de Ojos", price: 65, emoji: "🦋", image: null, cat: "ojos" },
-                { id: 8, name: "Rubor Mágico", price: 40, emoji: "💮", image: null, cat: "skincare" },
-                { id: 9, name: "Iluminador Shine", price: 50, emoji: "🍒", image: null, cat: "skincare" },
-                { id: 10, name: "Fijador Makeup", price: 55, emoji: "🍓", image: null, cat: "skincare" },
-                { id: 11, name: "Base Líquida", price: 70, emoji: "☁️", image: null, cat: "skincare" },
-                { id: 12, name: "Primer Facial", price: 45, emoji: "💎", image: null, cat: "skincare" },
-                { id: 13, name: "Corrector", price: 35, emoji: "🌙", image: null, cat: "skincare" },
-                { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", image: null, cat: "accesorios" },
-                { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", image: null, cat: "accesorios" }
-            ],
-            wheel: {
-                segmentIds: [1,2,3,4,5,6,7,8,9,10],
-                egg: {
-                    name: "¡SET ESPECIAL DE SKINCARE!",
-                    emoji: "🥚",
-                    image: null,
-                    value: 150
-                }
-            }
-        };
-
-        function loadDB() {
-            try {
-                const raw = localStorage.getItem(DB_KEY);
-                if (raw) return JSON.parse(raw);
-            } catch (e) { console.warn('No se pudo leer la base de datos guardada, usando valores por defecto.', e); }
-            return JSON.parse(JSON.stringify(DEFAULT_DB));
-        }
-
-        const db = loadDB();
-        const catalogProducts = db.products;
-
-        // Asegura que cada nivel de la promoción tenga código y cantidad de premios,
-        // igual que en el panel admin, para que ambas páginas queden sincronizadas.
-        function ensureTierCodeFields() {
-            (db.promo.tiers || []).forEach((tier, i) => {
-                if (!tier.code) tier.code = 'NIVEL' + (i + 1);
-                if (!tier.count) {
-                    const match = (tier.desc || '').match(/(\d+)/);
-                    tier.count = match ? parseInt(match[1], 10) : 10;
-                }
-            });
-        }
-        ensureTierCodeFields();
-
-        // Asegura que exista la configuración de la ruleta (compatibilidad con datos guardados antes de este cambio).
-        function ensureWheelConfig() {
-            if (!db.wheel) db.wheel = JSON.parse(JSON.stringify(DEFAULT_DB.wheel));
-            if (!Array.isArray(db.wheel.segmentIds) || db.wheel.segmentIds.length === 0) {
-                db.wheel.segmentIds = catalogProducts.slice(0, 10).map(p => p.id);
-            }
-            if (!db.wheel.egg) db.wheel.egg = JSON.parse(JSON.stringify(DEFAULT_DB.wheel.egg));
-        }
-        ensureWheelConfig();
-
-        // Los productos que giran en la ruleta, elegidos desde el panel admin.
-        function getWheelSegments() {
-            const chosen = db.wheel.segmentIds
-                .map(id => catalogProducts.find(p => p.id === id))
-                .filter(Boolean);
-            return chosen.length ? chosen : catalogProducts.slice(0, 10);
-        }
-
-        function productVisual(prod, sizeClass) {
-            if (prod.image) return `<img src="${prod.image}" alt="${prod.name}">`;
-            return prod.emoji || '🎁';
-        }
-
-        function renderEditableTexts() {
-            document.getElementById('announcementBar').innerText = db.announcement;
-            document.getElementById('heroTitle').innerText = db.hero.title;
-            document.getElementById('heroSubtitle').innerText = db.hero.subtitle;
-            document.getElementById('heroButton').innerText = db.hero.button;
-            document.getElementById('promoEyebrow').innerText = db.promo.eyebrow;
-            document.getElementById('promoTitle').innerText = db.promo.title;
-            document.getElementById('promoDescription').innerText = db.promo.description;
-        }
-
-        function renderPromo() {
-            const container = document.getElementById('promoContainer');
-            container.innerHTML = '';
-            db.promo.tiers.forEach(tier => {
-                const card = document.createElement('div');
-                card.className = 'promo-card' + (tier.featured ? ' featured' : '');
-                card.innerHTML = `
-                    ${tier.featured ? '<span class="promo-fav-tag">⭐ FAVORITO DE LA CASA</span>' : ''}
-                    <div class="promo-name">${tier.name}</div>
-                    <div class="promo-price">$${tier.price}</div>
-                    <div class="promo-desc">${tier.desc}</div>
-                    <div class="promo-gift">${tier.gift}</div>
-                    <button class="promo-btn" onclick="sendPromoToWhatsApp('${tier.name.replace(/'/g, "\\'")}', '$${tier.price}')">
-                        <i class="fa-brands fa-whatsapp"></i> Pedir
-                    </button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function renderGameButtons() {
-            const wrap = document.getElementById('gameButtonsControls');
-            wrap.innerHTML = '';
-            (db.promo.tiers || []).forEach(tier => {
-                const btn = document.createElement('button');
-                btn.className = 'game-btn';
-                btn.innerHTML = tier.name;
-                btn.onclick = () => openCodeModal(tier.code, tier.count, tier.name);
-                wrap.appendChild(btn);
-            });
-        }
-
+        // --- 2. RENDERIZADO VISUAL DE FIGURITAS (COMO LA IMAGEN DE REFERENCIA) ---
         function renderVisualBoard() {
             const grid = document.getElementById('boardGrid');
             grid.innerHTML = '';
-
+            
             catalogProducts.forEach(prod => {
                 const item = document.createElement('div');
                 item.className = 'visual-item';
                 item.innerHTML = `
-                    <div class="visual-emoji">${productVisual(prod)}</div>
+                    <div class="visual-emoji">${prod.emoji}</div>
                     <div class="visual-name">${prod.name.toUpperCase()}</div>
                 `;
                 grid.appendChild(item);
             });
 
+            // Agregar el Huevo Dorado Especial
             const goldenEgg = document.createElement('div');
             goldenEgg.className = 'visual-item';
             goldenEgg.style.borderColor = "var(--gold-accent)";
             goldenEgg.style.background = "#fffde7";
-            const eggVisual = db.wheel.egg.image ? `<img src="${db.wheel.egg.image}">` : (db.wheel.egg.emoji || '🥚');
             goldenEgg.innerHTML = `
-                <div class="visual-emoji">${eggVisual}</div>
+                <div class="visual-emoji">🥚</div>
                 <div class="visual-name" style="color:#d4af37;">PREMIO ESPECIAL</div>
             `;
             grid.appendChild(goldenEgg);
@@ -1494,22 +1105,24 @@
                 card.className = 'product-card';
                 card.innerHTML = `
                     <div>
-                        <div class="product-img-box">${productVisual(prod)}</div>
+                        <div class="product-img-box">${prod.emoji}</div>
                         <h4 style="font-family:'Fredoka'; color:var(--text-dark);">${prod.name}</h4>
                         <div style="font-size:1.2rem; font-weight:bold; color:var(--pink-dark); margin:10px 0;">$${prod.price}</div>
                     </div>
-                    <button class="buy-btn" onclick="addToCart('${prod.name.replace(/'/g, "\\'")}', ${prod.price})" style="font-size:0.9rem; padding:8px;">Añadir</button>
+                    <button class="buy-btn" onclick="addToCart('${prod.name}', ${prod.price})" style="font-size:0.9rem; padding:8px;">Añadir</button>
                 `;
                 grid.appendChild(card);
             });
         }
 
+        // --- 3. RULETA DE LA SUERTE (VISUAL) ---
         const wheelWrap = document.querySelector('.wheel-wrap');
         const wheel = document.getElementById('wheel');
+        const GOLDEN_EGG_VALUE = 150;
         let wheelRotation = 0;
 
         function buildWheel() {
-            const segments = getWheelSegments();
+            const segments = catalogProducts.slice(0, 10);
             const segAngle = 360 / segments.length;
             const colors = ['#ffe0ec', '#ffffff'];
             const gradientParts = segments.map((p, i) => `${colors[i % 2]} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
@@ -1518,7 +1131,7 @@
             wheel.innerHTML = segments.map((p, i) => {
                 const mid = segAngle * i + segAngle / 2;
                 return `<div class="wheel-seg" style="transform: rotate(${mid}deg) translate(0, -85px);">
-                            <span style="display:inline-block; transform: rotate(${-mid}deg);">${productVisual(p)}</span>
+                            <span style="display:inline-block; transform: rotate(${-mid}deg);">${p.emoji}</span>
                         </div>`;
             }).join('');
         }
@@ -1528,6 +1141,130 @@
             wheel.style.transform = `rotate(${wheelRotation}deg)`;
         }
 
+        // --- SISTEMA DE CANJE DE CÓDIGOS (conectado con el panel admin) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjKQvfXBW5R10u75a6gqxw5FgwGQ55YgU",
+            authDomain: "nayes-beauty.firebaseapp.com",
+            projectId: "nayes-beauty",
+            storageBucket: "nayes-beauty.firebasestorage.app",
+            messagingSenderId: "1004699736572",
+            appId: "1:1004699736572:web:bd92a49215dbe6b9373a79"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const dbFirestore = firebase.firestore();
+
+        const DB_KEY = 'nayes_beauty_db';
+        const CODE_SALT = "NAYES2026";
+        const CODE_CHARSET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+        // Debe coincidir con los niveles por defecto del panel admin.
+        // Si Naye ya guardó cambios en el panel admin (mismo navegador/dominio),
+        // se usan esos niveles actualizados en su lugar.
+        const DEFAULT_SCOOP_TIERS = [
+            { name: "💗 Naye's Sweet Scoop", code: "SWEET", count: 5 },
+            { name: "💖 Naye's Glam Scoop", code: "GLAM", count: 10 },
+            { name: "✨ Naye's Glow Scoop", code: "GLOW", count: 15 },
+            { name: "👑 Mega Naye Scoop", code: "MEGA", count: 22 },
+            { name: "🌟 Ultimate Naye Scoop", code: "ULTRA", count: 26 },
+            { name: "👑 Naye's Queen Luxe", code: "QUEEN", count: 32 },
+            { name: "💎 Naye's VIP Diamond", code: "VIPD", count: 40 }
+        ];
+
+        function loadScoopTiers() {
+            try {
+                const raw = localStorage.getItem(DB_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.promo && Array.isArray(parsed.promo.tiers) && parsed.promo.tiers.length) {
+                        return parsed.promo.tiers;
+                    }
+                }
+            } catch (e) { console.warn('No se pudo leer la configuración guardada, usando valores por defecto', e); }
+            return DEFAULT_SCOOP_TIERS;
+        }
+
+        function codeChecksum(str) {
+            let sum = 0;
+            for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 3);
+            for (let i = 0; i < CODE_SALT.length; i++) sum += CODE_SALT.charCodeAt(i);
+            return CODE_CHARSET[sum % CODE_CHARSET.length];
+        }
+
+        // Detecta a qué nivel pertenece un código válido a partir de su prefijo
+        function findTierByCode(rawCode) {
+            if (!rawCode) return null;
+            const code = rawCode.trim().toUpperCase();
+            const parts = code.split('-');
+            if (parts.length !== 3) return null;
+            const [prefix, body, check] = parts;
+            if (body.length !== 4) return null;
+            if (check !== codeChecksum(prefix + body)) return null;
+            const tiers = loadScoopTiers();
+            return tiers.find(t => (t.code || '').toUpperCase() === prefix) || null;
+        }
+
+        function openCodeModal() {
+            document.getElementById('codeModalInput').value = '';
+            document.getElementById('codeModalError').innerText = '';
+            document.getElementById('codeModalOverlay').classList.add('open');
+            setTimeout(() => document.getElementById('codeModalInput').focus(), 100);
+        }
+
+        function closeCodeModal() {
+            document.getElementById('codeModalOverlay').classList.remove('open');
+        }
+
+        async function confirmCodeAndSpin() {
+            const input = document.getElementById('codeModalInput');
+            const errorEl = document.getElementById('codeModalError');
+            const confirmBtn = document.getElementById('codeModalConfirmBtn');
+            const rawCode = input.value.trim().toUpperCase();
+
+            const tier = findTierByCode(rawCode);
+            if (!tier) {
+                errorEl.innerText = '❌ Código inválido. Revisa que lo hayas copiado bien.';
+                return;
+            }
+
+            errorEl.innerText = '';
+            confirmBtn.disabled = true;
+            confirmBtn.innerText = 'Verificando…';
+
+            try {
+                const docRef = dbFirestore.collection('scoop_codes').doc(rawCode);
+                await dbFirestore.runTransaction(async (t) => {
+                    const doc = await t.get(docRef);
+                    if (!doc.exists) throw new Error('NOT_FOUND');
+                    if (doc.data().used) throw new Error('ALREADY_USED');
+                    t.update(docRef, { used: true, usedAt: firebase.firestore.FieldValue.serverTimestamp() });
+                });
+                closeCodeModal();
+                takeScoop(tier.count);
+            } catch (e) {
+                if (e.message === 'NOT_FOUND') {
+                    errorEl.innerText = '❌ Ese código no existe. Verifica que lo copiaste bien.';
+                } else if (e.message === 'ALREADY_USED') {
+                    errorEl.innerText = '⚠️ Este código ya fue usado.';
+                } else {
+                    errorEl.innerText = '⚠️ No se pudo conectar. Revisa tu internet e intenta de nuevo.';
+                    console.error(e);
+                }
+            } finally {
+                confirmBtn.disabled = false;
+                confirmBtn.innerText = '🎡 Canjear y girar';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('codeModalInput');
+            if (input) {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') confirmCodeAndSpin();
+                });
+            }
+        });
+
+        // --- 4. LÓGICA DEL SIMULADOR ---
         let isExtracting = false;
         let lastSimulatedCount = 0;
 
@@ -1547,18 +1284,19 @@
             const status = document.getElementById('loadingStatus');
             const shareBtn = document.getElementById('wsShareBtn');
             const totalBadge = document.getElementById('basketTotal');
-
+            
             list.innerHTML = '';
             shareBtn.style.display = 'none';
             status.style.display = 'block';
             totalBadge.style.display = 'none';
 
             let currentPrizes = [];
-
+            
+            // Lógica para añadir premios
             for (let i = 0; i < count; i++) {
+                // 10% de probabilidad de huevito dorado en scoops grandes
                 if (count >= 20 && Math.random() < 0.10 && !currentPrizes.some(p => p.isGold)) {
-                    const egg = db.wheel.egg;
-                    currentPrizes.push({ name: egg.name, emoji: egg.emoji, image: egg.image, isGold: true, price: egg.value });
+                    currentPrizes.push({ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", isGold: true, price: GOLDEN_EGG_VALUE });
                 } else {
                     const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
                     currentPrizes.push({ ...prod, isGold: false });
@@ -1567,7 +1305,8 @@
 
             let revealed = 0;
             let runningTotal = 0;
-
+            
+            // La ruleta gira ~3.2s antes de empezar a revelar los premios
             setTimeout(() => {
                 const interval = setInterval(() => {
                     if (revealed < currentPrizes.length) {
@@ -1579,13 +1318,12 @@
                         if (p.isGold) {
                             li.style.background = "#fffde7";
                             li.style.borderColor = "var(--gold-accent)";
-                            const eggVisual = p.image ? `<img src="${p.image}" style="width:1.2em; height:1.2em; border-radius:50%; object-fit:cover; vertical-align:middle;">` : p.emoji;
-                            li.innerHTML = `<span style="font-size:1.2rem;">${eggVisual} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐</span>`;
+                            li.innerHTML = `<span style="font-size:1.2rem;">${p.emoji} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐</span>`;
                             confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                         } else {
-                            li.innerHTML = `<span style="font-size:1.2rem;">${productVisual(p)} <strong>${p.name}</strong></span> <span style="color:var(--pink-dark); font-weight:bold;">$${p.price}</span>`;
+                            li.innerHTML = `<span style="font-size:1.2rem;">${p.emoji} <strong>${p.name}</strong></span> <span style="color:var(--pink-dark); font-weight:bold;">$${p.price}</span>`;
                         }
-
+                        
                         list.appendChild(li);
                         list.scrollTop = list.scrollHeight;
                         totalBadge.style.display = 'inline-block';
@@ -1600,128 +1338,22 @@
                         isExtracting = false;
                         setButtonsState(false);
                     }
-                }, 800);
+                }, 800); // Velocidad de revelación
             }, 3200);
         }
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBjKQvfXBW5R10u75a6gqxw5FgwGQ55YgU",
-            authDomain: "nayes-beauty.firebaseapp.com",
-            projectId: "nayes-beauty",
-            storageBucket: "nayes-beauty.firebasestorage.app",
-            messagingSenderId: "1004699736572",
-            appId: "1:1004699736572:web:bd92a49215dbe6b9373a79"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const dbFirestore = firebase.firestore();
-
-        const CODE_SALT = "NAYES2026";
-        const CODE_CHARSET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-
-        function codeChecksum(str) {
-            let sum = 0;
-            for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 3);
-            for (let i = 0; i < CODE_SALT.length; i++) sum += CODE_SALT.charCodeAt(i);
-            return CODE_CHARSET[sum % CODE_CHARSET.length];
-        }
-
-        function isValidScoopCode(rawCode, expectedPrefix) {
-            if (!rawCode) return false;
-            const code = rawCode.trim().toUpperCase();
-            const parts = code.split('-');
-            if (parts.length !== 3) return false;
-            const [prefix, body, check] = parts;
-            if (prefix !== expectedPrefix) return false;
-            if (body.length !== 4) return false;
-            return check === codeChecksum(prefix + body);
-        }
-
-        let pendingScoop = null;
-
-        function openCodeModal(prefix, count, label) {
-            pendingScoop = { prefix, count, label };
-            document.getElementById('codeModalTitle').innerText = `Código para ${label}`;
-            document.getElementById('codeModalSubtitle').innerText = `Escribe el código que te dio Naye para tu ${label}`;
-            document.getElementById('codeModalInput').value = '';
-            document.getElementById('codeModalError').innerText = '';
-            document.getElementById('codeModalOverlay').classList.add('open');
-            setTimeout(() => document.getElementById('codeModalInput').focus(), 100);
-        }
-
-        function closeCodeModal() {
-            document.getElementById('codeModalOverlay').classList.remove('open');
-            pendingScoop = null;
-        }
-
-        async function confirmCodeAndSpin() {
-            const input = document.getElementById('codeModalInput');
-            const errorEl = document.getElementById('codeModalError');
-            const confirmBtn = document.getElementById('codeModalConfirmBtn');
-
-            if (!pendingScoop) {
-                errorEl.innerText = '⚠️ Cierra esta ventana y vuelve a elegir tu tamaño de scoop, por favor.';
-                return;
-            }
-
-            const rawCode = input.value.trim().toUpperCase();
-
-            if (!isValidScoopCode(rawCode, pendingScoop.prefix)) {
-                errorEl.innerText = '❌ Código inválido para este tamaño de scoop.';
-                return;
-            }
-
-            errorEl.innerText = '';
-            confirmBtn.disabled = true;
-            confirmBtn.innerText = 'Verificando…';
-
-            try {
-                if (typeof dbFirestore === 'undefined' || !dbFirestore) {
-                    throw new Error('NO_FIRESTORE');
-                }
-                const docRef = dbFirestore.collection('scoop_codes').doc(rawCode);
-                await dbFirestore.runTransaction(async (t) => {
-                    const doc = await t.get(docRef);
-                    if (!doc.exists) throw new Error('NOT_FOUND');
-                    if (doc.data().used) throw new Error('ALREADY_USED');
-                    t.update(docRef, { used: true, usedAt: firebase.firestore.FieldValue.serverTimestamp() });
-                });
-                closeCodeModal();
-                takeScoop(pendingScoop.count);
-            } catch (e) {
-                if (e.message === 'NOT_FOUND') {
-                    errorEl.innerText = '❌ Ese código no existe. Verifica que lo copiaste bien.';
-                } else if (e.message === 'ALREADY_USED') {
-                    errorEl.innerText = '⚠️ Este código ya fue usado.';
-                } else {
-                    errorEl.innerText = '⚠️ No se pudo conectar. Revisa tu internet e intenta de nuevo.';
-                    console.error(e);
-                }
-            } finally {
-                confirmBtn.disabled = false;
-                confirmBtn.innerText = '🎡 Girar la ruleta';
-            }
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const input = document.getElementById('codeModalInput');
-            if (input) {
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') confirmCodeAndSpin();
-                });
-            }
-        });
-
+        // --- PROMO NAYES SCOOPS ---
         function sendPromoToWhatsApp(scoopName, price) {
             let msg = `¡Hola! ✨ Me interesa la promoción Nayes Scoops: *${scoopName}* (${price}). ¿Me pasas la info de pago y entrega? 💄`;
-            window.open(`https://wa.me/${db.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/527443196897?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         function sendScoopToWhatsApp() {
             let msg = `¡Hola! Hice una simulación en la página y me encantó. Quiero pedir una cucharita de ${lastSimulatedCount} productos. ¿Me pasas la info de pago? ✨`;
-            window.open(`https://wa.me/${db.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/5217820000000?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
+        // --- 5. CARRITO DE COMPRAS ---
         let cart = [];
 
         function addToCart(name, price) {
@@ -1740,7 +1372,7 @@
             document.getElementById('cartCount').innerText = cart.length;
             const list = document.getElementById('cartItemsList');
             const totalEl = document.getElementById('cartTotal');
-
+            
             if (cart.length === 0) {
                 list.innerHTML = '<p style="text-align:center; color:#888;">Tu bolsita está vacía</p>';
                 totalEl.innerText = '$0 MXN';
@@ -1778,25 +1410,22 @@
             if (cart.length === 0) return alert("Tu carrito está vacío");
             let total = 0;
             let msg = `¡Hola Nayes Beauty! ✨ Deseo hacer el siguiente pedido:\n\n`;
-            cart.forEach(i => {
-                msg += `🛍️ ${i.name} ($${i.price})\n`;
+            cart.forEach(i => { 
+                msg += `🛍️ ${i.name} ($${i.price})\n`; 
                 total += i.price;
             });
             msg += `\n*Total a pagar:* $${total} MXN\n\n¿Me indicas cómo realizo el pago y la entrega?`;
-
+            
             cart = [];
             updateCart();
             toggleCart(false);
-            window.open(`https://wa.me/${db.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/5217820000000?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        renderEditableTexts();
-        renderPromo();
-        renderGameButtons();
+        // --- 6. INICIAR ---
         renderVisualBoard();
         renderProducts();
         buildWheel();
     </script>
 </body>
-
 </html>
