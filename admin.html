@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admin - Nayes Beauty & Scoops</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- SDKs de Firebase (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+    :root {
+        --pink-main: #ff6b9e;
+        --pink-light: #ffebf3;
+        --pink-dark: #d81b60;
+        --accent-purple: #b388ff;
+        --accent-yellow: #ffe57f;
+        --bg-cream: #fff9fb;
+        --text-dark: #4a4a4a;
+        --gold-accent: #ffd700;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background: var(--bg-cream); color: var(--text-dark); padding-bottom: 80px; }
+
+    header {
+        background: linear-gradient(135deg, var(--pink-dark), var(--pink-main));
+        color: white;
+        padding: 20px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        box-shadow: 0 4px 15px rgba(216,27,96,0.3);
+    }
+    header h1 { font-family:'Fredoka', cursive; font-size: 1.6rem; }
+    header a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; opacity: 0.9; }
+    header a:hover { opacity: 1; text-decoration: underline; }
+
+    .tabs {
+        display: flex;
+        gap: 8px;
+        max-width: 1100px;
+        margin: 20px auto 0 auto;
+        padding: 0 20px;
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        background: white;
+        border: 2px solid var(--pink-light);
+        color: var(--text-dark);
+        padding: 10px 18px;
+        border-radius: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+    .tab-btn.active { background: var(--pink-main); color: white; border-color: var(--pink-main); }
+
+    .container { max-width: 1100px; margin: 20px auto; padding: 0 20px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .panel {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(255,107,158,0.12);
+        border: 2px solid var(--pink-light);
+        margin-bottom: 20px;
+    }
+    .panel h2 { font-family:'Fredoka', cursive; color: var(--pink-dark); margin-bottom: 15px; font-size: 1.3rem; }
+    .panel h3 { font-family:'Fredoka', cursive; color: var(--text-dark); margin: 15px 0 10px 0; font-size: 1.05rem; }
+
+    label { display:block; font-weight:600; font-size:0.85rem; color:#666; margin-bottom:4px; margin-top:12px; }
+    input[type=text], input[type=number], textarea, select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 2px solid var(--pink-light);
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-family: 'Poppins', sans-serif;
+        color: var(--text-dark);
+    }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--pink-main); }
+    textarea { resize: vertical; min-height: 60px; }
+
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap: 15px; }
+    @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .card-item {
+        background: var(--bg-cream);
+        border: 2px solid var(--pink-light);
+        border-radius: 18px;
+        padding: 18px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    .card-item .remove-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #ff5c5c;
+        color: white;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .checkbox-row { display:flex; align-items:center; gap:8px; margin-top: 12px; }
+    .checkbox-row input { width: auto; }
+    .checkbox-row label { margin:0; }
+
+    .add-btn {
+        background: white;
+        border: 2px dashed var(--pink-main);
+        color: var(--pink-dark);
+        padding: 12px;
+        width: 100%;
+        border-radius: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+    .add-btn:hover { background: var(--pink-light); }
+
+    .img-upload-row { display:flex; align-items:center; gap:12px; margin-top:12px; }
+    .img-preview {
+        width: 60px; height: 60px; border-radius: 50%;
+        background: white; border: 2px solid var(--pink-light);
+        display:flex; align-items:center; justify-content:center;
+        font-size: 1.6rem; overflow:hidden; flex-shrink:0;
+    }
+    .img-preview img { width:100%; height:100%; object-fit:cover; }
+
+    .save-bar {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        background: white;
+        border-top: 3px solid var(--pink-light);
+        padding: 14px 5%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+        z-index: 100;
+    }
+    .save-btn {
+        background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+        color: white; border:none; padding: 14px 40px; border-radius: 25px;
+        font-weight: 700; font-size: 1.05rem; cursor:pointer;
+        box-shadow: 0 4px 15px rgba(255,107,158,0.4);
+    }
+    .reset-btn {
+        background: white; color:#999; border:2px solid #ddd; padding: 14px 25px;
+        border-radius: 25px; font-weight:700; cursor:pointer;
+    }
+
+    .toast {
+        position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+        background: #2ecc71; color:white; padding: 14px 28px; border-radius: 20px;
+        font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 999;
+        transition: transform 0.3s ease;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .hint { font-size: 0.78rem; color:#999; margin-top:4px; }
+
+    /* --- CÓDIGOS DE CANJE --- */
+    .code-tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 10px;
+    }
+    .code-tier-btn {
+        background: white;
+        border: 2px solid var(--pink-light);
+        color: var(--text-dark);
+        padding: 16px 10px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+    }
+    .code-tier-btn:hover { border-color: var(--pink-main); background: var(--pink-light); }
+    .code-tier-btn.active { background: var(--pink-main); color: white; border-color: var(--pink-main); }
+
+    .code-result-box {
+        margin-top: 20px;
+        background: linear-gradient(135deg, var(--pink-dark), var(--pink-main));
+        border-radius: 18px;
+        padding: 24px;
+        text-align: center;
+        display: none;
+    }
+    .code-result-box.show { display: block; }
+    .code-result-box .code-label { color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .code-result-box .code-value {
+        font-family: 'Fredoka', cursive;
+        font-size: 2.1rem;
+        letter-spacing: 3px;
+        color: white;
+        word-break: break-all;
+    }
+    .code-result-box .code-actions { margin-top: 14px; display:flex; gap:10px; justify-content:center; flex-wrap: wrap; }
+    .code-copy-btn {
+        background: white; color: var(--pink-dark); border:none; padding: 10px 20px;
+        border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 0.9rem;
+    }
+
+    .codes-history-table { width:100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
+    .codes-history-table th, .codes-history-table td { text-align:left; padding: 8px 6px; border-bottom: 1px solid var(--pink-light); }
+    .codes-history-table th { color:#999; font-weight:700; font-size:0.78rem; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1><i class="fa-solid fa-wand-magic-sparkles"></i> Panel Admin — Nayes Beauty & Scoops</h1>
+    <a href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver página pública</a>
+</header>
+
+<div class="tabs">
+    <button class="tab-btn active" onclick="showTab('general')">⚙️ General</button>
+    <button class="tab-btn" onclick="showTab('promo')">🔥 Promoción</button>
+    <button class="tab-btn" onclick="showTab('productos')">💄 Productos</button>
+    <button class="tab-btn" onclick="showTab('codigos')">🎟️ Códigos</button>
+</div>
+
+<div class="container">
+
+    <!-- TAB GENERAL -->
+    <div class="tab-content active" id="tab-general">
+        <div class="panel">
+            <h2>⚙️ Configuración General</h2>
+
+            <label>Texto de la barra de anuncio (arriba del todo)</label>
+            <input type="text" id="f-announcement">
+
+            <label>Número de WhatsApp (con código de país, sin +, sin espacios. Ej: 527443196897)</label>
+            <input type="text" id="f-whatsapp">
+            <div class="hint">A este número llegan los pedidos del carrito, la ruleta y la promoción.</div>
+
+            <h3>Sección principal (Hero)</h3>
+            <label>Título grande</label>
+            <input type="text" id="f-hero-title">
+            <label>Subtítulo</label>
+            <textarea id="f-hero-subtitle"></textarea>
+            <label>Texto del botón</label>
+            <input type="text" id="f-hero-button">
+        </div>
+    </div>
+
+    <!-- TAB PROMOCIÓN -->
+    <div class="tab-content" id="tab-promo">
+        <div class="panel">
+            <h2>🔥 Banner de Promoción</h2>
+            <label>Etiqueta pequeña (arriba)</label>
+            <input type="text" id="f-promo-eyebrow">
+            <label>Título</label>
+            <input type="text" id="f-promo-title">
+            <label>Descripción</label>
+            <textarea id="f-promo-desc"></textarea>
+        </div>
+
+        <div class="panel">
+            <h2>🥄 Niveles / Paquetes de la Promoción</h2>
+            <div id="promoTiersList"></div>
+            <button class="add-btn" onclick="addTier()">➕ Agregar nivel</button>
+        </div>
+    </div>
+
+    <!-- TAB PRODUCTOS -->
+    <div class="tab-content" id="tab-productos">
+        <div class="panel">
+            <h2>💄 Catálogo de Productos</h2>
+            <p class="hint" style="margin-bottom:15px;">Puedes subir una foto JPG/PNG para cada producto. Si no subes foto, se muestra el emoji.</p>
+            <div id="productsList"></div>
+            <button class="add-btn" onclick="addProduct()">➕ Agregar producto</button>
+        </div>
+    </div>
+
+    <!-- TAB CÓDIGOS -->
+    <div class="tab-content" id="tab-codigos">
+        <div class="panel">
+            <h2>🎟️ Generar código para la ruleta</h2>
+            <p class="hint" style="margin-bottom:10px;">Cuando una clienta pague su Naye Scoop, elige aquí qué tamaño compró y genera su código. Ese código se lo das (por WhatsApp o en persona) y ella lo usará en la página para poder girar la ruleta de ese tamaño. El código queda guardado en la nube y solo se puede usar UNA vez, sin importar desde qué celular se use.</p>
+
+            <div class="code-tier-grid" id="codeTierGrid"></div>
+
+            <div class="code-result-box" id="codeResultBox">
+                <div class="code-label">Código generado</div>
+                <div class="code-value" id="codeResultValue">----</div>
+                <div class="code-actions">
+                    <button class="code-copy-btn" onclick="copyGeneratedCode()"><i class="fa-solid fa-copy"></i> Copiar código</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3 style="margin-top:0;">🔍 Verificar un código</h3>
+            <p class="hint">Consulta si un código ya fue usado (útil si una clienta dice que no le funcionó).</p>
+            <input type="text" id="checkCodeInput" placeholder="Ej: MINI-K7X9-Q" style="text-transform:uppercase;">
+            <button class="add-btn" onclick="checkCodeStatus()" style="margin-top:10px;">Verificar código</button>
+            <div id="checkCodeResult" style="margin-top:10px; font-weight:700;"></div>
+        </div>
+
+        <div class="panel">
+            <h3 style="margin-top:0;">📋 Historial de códigos generados (en este dispositivo)</h3>
+            <p class="hint">Este listado es solo un recordatorio local. El control real de "usado / no usado" vive en la nube y se consulta arriba.</p>
+            <table class="codes-history-table">
+                <thead><tr><th>Código</th><th>Tamaño</th><th>Fecha</th><th></th></tr></thead>
+                <tbody id="codesHistoryBody"></tbody>
+            </table>
+            <button class="add-btn" onclick="clearCodesHistory()" style="margin-top:12px;">🗑️ Vaciar historial local</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="save-bar">
+    <button class="reset-btn" onclick="resetToDefaults()">Restaurar valores originales</button>
+    <button class="save-btn" onclick="saveAll()"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
+</div>
+
+<div class="toast" id="toast">✅ Cambios guardados</div>
+
+<script>
+    const DB_KEY = 'nayes_beauty_db';
+
+    const DEFAULT_DB = {
+        announcement: "✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨",
+        whatsapp: "527443196897",
+        hero: {
+            title: "Makeup Sorpresa 💖",
+            subtitle: "Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!",
+            button: "¡Quiero mi Cucharita! ✨"
+        },
+        promo: {
+            eyebrow: "✨ LLEGÓ LA NUEVA EXPERIENCIA ✨",
+            title: "Nayes Scoops 🎉",
+            description: "¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles.",
+            tiers: [
+                { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Mínimo 5 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false, code: "SWEET", count: 5 },
+                { name: "💖 Naye's Glam Scoop", price: 195, desc: "Mínimo 10 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false, code: "GLAM", count: 10 },
+                { name: "✨ Naye's Glow Scoop", price: 250, desc: "Mínimo 15 tesoros VIP de belleza y cuidado personal", gift: "🎁 Incluye regalo adicional especial", featured: true, code: "GLOW", count: 15 },
+                { name: "👑 Mega Naye Scoop", price: 350, desc: "Mínimo 22 tesoros + 1 producto estelar", gift: "🎁 Incluye regalo sorpresa premium", featured: false, code: "MEGA", count: 22 },
+                { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Mínimo 26 tesoros + 2 productos estelares", gift: "🎁 Incluye regalo sorpresa deluxe", featured: false, code: "ULTRA", count: 26 },
+                { name: "👑 Naye's Queen Luxe", price: 500, desc: "Mínimo 32 tesoros + 3 productos estelares", gift: "🎁 Regalo super deluxe + empaque especial", featured: false, code: "QUEEN", count: 32 },
+                { name: "💎 Naye's VIP Diamond", price: 600, desc: "Mínimo 40 tesoros + Set estelar completo", gift: "🎁 La experiencia más grande y con más sorpresas", featured: false, code: "VIPD", count: 40 }
+            ]
+        },
+        products: [
+            { id: 1, name: "Gloss de Labios", price: 35, emoji: "💖", image: null, cat: "labios" },
+            { id: 2, name: "Máscara Pestañas", price: 45, emoji: "🌸", image: null, cat: "ojos" },
+            { id: 3, name: "Labial en Barra", price: 40, emoji: "⭐", image: null, cat: "labios" },
+            { id: 4, name: "Delineador", price: 30, emoji: "🎀", image: null, cat: "ojos" },
+            { id: 5, name: "Tinta de Labios", price: 35, emoji: "🌼", image: null, cat: "labios" },
+            { id: 6, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
+            { id: 7, name: "Sombras de Ojos", price: 65, emoji: "🦋", image: null, cat: "ojos" },
+            { id: 8, name: "Rubor Mágico", price: 40, emoji: "💮", image: null, cat: "skincare" },
+            { id: 9, name: "Iluminador Shine", price: 50, emoji: "🍒", image: null, cat: "skincare" },
+            { id: 10, name: "Fijador Makeup", price: 55, emoji: "🍓", image: null, cat: "skincare" },
+            { id: 11, name: "Base Líquida", price: 70, emoji: "☁️", image: null, cat: "skincare" },
+            { id: 12, name: "Primer Facial", price: 45, emoji: "💎", image: null, cat: "skincare" },
+            { id: 13, name: "Corrector", price: 35, emoji: "🌙", image: null, cat: "skincare" },
+            { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", image: null, cat: "accesorios" },
+            { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", image: null, cat: "accesorios" }
+        ]
+    };
+
+    function loadDB() {
+        try {
+            const raw = localStorage.getItem(DB_KEY);
+            if (raw) return JSON.parse(raw);
+        } catch (e) { console.warn('Error leyendo DB, usando default', e); }
+        return JSON.parse(JSON.stringify(DEFAULT_DB));
+    }
+
+    let db = loadDB();
+
+    function ensureTierCodeFields() {
+        db.promo.tiers.forEach((tier, i) => {
+            if (!tier.code) {
+                tier.code = 'NIVEL' + (i + 1);
+            }
+            if (!tier.count) {
+                const match = (tier.desc || '').match(/(\d+)/);
+                tier.count = match ? parseInt(match[1], 10) : 10;
+            }
+        });
+    }
+    ensureTierCodeFields();
+
+    function showTab(name) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    function fillGeneralForm() {
+        document.getElementById('f-announcement').value = db.announcement;
+        document.getElementById('f-whatsapp').value = db.whatsapp;
+        document.getElementById('f-hero-title').value = db.hero.title;
+        document.getElementById('f-hero-subtitle').value = db.hero.subtitle;
+        document.getElementById('f-hero-button').value = db.hero.button;
+        document.getElementById('f-promo-eyebrow').value = db.promo.eyebrow;
+        document.getElementById('f-promo-title').value = db.promo.title;
+        document.getElementById('f-promo-desc').value = db.promo.description;
+    }
+
+    function renderTiers() {
+        const list = document.getElementById('promoTiersList');
+        list.innerHTML = '';
+        db.promo.tiers.forEach((tier, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-item';
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeTier(${i})">✕</button>
+                <div class="grid-2">
+                    <div>
+                        <label>Nombre del nivel</label>
+                        <input type="text" value="${escAttr(tier.name)}" oninput="updateTier(${i}, 'name', this.value)">
+                    </div>
+                    <div>
+                        <label>Precio ($)</label>
+                        <input type="number" value="${tier.price}" oninput="updateTier(${i}, 'price', this.value)">
+                    </div>
+                </div>
+                <label>Descripción (ej. mínimo de tesoros)</label>
+                <input type="text" value="${escAttr(tier.desc)}" oninput="updateTier(${i}, 'desc', this.value)">
+                <label>Texto del regalo incluido</label>
+                <input type="text" value="${escAttr(tier.gift)}" oninput="updateTier(${i}, 'gift', this.value)">
+                <div class="grid-2">
+                    <div>
+                        <label>Código corto (para los códigos de la ruleta)</label>
+                        <input type="text" value="${escAttr(tier.code)}" oninput="updateTier(${i}, 'code', this.value.toUpperCase().replace(/[^A-Z0-9]/g,''))" maxlength="8">
+                        <div class="hint">Debe ser único entre niveles, sin espacios ni acentos. Ej: SWEET, GLAM.</div>
+                    </div>
+                    <div>
+                        <label>Cantidad de premios al girar la ruleta</label>
+                        <input type="number" value="${tier.count}" oninput="updateTier(${i}, 'count', this.value)">
+                    </div>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="feat-${i}" ${tier.featured ? 'checked' : ''} onchange="updateTier(${i}, 'featured', this.checked)">
+                    <label for="feat-${i}">⭐ Marcar como "Favorito de la casa"</label>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+        renderCodeTierGrid();
+    }
+
+    function updateTier(i, field, value) {
+        if (field === 'price' || field === 'count') value = parseInt(value, 10) || 0;
+        db.promo.tiers[i][field] = value;
+        if (field === 'name' || field === 'price') renderCodeTierGrid();
+    }
+
+    function removeTier(i) {
+        if (!confirm('¿Quitar este nivel de la promoción?')) return;
+        db.promo.tiers.splice(i, 1);
+        renderTiers();
+    }
+
+    function addTier() {
+        const newIndex = db.promo.tiers.length;
+        db.promo.tiers.push({ name: "Nuevo Nivel", price: 100, desc: "Descripción del nivel", gift: "🎁 Incluye regalo", featured: false, code: "NIVEL" + (newIndex + 1), count: 10 });
+        renderTiers();
+    }
+
+    function renderProductsAdmin() {
+        const list = document.getElementById('productsList');
+        list.innerHTML = '';
+        db.products.forEach((prod, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-item';
+            const preview = prod.image ? `<img src="${prod.image}">` : (prod.emoji || '🎁');
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeProduct(${i})">✕</button>
+                <div class="grid-2">
+                    <div>
+                        <label>Nombre del producto</label>
+                        <input type="text" value="${escAttr(prod.name)}" oninput="updateProduct(${i}, 'name', this.value)">
+                    </div>
+                    <div>
+                        <label>Precio ($)</label>
+                        <input type="number" value="${prod.price}" oninput="updateProduct(${i}, 'price', this.value)">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <label>Categoría</label>
+                        <select onchange="updateProduct(${i}, 'cat', this.value)">
+                            ${['labios','ojos','skincare','accesorios'].map(c => `<option value="${c}" ${prod.cat===c?'selected':''}>${c}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div>
+                        <label>Emoji (se usa si no hay foto)</label>
+                        <input type="text" value="${escAttr(prod.emoji || '')}" oninput="updateProduct(${i}, 'emoji', this.value)" maxlength="4">
+                    </div>
+                </div>
+                <label>Foto del producto (JPG/PNG)</label>
+                <div class="img-upload-row">
+                    <div class="img-preview" id="preview-${i}">${preview}</div>
+                    <input type="file" accept="image/*" onchange="handleImageUpload(event, ${i})">
+                    ${prod.image ? `<button class="remove-btn" style="position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeProductImage(${i})">Quitar foto</button>` : ''}
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function updateProduct(i, field, value) {
+        if (field === 'price') value = parseFloat(value) || 0;
+        db.products[i][field] = value;
+    }
+
+    function handleImageUpload(evt, i) {
+        const file = evt.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('Por favor sube un archivo de imagen (jpg/png).'); return; }
+        if (file.size > 1.5 * 1024 * 1024) {
+            if (!confirm('Esta imagen pesa más de 1.5MB, puede hacer que la página cargue lento o falle el guardado. ¿Continuar de todos modos?')) return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.products[i].image = e.target.result;
+            renderProductsAdmin();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeProductImage(i) {
+        db.products[i].image = null;
+        renderProductsAdmin();
+    }
+
+    function removeProduct(i) {
+        if (!confirm('¿Eliminar este producto del catálogo?')) return;
+        db.products.splice(i, 1);
+        renderProductsAdmin();
+    }
+
+    function addProduct() {
+        const newId = db.products.length ? Math.max(...db.products.map(p => p.id)) + 1 : 1;
+        db.products.push({ id: newId, name: "Nuevo producto", price: 30, emoji: "✨", image: null, cat: "accesorios" });
+        renderProductsAdmin();
+    }
+
+    function escAttr(str) {
+        return (str || '').replace(/"/g, '&quot;');
+    }
+
+    function saveAll() {
+        db.announcement = document.getElementById('f-announcement').value;
+        db.whatsapp = document.getElementById('f-whatsapp').value.replace(/[^0-9]/g, '');
+        db.hero.title = document.getElementById('f-hero-title').value;
+        db.hero.subtitle = document.getElementById('f-hero-subtitle').value;
+        db.hero.button = document.getElementById('f-hero-button').value;
+        db.promo.eyebrow = document.getElementById('f-promo-eyebrow').value;
+        db.promo.title = document.getElementById('f-promo-title').value;
+        db.promo.description = document.getElementById('f-promo-desc').value;
+
+        try {
+            localStorage.setItem(DB_KEY, JSON.stringify(db));
+            showToast('✅ Cambios guardados');
+        } catch (e) {
+            alert('No se pudo guardar. Es posible que las fotos ocupen demasiado espacio — intenta usar fotos más ligeras.');
+            console.error(e);
+        }
+    }
+
+    function resetToDefaults() {
+        if (!confirm('Esto borrará todos tus cambios guardados y regresará todo a los valores originales. ¿Continuar?')) return;
+        localStorage.removeItem(DB_KEY);
+        db = JSON.parse(JSON.stringify(DEFAULT_DB));
+        fillGeneralForm();
+        renderTiers();
+        renderProductsAdmin();
+        showToast('↩️ Valores originales restaurados (recuerda dar "Guardar cambios")');
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjKQvfXBW5R10u75a6gqxw5FgwGQ55YgU",
+        authDomain: "nayes-beauty.firebaseapp.com",
+        projectId: "nayes-beauty",
+        storageBucket: "nayes-beauty.firebasestorage.app",
+        messagingSenderId: "1004699736572",
+        appId: "1:1004699736572:web:bd92a49215dbe6b9373a79"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const dbFirestore = firebase.firestore();
+
+    const CODE_SALT = "NAYES2026"; 
+    const CODE_CHARSET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; 
+    const CODES_HISTORY_KEY = 'nayes_codes_history';
+
+    function codeChecksum(str) {
+        let sum = 0;
+        for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 3);
+        for (let i = 0; i < CODE_SALT.length; i++) sum += CODE_SALT.charCodeAt(i);
+        return CODE_CHARSET[sum % CODE_CHARSET.length];
+    }
+
+    function randomCodeBody(len) {
+        let s = '';
+        for (let i = 0; i < len; i++) s += CODE_CHARSET[Math.floor(Math.random() * CODE_CHARSET.length)];
+        return s;
+    }
+
+    function generateScoopCode(prefix) {
+        const body = randomCodeBody(4);
+        const check = codeChecksum(prefix + body);
+        return `${prefix}-${body}-${check}`;
+    }
+
+    function renderCodeTierGrid() {
+        const grid = document.getElementById('codeTierGrid');
+        grid.innerHTML = '';
+        if (!db.promo.tiers.length) {
+            grid.innerHTML = '<p class="hint">Primero agrega niveles en la pestaña 🔥 Promoción.</p>';
+            return;
+        }
+        db.promo.tiers.forEach(t => {
+            const btn = document.createElement('button');
+            btn.className = 'code-tier-btn';
+            btn.innerHTML = `${t.name}<br><span style="font-weight:400; font-size:0.8rem;">$${t.price}</span>`;
+            btn.onclick = () => generateAndShowCode(t);
+            grid.appendChild(btn);
+        });
+    }
+
+    async function generateAndShowCode(tier) {
+        const box = document.getElementById('codeResultBox');
+        const valueEl = document.getElementById('codeResultValue');
+        valueEl.innerText = 'Generando…';
+        box.classList.add('show');
+
+        const code = generateScoopCode(tier.code);
+
+        try {
+            await dbFirestore.collection('scoop_codes').doc(code).set({
+                tier: tier.code,
+                count: tier.count,
+                label: tier.name,
+                used: false,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            valueEl.innerText = code;
+            saveCodeToHistory(code, tier.name);
+        } catch (e) {
+            valueEl.innerText = '⚠️ Error de conexión';
+            console.error(e);
+            showToast('❌ No se pudo guardar el código, revisa tu internet o tu configuración de Firebase');
+        }
+    }
+
+    function copyGeneratedCode() {
+        const code = document.getElementById('codeResultValue').innerText;
+        navigator.clipboard.writeText(code).then(() => showToast('📋 Código copiado')).catch(() => {});
+    }
+
+    async function checkCodeStatus() {
+        const raw = document.getElementById('checkCodeInput').value.trim().toUpperCase();
+        const resultEl = document.getElementById('checkCodeResult');
+        if (!raw) return;
+        resultEl.style.color = 'var(--text-dark)';
+        resultEl.innerText = 'Buscando…';
+        try {
+            const doc = await dbFirestore.collection('scoop_codes').doc(raw).get();
+            if (!doc.exists) {
+                resultEl.style.color = '#e53935';
+                resultEl.innerText = '❌ Ese código no existe.';
+                return;
+            }
+            const d = doc.data();
+            if (d.used) {
+                resultEl.style.color = '#e53935';
+                resultEl.innerText = `⚠️ Ya fue usado — ${d.label}`;
+            } else {
+                resultEl.style.color = '#2ecc71';
+                resultEl.innerText = `✅ Aún no se ha usado — ${d.label}`;
+            }
+        } catch (e) {
+            resultEl.style.color = '#e53935';
+            resultEl.innerText = '⚠️ Error de conexión.';
+            console.error(e);
+        }
+    }
+
+    function loadCodesHistory() {
+        try {
+            const raw = localStorage.getItem(CODES_HISTORY_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+
+    function saveCodeToHistory(code, tierLabel) {
+        const history = loadCodesHistory();
+        history.unshift({ code, tierLabel, date: new Date().toLocaleString('es-MX') });
+        localStorage.setItem(CODES_HISTORY_KEY, JSON.stringify(history.slice(0, 100)));
+        renderCodesHistory();
+    }
+
+    function renderCodesHistory() {
+        const body = document.getElementById('codesHistoryBody');
+        const history = loadCodesHistory();
+        if (history.length === 0) {
+            body.innerHTML = '<tr><td colspan="4" style="color:#999; text-align:center;">Aún no has generado códigos</td></tr>';
+            return;
+        }
+        body.innerHTML = history.map(h => `
+            <tr>
+                <td style="font-weight:700; letter-spacing:1px;">${h.code}</td>
+                <td>${h.tierLabel}</td>
+                <td style="color:#888;">${h.date}</td>
+                <td><button class="code-copy-btn" style="padding:4px 10px; font-size:0.78rem;" onclick="navigator.clipboard.writeText('${h.code}')">Copiar</button></td>
+            </tr>
+        `).join('');
+    }
+
+    function clearCodesHistory() {
+        if (!confirm('¿Borrar el recordatorio local de códigos? (Esto NO borra los códigos de la nube ni los invalida)')) return;
+        localStorage.removeItem(CODES_HISTORY_KEY);
+        renderCodesHistory();
+    }
+
+    fillGeneralForm();
+    renderTiers();
+    renderProductsAdmin();
+    renderCodeTierGrid();
+    renderCodesHistory();
+</script>
+</body>
+</html>
