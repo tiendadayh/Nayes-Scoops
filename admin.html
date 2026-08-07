@@ -300,6 +300,7 @@
     <button class="tab-btn active" onclick="showTab('general')">⚙️ General</button>
     <button class="tab-btn" onclick="showTab('promo')">🔥 Promoción</button>
     <button class="tab-btn" onclick="showTab('productos')">💄 Productos</button>
+    <button class="tab-btn" onclick="showTab('ruleta')">🎡 Ruleta</button>
     <button class="tab-btn" onclick="showTab('codigos')">🎟️ Códigos</button>
 </div>
 
@@ -362,6 +363,39 @@
 
             <div id="productsList"></div>
             <button class="add-btn" onclick="addProduct()">➕ Agregar producto</button>
+        </div>
+    </div>
+
+    <!-- TAB RULETA -->
+    <div class="tab-content" id="tab-ruleta">
+        <div class="panel">
+            <h2>🎡 Productos que giran en la ruleta</h2>
+            <p class="hint" style="margin-bottom:15px;">Elige qué productos de tu catálogo aparecen girando en la ruleta de la suerte (máximo 10). Tus demás productos se siguen mostrando normal en el catálogo y en la tabla de equivalencias.</p>
+            <span class="products-count-badge" id="wheelCountBadge" style="margin-bottom:15px; display:inline-block;">0 / 10 elegidos</span>
+            <div id="wheelProductsList" class="code-tier-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px,1fr));"></div>
+        </div>
+
+        <div class="panel">
+            <h2>🥚 Premio del Huevo Dorado</h2>
+            <p class="hint" style="margin-bottom:15px;">Es el premio especial y sorpresa que a veces le puede salir a la clienta cuando abre una cucharada grande (Mega en adelante).</p>
+            <label>Nombre del premio</label>
+            <input type="text" id="f-egg-name">
+            <div class="grid-2">
+                <div>
+                    <label>Emoji (se usa si no subes foto)</label>
+                    <input type="text" id="f-egg-emoji" maxlength="4">
+                </div>
+                <div>
+                    <label>Valor mostrado ($)</label>
+                    <input type="number" id="f-egg-value">
+                </div>
+            </div>
+            <label>Foto del premio (opcional)</label>
+            <div class="img-upload-row">
+                <div class="img-preview" id="egg-preview">🥚</div>
+                <input type="file" accept="image/*" onchange="handleEggImageUpload(event)">
+                <button class="remove-btn" id="egg-remove-btn" style="display:none; position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeEggImage()">Quitar foto</button>
+            </div>
         </div>
     </div>
 
@@ -451,7 +485,16 @@
             { id: 13, name: "Corrector", price: 35, emoji: "🌙", image: null, cat: "skincare" },
             { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", image: null, cat: "accesorios" },
             { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", image: null, cat: "accesorios" }
-        ]
+        ],
+        wheel: {
+            segmentIds: [1,2,3,4,5,6,7,8,9,10],
+            egg: {
+                name: "¡SET ESPECIAL DE SKINCARE!",
+                emoji: "🥚",
+                image: null,
+                value: 150
+            }
+        }
     };
 
     function loadDB() {
@@ -477,11 +520,26 @@
     }
     ensureTierCodeFields();
 
+    function ensureWheelConfig() {
+        if (!db.wheel) {
+            db.wheel = JSON.parse(JSON.stringify(DEFAULT_DB.wheel));
+        }
+        if (!Array.isArray(db.wheel.segmentIds)) db.wheel.segmentIds = [];
+        // quita de la ruleta cualquier producto que ya no exista en el catálogo
+        db.wheel.segmentIds = db.wheel.segmentIds.filter(id => db.products.some(p => p.id === id));
+        if (!db.wheel.egg) db.wheel.egg = JSON.parse(JSON.stringify(DEFAULT_DB.wheel.egg));
+    }
+    ensureWheelConfig();
+
     function showTab(name) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
         document.getElementById('tab-' + name).classList.add('active');
         event.target.classList.add('active');
+        if (name === 'ruleta') {
+            ensureWheelConfig();
+            renderWheelProductsList();
+        }
     }
 
     function fillGeneralForm() {
@@ -646,8 +704,11 @@
 
     function removeProduct(i) {
         if (!confirm('¿Eliminar este producto del catálogo?')) return;
+        const removedId = db.products[i].id;
         db.products.splice(i, 1);
+        db.wheel.segmentIds = db.wheel.segmentIds.filter(id => id !== removedId);
         renderProductsAdmin();
+        renderWheelProductsList();
     }
 
     function addProduct() {
@@ -661,6 +722,76 @@
         return (str || '').replace(/"/g, '&quot;');
     }
 
+    function renderWheelProductsList() {
+        const list = document.getElementById('wheelProductsList');
+        const badge = document.getElementById('wheelCountBadge');
+        badge.innerText = `${db.wheel.segmentIds.length} / 10 elegidos`;
+        list.innerHTML = '';
+        if (!db.products.length) {
+            list.innerHTML = '<p class="hint">Primero agrega productos en la pestaña 💄 Productos.</p>';
+            return;
+        }
+        db.products.forEach(prod => {
+            const checked = db.wheel.segmentIds.includes(prod.id);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-tier-btn' + (checked ? ' active' : '');
+            const visual = prod.image ? `<img src="${prod.image}" style="width:28px; height:28px; border-radius:50%; object-fit:cover; vertical-align:middle;">` : (prod.emoji || '✨');
+            btn.innerHTML = `${visual}<br><span style="font-weight:400; font-size:0.8rem;">${escAttr(prod.name)}</span>`;
+            btn.onclick = () => toggleWheelProduct(prod.id);
+            list.appendChild(btn);
+        });
+    }
+
+    function toggleWheelProduct(id) {
+        const idx = db.wheel.segmentIds.indexOf(id);
+        if (idx >= 0) {
+            db.wheel.segmentIds.splice(idx, 1);
+        } else {
+            if (db.wheel.segmentIds.length >= 10) {
+                alert('Solo puedes elegir hasta 10 productos para que giren en la ruleta.');
+                return;
+            }
+            db.wheel.segmentIds.push(id);
+        }
+        renderWheelProductsList();
+    }
+
+    function fillWheelEggForm() {
+        document.getElementById('f-egg-name').value = db.wheel.egg.name;
+        document.getElementById('f-egg-emoji').value = db.wheel.egg.emoji || '';
+        document.getElementById('f-egg-value').value = db.wheel.egg.value;
+        const preview = document.getElementById('egg-preview');
+        const removeBtn = document.getElementById('egg-remove-btn');
+        if (db.wheel.egg.image) {
+            preview.innerHTML = `<img src="${db.wheel.egg.image}">`;
+            removeBtn.style.display = 'inline-block';
+        } else {
+            preview.innerHTML = db.wheel.egg.emoji || '🥚';
+            removeBtn.style.display = 'none';
+        }
+    }
+
+    function handleEggImageUpload(evt) {
+        const file = evt.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('Por favor sube un archivo de imagen (jpg/png).'); return; }
+        if (file.size > 1.5 * 1024 * 1024) {
+            if (!confirm('Esta imagen pesa más de 1.5MB, puede hacer que la página cargue lento o falle el guardado. ¿Continuar de todos modos?')) return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.wheel.egg.image = e.target.result;
+            fillWheelEggForm();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeEggImage() {
+        db.wheel.egg.image = null;
+        fillWheelEggForm();
+    }
+
     function saveAll() {
         db.announcement = document.getElementById('f-announcement').value;
         db.whatsapp = document.getElementById('f-whatsapp').value.replace(/[^0-9]/g, '');
@@ -670,6 +801,9 @@
         db.promo.eyebrow = document.getElementById('f-promo-eyebrow').value;
         db.promo.title = document.getElementById('f-promo-title').value;
         db.promo.description = document.getElementById('f-promo-desc').value;
+        db.wheel.egg.name = document.getElementById('f-egg-name').value;
+        db.wheel.egg.emoji = document.getElementById('f-egg-emoji').value;
+        db.wheel.egg.value = parseInt(document.getElementById('f-egg-value').value, 10) || 0;
 
         try {
             localStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -687,6 +821,8 @@
         fillGeneralForm();
         renderTiers();
         renderProductsAdmin();
+        renderWheelProductsList();
+        fillWheelEggForm();
         showToast('↩️ Valores originales restaurados (recuerda dar "Guardar cambios")');
     }
 
@@ -845,6 +981,8 @@
     fillGeneralForm();
     renderTiers();
     renderProductsAdmin();
+    renderWheelProductsList();
+    fillWheelEggForm();
     renderCodeTierGrid();
     renderCodesHistory();
 </script>

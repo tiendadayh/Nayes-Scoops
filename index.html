@@ -1359,7 +1359,16 @@
                 { id: 13, name: "Corrector", price: 35, emoji: "🌙", image: null, cat: "skincare" },
                 { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", image: null, cat: "accesorios" },
                 { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", image: null, cat: "accesorios" }
-            ]
+            ],
+            wheel: {
+                segmentIds: [1,2,3,4,5,6,7,8,9,10],
+                egg: {
+                    name: "¡SET ESPECIAL DE SKINCARE!",
+                    emoji: "🥚",
+                    image: null,
+                    value: 150
+                }
+            }
         };
 
         function loadDB() {
@@ -1385,6 +1394,24 @@
             });
         }
         ensureTierCodeFields();
+
+        // Asegura que exista la configuración de la ruleta (compatibilidad con datos guardados antes de este cambio).
+        function ensureWheelConfig() {
+            if (!db.wheel) db.wheel = JSON.parse(JSON.stringify(DEFAULT_DB.wheel));
+            if (!Array.isArray(db.wheel.segmentIds) || db.wheel.segmentIds.length === 0) {
+                db.wheel.segmentIds = catalogProducts.slice(0, 10).map(p => p.id);
+            }
+            if (!db.wheel.egg) db.wheel.egg = JSON.parse(JSON.stringify(DEFAULT_DB.wheel.egg));
+        }
+        ensureWheelConfig();
+
+        // Los productos que giran en la ruleta, elegidos desde el panel admin.
+        function getWheelSegments() {
+            const chosen = db.wheel.segmentIds
+                .map(id => catalogProducts.find(p => p.id === id))
+                .filter(Boolean);
+            return chosen.length ? chosen : catalogProducts.slice(0, 10);
+        }
 
         function productVisual(prod, sizeClass) {
             if (prod.image) return `<img src="${prod.image}" alt="${prod.name}">`;
@@ -1451,8 +1478,9 @@
             goldenEgg.className = 'visual-item';
             goldenEgg.style.borderColor = "var(--gold-accent)";
             goldenEgg.style.background = "#fffde7";
+            const eggVisual = db.wheel.egg.image ? `<img src="${db.wheel.egg.image}">` : (db.wheel.egg.emoji || '🥚');
             goldenEgg.innerHTML = `
-                <div class="visual-emoji">🥚</div>
+                <div class="visual-emoji">${eggVisual}</div>
                 <div class="visual-name" style="color:#d4af37;">PREMIO ESPECIAL</div>
             `;
             grid.appendChild(goldenEgg);
@@ -1478,11 +1506,10 @@
 
         const wheelWrap = document.querySelector('.wheel-wrap');
         const wheel = document.getElementById('wheel');
-        const GOLDEN_EGG_VALUE = 150;
         let wheelRotation = 0;
 
         function buildWheel() {
-            const segments = catalogProducts.slice(0, 10);
+            const segments = getWheelSegments();
             const segAngle = 360 / segments.length;
             const colors = ['#ffe0ec', '#ffffff'];
             const gradientParts = segments.map((p, i) => `${colors[i % 2]} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
@@ -1530,7 +1557,8 @@
 
             for (let i = 0; i < count; i++) {
                 if (count >= 20 && Math.random() < 0.10 && !currentPrizes.some(p => p.isGold)) {
-                    currentPrizes.push({ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", isGold: true, price: GOLDEN_EGG_VALUE });
+                    const egg = db.wheel.egg;
+                    currentPrizes.push({ name: egg.name, emoji: egg.emoji, image: egg.image, isGold: true, price: egg.value });
                 } else {
                     const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
                     currentPrizes.push({ ...prod, isGold: false });
@@ -1551,7 +1579,8 @@
                         if (p.isGold) {
                             li.style.background = "#fffde7";
                             li.style.borderColor = "var(--gold-accent)";
-                            li.innerHTML = `<span style="font-size:1.2rem;">${p.emoji} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐</span>`;
+                            const eggVisual = p.image ? `<img src="${p.image}" style="width:1.2em; height:1.2em; border-radius:50%; object-fit:cover; vertical-align:middle;">` : p.emoji;
+                            li.innerHTML = `<span style="font-size:1.2rem;">${eggVisual} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐</span>`;
                             confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                         } else {
                             li.innerHTML = `<span style="font-size:1.2rem;">${productVisual(p)} <strong>${p.name}</strong></span> <span style="color:var(--pink-dark); font-weight:bold;">$${p.price}</span>`;
