@@ -1654,10 +1654,15 @@
         }
 
         async function confirmCodeAndSpin() {
-            if (!pendingScoop) return;
             const input = document.getElementById('codeModalInput');
             const errorEl = document.getElementById('codeModalError');
             const confirmBtn = document.getElementById('codeModalConfirmBtn');
+
+            if (!pendingScoop) {
+                errorEl.innerText = '⚠️ Cierra esta ventana y vuelve a elegir tu tamaño de scoop, por favor.';
+                return;
+            }
+
             const rawCode = input.value.trim().toUpperCase();
 
             if (!isValidScoopCode(rawCode, pendingScoop.prefix)) {
@@ -1670,6 +1675,9 @@
             confirmBtn.innerText = 'Verificando…';
 
             try {
+                if (typeof dbFirestore === 'undefined' || !dbFirestore) {
+                    throw new Error('NO_FIRESTORE');
+                }
                 const docRef = dbFirestore.collection('scoop_codes').doc(rawCode);
                 await dbFirestore.runTransaction(async (t) => {
                     const doc = await t.get(docRef);
@@ -1693,6 +1701,7 @@
                 confirmBtn.innerText = '🎡 Girar la ruleta';
             }
         }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             const input = document.getElementById('codeModalInput');
