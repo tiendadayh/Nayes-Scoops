@@ -399,26 +399,23 @@
         </div>
 
         <div class="panel">
-            <h2>🥚 Premio del Huevo Dorado</h2>
-            <p class="hint" style="margin-bottom:15px;">Es el premio especial y sorpresa que a veces le puede salir a la clienta cuando abre una cucharada grande (Mega en adelante).</p>
-            <label>Nombre del premio</label>
-            <input type="text" id="f-egg-name">
+            <h2>🥚 Premios Extra (Huevos Dorados)</h2>
+            <p class="hint" style="margin-bottom:15px;">Son premios especiales y sorpresa que la clienta puede ganar <strong>EXTRA, además de todo lo que ya trae su paquete</strong>, al abrir una cucharada grande. Agrega varios huevos distintos para tener más variedad — entre más grande el Scoop, más oportunidades tiene la clienta de que le salga más de uno si tiene suerte.</p>
             <div class="grid-2">
                 <div>
-                    <label>Emoji (se usa si no subes foto)</label>
-                    <input type="text" id="f-egg-emoji" maxlength="4">
+                    <label>Probabilidad de premio extra (%)</label>
+                    <input type="number" id="f-egg-chance" min="0" max="100" oninput="db.wheel.eggChance = parseInt(this.value,10) || 0">
+                    <div class="hint">Qué tan probable es que caiga un huevo extra, en cada oportunidad.</div>
                 </div>
                 <div>
-                    <label>Valor mostrado ($)</label>
-                    <input type="number" id="f-egg-value">
+                    <label>Figuritas necesarias por cada oportunidad</label>
+                    <input type="number" id="f-egg-mincount" min="1" oninput="db.wheel.eggMinCount = parseInt(this.value,10) || 1">
+                    <div class="hint">Ej. con 20, un Scoop de 40 figuritas tiene 2 oportunidades de ganar huevo extra.</div>
                 </div>
             </div>
-            <label>Foto del premio (opcional)</label>
-            <div class="img-upload-row">
-                <div class="img-preview" id="egg-preview">🥚</div>
-                <input type="file" accept="image/*" onchange="handleEggImageUpload(event)">
-                <button class="remove-btn" id="egg-remove-btn" style="display:none; position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeEggImage()">Quitar foto</button>
-            </div>
+            <h3>Lista de huevos posibles</h3>
+            <div id="eggsList"></div>
+            <button class="add-btn" onclick="addEgg()">🥚 Agregar huevo</button>
         </div>
     </div>
 
@@ -536,12 +533,11 @@
         ],
         wheel: {
             segmentIds: [1,2,3,4,5,6,7,8,9,10],
-            egg: {
-                name: "¡SET ESPECIAL DE SKINCARE!",
-                emoji: "🥚",
-                image: null,
-                value: 150
-            }
+            eggChance: 10,
+            eggMinCount: 20,
+            eggs: [
+                { id: 1, name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }
+            ]
         }
     };
 
@@ -575,7 +571,14 @@
         if (!Array.isArray(db.wheel.segmentIds)) db.wheel.segmentIds = [];
         // quita de la ruleta cualquier producto que ya no exista en el catálogo
         db.wheel.segmentIds = db.wheel.segmentIds.filter(id => db.products.some(p => p.id === id));
-        if (!db.wheel.egg) db.wheel.egg = JSON.parse(JSON.stringify(DEFAULT_DB.wheel.egg));
+        // Migra el formato viejo (un solo "huevo dorado") a la nueva lista de varios huevos
+        if (!Array.isArray(db.wheel.eggs) || !db.wheel.eggs.length) {
+            db.wheel.eggs = db.wheel.egg ? [db.wheel.egg] : JSON.parse(JSON.stringify(DEFAULT_DB.wheel.eggs));
+        }
+        db.wheel.eggs.forEach((egg, i) => { if (!egg.id) egg.id = i + 1; });
+        delete db.wheel.egg;
+        if (typeof db.wheel.eggChance !== 'number') db.wheel.eggChance = DEFAULT_DB.wheel.eggChance;
+        if (typeof db.wheel.eggMinCount !== 'number') db.wheel.eggMinCount = DEFAULT_DB.wheel.eggMinCount;
         if (!db.ads) db.ads = { image1: null, image2: null };
     }
     ensureWheelConfig();
@@ -588,6 +591,8 @@
         if (name === 'ruleta') {
             ensureWheelConfig();
             renderWheelProductsList();
+            renderEggsList();
+            fillEggGlobalForm();
         }
     }
 
@@ -840,22 +845,62 @@
         renderWheelProductsList();
     }
 
-    function fillWheelEggForm() {
-        document.getElementById('f-egg-name').value = db.wheel.egg.name;
-        document.getElementById('f-egg-emoji').value = db.wheel.egg.emoji || '';
-        document.getElementById('f-egg-value').value = db.wheel.egg.value;
-        const preview = document.getElementById('egg-preview');
-        const removeBtn = document.getElementById('egg-remove-btn');
-        if (db.wheel.egg.image) {
-            preview.innerHTML = `<img src="${db.wheel.egg.image}">`;
-            removeBtn.style.display = 'inline-block';
-        } else {
-            preview.innerHTML = db.wheel.egg.emoji || '🥚';
-            removeBtn.style.display = 'none';
-        }
+    function fillEggGlobalForm() {
+        document.getElementById('f-egg-chance').value = db.wheel.eggChance;
+        document.getElementById('f-egg-mincount').value = db.wheel.eggMinCount;
     }
 
-    function handleEggImageUpload(evt) {
+    function renderEggsList() {
+        const list = document.getElementById('eggsList');
+        list.innerHTML = '';
+        db.wheel.eggs.forEach((egg, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-item';
+            const preview = egg.image ? `<img src="${egg.image}">` : (egg.emoji || '🥚');
+            div.innerHTML = `
+                ${db.wheel.eggs.length > 1 ? `<button class="remove-btn" onclick="removeEgg(${i})">✕</button>` : ''}
+                <div class="grid-2">
+                    <div>
+                        <label>Nombre del premio</label>
+                        <input type="text" value="${escAttr(egg.name)}" oninput="updateEgg(${i}, 'name', this.value)">
+                    </div>
+                    <div>
+                        <label>Valor mostrado ($)</label>
+                        <input type="number" value="${egg.value}" oninput="updateEgg(${i}, 'value', this.value)">
+                    </div>
+                </div>
+                <label>Emoji (se usa si no subes foto)</label>
+                <input type="text" value="${escAttr(egg.emoji || '')}" oninput="updateEgg(${i}, 'emoji', this.value)" maxlength="4">
+                <label>Foto del premio (opcional)</label>
+                <div class="img-upload-row">
+                    <div class="img-preview">${preview}</div>
+                    <input type="file" accept="image/*" onchange="handleEggImageUpload(event, ${i})">
+                    ${egg.image ? `<button class="remove-btn" style="position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeEggImage(${i})">Quitar foto</button>` : ''}
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function updateEgg(i, field, value) {
+        if (field === 'value') value = parseInt(value, 10) || 0;
+        db.wheel.eggs[i][field] = value;
+    }
+
+    function addEgg() {
+        const newId = db.wheel.eggs.length ? Math.max(...db.wheel.eggs.map(e => e.id || 0)) + 1 : 1;
+        db.wheel.eggs.push({ id: newId, name: "Nuevo premio extra", emoji: "🥚", image: null, value: 100 });
+        renderEggsList();
+    }
+
+    function removeEgg(i) {
+        if (db.wheel.eggs.length <= 1) { alert('Debe quedar al menos un huevo configurado.'); return; }
+        if (!confirm('¿Quitar este premio extra?')) return;
+        db.wheel.eggs.splice(i, 1);
+        renderEggsList();
+    }
+
+    function handleEggImageUpload(evt, i) {
         const file = evt.target.files[0];
         if (!file) return;
         if (!file.type.startsWith('image/')) { alert('Por favor sube un archivo de imagen (jpg/png).'); return; }
@@ -864,15 +909,15 @@
         }
         const reader = new FileReader();
         reader.onload = function(e) {
-            db.wheel.egg.image = e.target.result;
-            fillWheelEggForm();
+            db.wheel.eggs[i].image = e.target.result;
+            renderEggsList();
         };
         reader.readAsDataURL(file);
     }
 
-    function removeEggImage() {
-        db.wheel.egg.image = null;
-        fillWheelEggForm();
+    function removeEggImage(i) {
+        db.wheel.eggs[i].image = null;
+        renderEggsList();
     }
 
     async function saveAll() {
@@ -884,9 +929,8 @@
         db.promo.eyebrow = document.getElementById('f-promo-eyebrow').value;
         db.promo.title = document.getElementById('f-promo-title').value;
         db.promo.description = document.getElementById('f-promo-desc').value;
-        db.wheel.egg.name = document.getElementById('f-egg-name').value;
-        db.wheel.egg.emoji = document.getElementById('f-egg-emoji').value;
-        db.wheel.egg.value = parseInt(document.getElementById('f-egg-value').value, 10) || 0;
+        db.wheel.eggChance = parseInt(document.getElementById('f-egg-chance').value, 10) || 0;
+        db.wheel.eggMinCount = parseInt(document.getElementById('f-egg-mincount').value, 10) || 1;
 
         try {
             localStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -918,7 +962,8 @@
         renderTiers();
         renderProductsAdmin();
         renderWheelProductsList();
-        fillWheelEggForm();
+        renderEggsList();
+        fillEggGlobalForm();
         showToast('↩️ Valores originales restaurados (recuerda dar "Guardar cambios")');
     }
 
@@ -1095,7 +1140,8 @@
         renderTiers();
         renderProductsAdmin();
         renderWheelProductsList();
-        fillWheelEggForm();
+        renderEggsList();
+        fillEggGlobalForm();
         renderCodeTierGrid();
         renderCodesHistory();
     }

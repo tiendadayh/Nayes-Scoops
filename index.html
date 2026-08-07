@@ -67,15 +67,17 @@
             top: 0;
             z-index: 1000;
             border-bottom: 2px solid var(--pink-light);
+            gap: 10px;
         }
 
         .logo {
             font-family: 'Fredoka', cursive;
-            font-size: 2rem;
+            font-size: clamp(1.4rem, 5vw, 2rem);
             color: var(--pink-main);
             font-weight: 700;
             text-decoration: none;
             text-shadow: 2px 2px 0px var(--pink-light);
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -94,6 +96,23 @@
 
         .nav-links a:hover { color: var(--pink-main); }
 
+        .nav-toggle-btn {
+            display: none;
+            background: white;
+            color: var(--pink-main);
+            border: 2px solid var(--pink-main);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
         .cart-icon-btn {
             position: relative;
             background: white;
@@ -106,6 +125,7 @@
             font-size: 1.1rem;
             transition: all 0.2s;
             box-shadow: 0 4px 10px rgba(255,107,158,0.2);
+            flex-shrink: 0;
         }
 
         .cart-icon-btn:hover { transform: scale(1.05); background: var(--pink-main); color: white; }
@@ -129,21 +149,22 @@
 
         .hero {
             background: linear-gradient(135deg, #ffeef4 0%, #fff 100%);
-            padding: 50px 5% 40px 5%;
+            padding: clamp(30px, 8vw, 50px) 5% clamp(25px, 6vw, 40px) 5%;
             text-align: center;
             border-bottom: 4px dashed var(--pink-light);
         }
 
         .hero h1 {
             font-family: 'Fredoka', cursive;
-            font-size: 3.5rem;
+            font-size: clamp(2.1rem, 8vw, 3.5rem);
             color: var(--pink-dark);
             margin-bottom: 15px;
             text-shadow: 3px 3px 0px #fff, 5px 5px 0px var(--pink-light);
+            line-height: 1.15;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(0.95rem, 3.2vw, 1.2rem);
             color: #666;
             max-width: 600px;
             margin: 0 auto 25px auto;
@@ -156,20 +177,20 @@
 
         .section-title {
             text-align: center;
-            margin: 50px 0 30px 0;
+            margin: clamp(30px, 7vw, 50px) 0 clamp(20px, 5vw, 30px) 0;
             padding: 0 10px;
         }
 
         .section-title h2 {
             font-family: 'Fredoka', cursive;
-            font-size: 2.5rem;
+            font-size: clamp(1.7rem, 6vw, 2.5rem);
             color: var(--pink-dark);
             text-shadow: 2px 2px 0px var(--pink-light);
         }
 
         .section-title p {
             color: #777;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             margin-top: 5px;
             font-weight: 600;
         }
@@ -190,6 +211,8 @@
             border-radius: 25px;
             padding: 20px;
             width: 220px;
+            flex: 1 1 160px;
+            max-width: 220px;
             text-align: center;
             border: 3px solid var(--pink-light);
             box-shadow: 0 10px 25px rgba(255, 107, 158, 0.15);
@@ -752,6 +775,82 @@
         }
         .promo-btn:hover { transform: scale(1.05); }
 
+        /* --- AJUSTES GENERALES PARA CELULAR --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(12px);
+                border-bottom: 2px solid var(--pink-light);
+                box-shadow: 0 10px 20px rgba(255,107,158,0.15);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a {
+                display: block;
+                padding: 14px 6%;
+                border-top: 1px solid var(--pink-light);
+                font-size: 0.95rem;
+            }
+            .nav-toggle-btn { display: flex; }
+            .cart-icon-btn { padding: 8px 12px; font-size: 1rem; }
+
+            .steps-container { gap: 12px; padding: 0 15px; }
+            .step-card { padding: 15px; }
+            .step-icon { font-size: 2.8rem; margin: 10px 0; }
+            .step-title { font-size: 1.05rem; }
+
+            .scoops-container { padding: 0 15px; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); }
+            .scoop-card { padding: 22px 14px; border-radius: 22px; }
+            .scoop-icon { font-size: 3rem; }
+            .scoop-title { font-size: 1.15rem; }
+            .scoop-price { font-size: 1.7rem; }
+
+            .game-wrapper { margin: 20px auto; padding: 0 15px; gap: 18px; }
+            .board-section, .game-section { padding: 18px; border-radius: 22px; }
+            .board-title { font-size: 1.05rem; padding: 8px; }
+            .equivalents-visual-grid { grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; max-height: 320px; }
+            .visual-emoji { font-size: 2rem; }
+            .visual-name { font-size: 0.68rem; }
+
+            .wheel-wrap { width: 210px; height: 210px; }
+            .wheel-seg { width: 26px; height: 26px; margin-left: -13px; margin-top: -13px; font-size: 1.2rem; }
+            .wheel-center { width: 40px; height: 40px; font-size: 1.1rem; }
+            .wheel-pointer { font-size: 1.5rem; top: -12px; }
+
+            .controls { gap: 8px; }
+            .game-btn { padding: 11px 6px; font-size: 0.82rem; }
+
+            .products-grid { padding: 0 15px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .product-card { padding: 15px 10px; }
+            .product-img-box { width: 90px; height: 90px; font-size: 3rem; }
+
+            .promo-banner { padding: 0 15px; }
+            .promo-banner-inner { padding: 26px 18px; border-radius: 24px; }
+            .promo-banner-inner h2 { font-size: 1.7rem; }
+            .promo-banner-inner p { font-size: 0.92rem; }
+            .promo-container { padding: 0 15px; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .promo-card { padding: 20px 14px; }
+            .promo-price { font-size: 1.6rem; }
+
+            .code-modal-box { padding: 22px 18px; border-radius: 18px; }
+            .cart-drawer { max-width: 100%; padding: 16px; }
+        }
+
+        @media (max-width: 380px) {
+            .wheel-wrap { width: 185px; height: 185px; }
+            .wheel-seg { width: 22px; height: 22px; margin-left: -11px; margin-top: -11px; font-size: 1.05rem; }
+            .wheel-center { width: 36px; height: 36px; font-size: 1rem; }
+            .controls { grid-template-columns: 1fr; }
+            .equivalents-visual-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); }
+        }
+
     </style>
 </head>
 <body>
@@ -764,16 +863,21 @@
         <a href="#" class="logo">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Nayes Scoops
         </a>
-        <ul class="nav-links">
-            <li><a href="#nayes-promo">🔥 Promoción</a></li>
-            <li><a href="#dinamica">¿Cómo Funciona?</a></li>
-            <li><a href="#juego">🎡 Ruleta</a></li>
-            <li><a href="#productos">Catálogo</a></li>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#nayes-promo" onclick="closeMobileNav()">🔥 Promoción</a></li>
+            <li><a href="#dinamica" onclick="closeMobileNav()">¿Cómo Funciona?</a></li>
+            <li><a href="#juego" onclick="closeMobileNav()">🎡 Ruleta</a></li>
+            <li><a href="#productos" onclick="closeMobileNav()">Catálogo</a></li>
         </ul>
-        <button class="cart-icon-btn" onclick="toggleCart()">
-            <i class="fa-solid fa-basket-shopping"></i>
-            <span class="cart-badge" id="cartCount">0</span>
-        </button>
+        <div class="nav-right">
+            <button class="cart-icon-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+            <button class="nav-toggle-btn" id="navToggleBtn" onclick="toggleMobileNav()" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
     <section class="hero">
@@ -998,11 +1102,15 @@
             { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye 32 figuritas — el maquillaje depende de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", count: 32 },
             { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye 43 figuritas — el maquillaje depende de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", count: 43 }
         ];
-        const DEFAULT_EGG = { name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 };
+        const DEFAULT_EGGS = [{ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }];
+        const DEFAULT_EGG_CHANCE = 10;
+        const DEFAULT_EGG_MINCOUNT = 20;
         const DEFAULT_WHATSAPP = "527443196897";
 
         let catalogProducts = DEFAULT_PRODUCTS.slice();
-        let currentEgg = { ...DEFAULT_EGG };
+        let currentEggs = DEFAULT_EGGS.slice();
+        let eggChance = DEFAULT_EGG_CHANCE;
+        let eggMinCount = DEFAULT_EGG_MINCOUNT;
         let shopWhatsApp = DEFAULT_WHATSAPP;
         let db = null;
 
@@ -1024,19 +1132,22 @@
                 grid.appendChild(item);
             });
 
-            // Agregar el Premio Especial (huevo dorado) configurado en el panel admin
-            const goldenEgg = document.createElement('div');
-            goldenEgg.className = 'visual-item';
-            goldenEgg.style.borderColor = "var(--gold-accent)";
-            goldenEgg.style.background = "#fffde7";
-            const eggVisual = currentEgg.image
-                ? `<img src="${currentEgg.image}" alt="${currentEgg.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
-                : `<div class="visual-emoji">${currentEgg.emoji || '🥚'}</div>`;
-            goldenEgg.innerHTML = `
-                ${eggVisual}
-                <div class="visual-name" style="color:#d4af37;">PREMIO ESPECIAL</div>
-            `;
-            grid.appendChild(goldenEgg);
+            // Agrega los Premios Extra (huevos dorados) configurados en el panel admin.
+            // Son EXTRA a las figuritas normales, por eso se muestran aparte y en dorado.
+            currentEggs.forEach(egg => {
+                const goldenEgg = document.createElement('div');
+                goldenEgg.className = 'visual-item';
+                goldenEgg.style.borderColor = "var(--gold-accent)";
+                goldenEgg.style.background = "#fffde7";
+                const eggVisual = egg.image
+                    ? `<img src="${egg.image}" alt="${egg.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
+                    : `<div class="visual-emoji">${egg.emoji || '🥚'}</div>`;
+                goldenEgg.innerHTML = `
+                    ${eggVisual}
+                    <div class="visual-name" style="color:#d4af37;">PREMIO EXTRA</div>
+                `;
+                grid.appendChild(goldenEgg);
+            });
         }
 
         function renderProducts() {
@@ -1123,9 +1234,14 @@
             const gradientParts = segments.map((p, i) => `${colors[i % 2]} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
             wheel.style.background = `conic-gradient(${gradientParts.join(',')})`;
 
+            // El radio se calcula según el tamaño real de la ruleta (que cambia en
+            // celulares chicos por CSS) para que las figuritas siempre queden bien
+            // acomodadas dentro del círculo, sin importar el tamaño de pantalla.
+            const radius = (wheel.clientWidth / 2) * 0.71;
+
             wheel.innerHTML = segments.map((p, i) => {
                 const mid = segAngle * i + segAngle / 2;
-                return `<div class="wheel-seg" style="transform: rotate(${mid}deg) translate(0, -85px);">
+                return `<div class="wheel-seg" style="transform: rotate(${mid}deg) translate(0, -${radius}px);">
                             <span style="display:inline-block; transform: rotate(${-mid}deg);">${p.emoji}</span>
                         </div>`;
             }).join('');
@@ -1190,7 +1306,14 @@
 
             if (db.wheel) {
                 wheelSegmentIds = Array.isArray(db.wheel.segmentIds) ? db.wheel.segmentIds : null;
-                if (db.wheel.egg) currentEgg = { ...DEFAULT_EGG, ...db.wheel.egg };
+                // Compatibilidad: admin puede mandar "eggs" (lista nueva) o el "egg" viejo (uno solo)
+                if (Array.isArray(db.wheel.eggs) && db.wheel.eggs.length) {
+                    currentEggs = db.wheel.eggs;
+                } else if (db.wheel.egg) {
+                    currentEggs = [db.wheel.egg];
+                }
+                if (typeof db.wheel.eggChance === 'number') eggChance = db.wheel.eggChance;
+                if (typeof db.wheel.eggMinCount === 'number') eggMinCount = db.wheel.eggMinCount;
             }
 
             renderVisualBoard();
@@ -1334,16 +1457,27 @@
             totalBadge.style.display = 'none';
 
             let currentPrizes = [];
-            
-            // Lógica para añadir premios
+
+            // Primero se arma el paquete normal: todas las figuritas que la clienta
+            // ya ganó por su Scoop, sin quitarle ningún lugar al huevo.
             for (let i = 0; i < count; i++) {
-                // 10% de probabilidad de huevito dorado en scoops grandes
-                if (count >= 20 && Math.random() < 0.10 && !currentPrizes.some(p => p.isGold)) {
-                    currentPrizes.push({ name: currentEgg.name, emoji: currentEgg.emoji, isGold: true, price: currentEgg.value });
-                } else {
-                    const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
-                    currentPrizes.push({ ...prod, isGold: false });
+                const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
+                currentPrizes.push({ ...prod, isGold: false });
+            }
+
+            // Luego, aparte y EXTRA a todo lo del paquete, se checa si le tocan
+            // huevos dorados. Entre más grande el Scoop, más oportunidades tiene
+            // de que le salga más de uno si tiene suerte.
+            if (currentEggs.length && count >= eggMinCount) {
+                const rolls = Math.max(1, Math.floor(count / eggMinCount));
+                const wonEggs = [];
+                for (let i = 0; i < rolls; i++) {
+                    if (Math.random() * 100 < eggChance) {
+                        const egg = currentEggs[Math.floor(Math.random() * currentEggs.length)];
+                        wonEggs.push({ name: egg.name, emoji: egg.emoji, image: egg.image, isGold: true, price: egg.value });
+                    }
                 }
+                currentPrizes.push(...wonEggs);
             }
 
             let revealed = 0;
@@ -1440,6 +1574,14 @@
             });
 
             totalEl.innerText = `$${total} MXN`;
+        }
+
+        function toggleMobileNav() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        function closeMobileNav() {
+            document.getElementById('navLinks').classList.remove('open');
         }
 
         function toggleCart(forceOpen = null) {
