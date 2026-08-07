@@ -302,6 +302,10 @@
             .game-wrapper { grid-template-columns: 1fr; }
         }
 
+        @media (max-width: 600px) {
+            #publicidadAdsGrid { grid-template-columns: 1fr !important; }
+        }
+
         .board-section, .game-section {
             background: white;
             border-radius: 30px;
@@ -752,8 +756,8 @@
 </head>
 <body>
 
-    <div class="announcement-bar">
-        ✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨
+    <div class="announcement-bar" id="announcementBar">
+        <span id="announcementText">✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨</span>
     </div>
 
     <nav>
@@ -763,7 +767,6 @@
         <ul class="nav-links">
             <li><a href="#nayes-promo">🔥 Promoción</a></li>
             <li><a href="#dinamica">¿Cómo Funciona?</a></li>
-            <li><a href="#scoops">Cucharitas</a></li>
             <li><a href="#juego">🎡 Ruleta</a></li>
             <li><a href="#productos">Catálogo</a></li>
         </ul>
@@ -774,92 +777,32 @@
     </nav>
 
     <section class="hero">
-        <h1>Makeup Sorpresa 💖</h1>
-        <p>Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!</p>
-        <a href="#scoops" class="buy-btn" style="display:inline-block; width:auto; padding:15px 40px;">¡Quiero mi Cucharita! ✨</a>
+        <h1 id="heroTitle">Makeup Sorpresa 💖</h1>
+        <p id="heroSubtitle">Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!</p>
+        <a href="#juego" class="buy-btn" id="heroButton" style="display:inline-block; width:auto; padding:15px 40px;">¡Quiero mi Cucharita! ✨</a>
+    </section>
+
+    <!-- PUBLICIDAD DE JUEGOS EN VIVO -->
+    <section id="publicidadAdsSection" style="display:none; margin-top:40px;">
+        <div class="section-title">
+            <h2>📸 Nuestros Juegos en Vivo</h2>
+        </div>
+        <div id="publicidadAdsGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:0 auto; padding:0 20px;">
+        </div>
     </section>
 
     <!-- PROMOCIÓN NAYES SCOOPS -->
     <section id="nayes-promo" style="margin-top: 50px; padding-bottom: 10px;">
         <div class="promo-banner">
             <div class="promo-banner-inner">
-                <span class="promo-eyebrow">✨ LLEGÓ LA NUEVA EXPERIENCIA ✨</span>
-                <h2>Nayes Scoops 🎉</h2>
-                <p>¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. Elige el nivel que más te guste y vive la experiencia 💄✨</p>
+                <span class="promo-eyebrow" id="promoEyebrow">✨ LLEGÓ LA NUEVA EXPERIENCIA ✨</span>
+                <h2 id="promoTitle">Nayes Scoops 🎉</h2>
+                <p id="promoDescription">¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. 🔴 ¡Cada Scoop se transmite en vivo para que veas salir tus figuritas y tu maquillaje en tiempo real! 🤩</p>
             </div>
         </div>
 
-        <div class="promo-container">
-            <div class="promo-card">
-                <div class="promo-name">💗 Naye's Sweet Scoop</div>
-                <div class="promo-price">$100</div>
-                <div class="promo-desc">Mínimo 5 tesoros de belleza</div>
-                <div class="promo-gift">🎁 Incluye regalo adicional</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Sweet Scoop', '$100')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card">
-                <div class="promo-name">💖 Naye's Glam Scoop</div>
-                <div class="promo-price">$195</div>
-                <div class="promo-desc">Mínimo 10 tesoros de belleza</div>
-                <div class="promo-gift">🎁 Incluye regalo adicional</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Glam Scoop', '$195')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card featured">
-                <span class="promo-fav-tag">⭐ FAVORITO DE LA CASA</span>
-                <div class="promo-name">✨ Naye's Glow Scoop</div>
-                <div class="promo-price">$250</div>
-                <div class="promo-desc">Mínimo 15 tesoros VIP de belleza y cuidado personal</div>
-                <div class="promo-gift">🎁 Incluye regalo adicional especial</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Glow Scoop', '$250')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card">
-                <div class="promo-name">👑 Mega Naye Scoop</div>
-                <div class="promo-price">$350</div>
-                <div class="promo-desc">Mínimo 22 tesoros + 1 producto estelar</div>
-                <div class="promo-gift">🎁 Incluye regalo sorpresa premium</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Mega Naye Scoop', '$350')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card">
-                <div class="promo-name">🌟 Ultimate Naye Scoop</div>
-                <div class="promo-price">$400</div>
-                <div class="promo-desc">Mínimo 26 tesoros + 2 productos estelares</div>
-                <div class="promo-gift">🎁 Incluye regalo sorpresa deluxe</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Ultimate Naye Scoop', '$400')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card">
-                <div class="promo-name">👑 Naye's Queen Luxe</div>
-                <div class="promo-price">$500</div>
-                <div class="promo-desc">Mínimo 32 tesoros + 3 productos estelares</div>
-                <div class="promo-gift">🎁 Regalo super deluxe + empaque especial</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s Queen Luxe', '$500')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
-
-            <div class="promo-card">
-                <div class="promo-name">💎 Naye's VIP Diamond</div>
-                <div class="promo-price">$600</div>
-                <div class="promo-desc">Mínimo 40 tesoros + Set estelar completo</div>
-                <div class="promo-gift">🎁 La experiencia más grande y con más sorpresas</div>
-                <button class="promo-btn" onclick="sendPromoToWhatsApp('Naye\'s VIP Diamond', '$600')">
-                    <i class="fa-brands fa-whatsapp"></i> Pedir
-                </button>
-            </div>
+        <div class="promo-container" id="promoContainer">
+            <!-- Se llena dinámicamente con JS a partir de lo configurado en el panel admin -->
         </div>
 
         <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:20px;">
@@ -879,7 +822,7 @@
                 <div class="step-number">1</div>
                 <div class="step-icon">🛍️</div>
                 <div class="step-title">Elige tu Scoop</div>
-                <div class="step-desc">Selecciona el tamaño de tu cucharita (Mini, Estándar, Premium o Glam).</div>
+                <div class="step-desc">Elige el nivel de tu Nayes Scoop, del Sweet Scoop al VIP Diamond.</div>
             </div>
             <div class="step-card">
                 <div class="step-number">2</div>
@@ -898,52 +841,6 @@
                 <div class="step-icon">🚚</div>
                 <div class="step-title">Disfruta</div>
                 <div class="step-desc">Recibes tus hermosos cosméticos directamente en la puerta de tu casa.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NUEVA SECCIÓN DE PAQUETES (CUCHARITAS) -->
-    <section id="scoops">
-        <div class="section-title">
-            <h2>¡Tenemos 4 tipos de cucharitas! 🥄</h2>
-            <p>Entre más grande tu cucharita, más oportunidades de ganar premios especiales</p>
-        </div>
-
-        <div class="scoops-container">
-            <div class="scoop-card card-mini">
-                <div class="scoop-icon">🥄</div>
-                <div class="scoop-title">Naye's Sweet Scoop</div>
-                <div class="scoop-price">$100</div>
-                <div class="scoop-items-badge">INCLUYE 5 a 7 PRODUCTOS</div>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Ideal para probar tu suerte.</p>
-                <button class="buy-btn" onclick="addToCart('Naye\'s Sweet Scoop', 95)">Agregar al carrito</button>
-            </div>
-
-            <div class="scoop-card card-std">
-                <div class="scoop-icon">🥣</div>
-                <div class="scoop-title">Cucharita Estándar</div>
-                <div class="scoop-price">$190</div>
-                <div class="scoop-items-badge">INCLUYE 10 PRODUCTOS</div>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">La favorita de nuestras clientas.</p>
-                <button class="buy-btn" onclick="addToCart('Cucharita Estándar', 190)">Agregar al carrito</button>
-            </div>
-
-            <div class="scoop-card card-prem">
-                <div class="scoop-icon">💖</div>
-                <div class="scoop-title">Cucharita Premium</div>
-                <div class="scoop-price">$380</div>
-                <div class="scoop-items-badge">INCLUYE 20 PRODUCTOS</div>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Doble porción de magia y color.</p>
-                <button class="buy-btn" onclick="addToCart('Cucharita Premium', 380)">Agregar al carrito</button>
-            </div>
-
-            <div class="scoop-card card-glam">
-                <div class="scoop-icon">👑</div>
-                <div class="scoop-title">Cucharita Glam VIP</div>
-                <div class="scoop-price">$580</div>
-                <div class="scoop-items-badge">INCLUYE 30 PRODUCTOS</div>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Full sorpresas + Huevito Dorado.</p>
-                <button class="buy-btn" onclick="addToCart('Cucharita Glam VIP', 580)">Agregar al carrito</button>
             </div>
         </div>
     </section>
@@ -1051,24 +948,63 @@
 
     <script>
         // --- 1. BASE DE DATOS DE PRODUCTOS Y "FIGURITAS" ---
-        // Actualizamos para que los emojis sean las "Figuritas" llamativas
-        const catalogProducts = [
-            { id: 1, name: "Gloss de Labios", price: 35, emoji: "💖", cat: "labios" },
-            { id: 2, name: "Máscara Pestañas", price: 45, emoji: "🌸", cat: "ojos" },
-            { id: 3, name: "Labial en Barra", price: 40, emoji: "⭐", cat: "labios" },
-            { id: 4, name: "Delineador", price: 30, emoji: "🎀", cat: "ojos" },
-            { id: 5, name: "Tinta de Labios", price: 35, emoji: "🌼", cat: "labios" },
-            { id: 6, name: "Lápiz de Cejas", price: 25, emoji: "👑", cat: "ojos" },
-            { id: 7, name: "Sombras de Ojos", price: 65, emoji: "🦋", cat: "ojos" },
-            { id: 8, name: "Rubor Mágico", price: 40, emoji: "💮", cat: "skincare" },
-            { id: 9, name: "Iluminador Shine", price: 50, emoji: "🍒", cat: "skincare" },
-            { id: 10, name: "Fijador Makeup", price: 55, emoji: "🍓", cat: "skincare" },
-            { id: 11, name: "Base Líquida", price: 70, emoji: "☁️", cat: "skincare" },
-            { id: 12, name: "Primer Facial", price: 45, emoji: "💎", cat: "skincare" },
-            { id: 13, name: "Corrector", price: 35, emoji: "🌙", cat: "skincare" },
-            { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", cat: "accesorios" },
-            { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", cat: "accesorios" }
+        // Estos son solo valores de respaldo (por si aún no carga la nube ni hay nada
+        // guardado en este navegador). En cuanto carguen los datos reales del panel
+        // admin (localStorage + Firebase), se reemplazan automáticamente.
+        const DEFAULT_PRODUCTS = [
+            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 40, emoji: "💧", image: null, cat: "skincare" },
+            { id: 2, name: "Corrector de Ojeras Líquido", price: 30, emoji: "🌙", image: null, cat: "skincare" },
+            { id: 3, name: "Polvo Suelto Traslúcido", price: 30, emoji: "☁️", image: null, cat: "skincare" },
+            { id: 4, name: "Polvo Compacto", price: 30, emoji: "🍰", image: null, cat: "skincare" },
+            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 30, emoji: "✨", image: null, cat: "skincare" },
+            { id: 6, name: "Rubor (crema o compacto)", price: 30, emoji: "🌸", image: null, cat: "skincare" },
+            { id: 7, name: "Contorno (polvo o crema)", price: 35, emoji: "🍫", image: null, cat: "skincare" },
+            { id: 8, name: "Iluminador (líquido o polvo)", price: 40, emoji: "🍒", image: null, cat: "skincare" },
+            { id: 9, name: "Primer o Preparador Facial", price: 35, emoji: "💎", image: null, cat: "skincare" },
+            { id: 10, name: "Crema Hidratante Facial", price: 30, emoji: "🧴", image: null, cat: "skincare" },
+            { id: 11, name: "Paleta de Sombras", price: 45, emoji: "🦋", image: null, cat: "ojos" },
+            { id: 12, name: "Lápiz Delineador de Ojos", price: 25, emoji: "✏️", image: null, cat: "ojos" },
+            { id: 13, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
+            { id: 14, name: "Delineador Líquido o en Crema", price: 30, emoji: "🖊️", image: null, cat: "ojos" },
+            { id: 15, name: "Máscara de Pestañas (rímel)", price: 40, emoji: "🌟", image: null, cat: "ojos" },
+            { id: 16, name: "Pestañas Postizas", price: 35, emoji: "🪽", image: null, cat: "ojos" },
+            { id: 17, name: "Primer para Sombras", price: 30, emoji: "💫", image: null, cat: "ojos" },
+            { id: 18, name: "Gel Fijador de Cejas", price: 25, emoji: "🧊", image: null, cat: "ojos" },
+            { id: 19, name: "Pomada de Cejas", price: 25, emoji: "🍯", image: null, cat: "ojos" },
+            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 30, emoji: "⭐", image: null, cat: "labios" },
+            { id: 21, name: "Labial Nude", price: 30, emoji: "🤎", image: null, cat: "labios" },
+            { id: 22, name: "Labial Rojo", price: 30, emoji: "❤️", image: null, cat: "labios" },
+            { id: 23, name: "Tinta de Labios", price: 30, emoji: "🌼", image: null, cat: "labios" },
+            { id: 24, name: "Brillo Labial (gloss)", price: 25, emoji: "💖", image: null, cat: "labios" },
+            { id: 25, name: "Bálsamo Hidratante Labial", price: 25, emoji: "🍓", image: null, cat: "labios" },
+            { id: 26, name: "Mascarilla Labial (colágeno)", price: 30, emoji: "💋", image: null, cat: "labios" },
+            { id: 27, name: "Brocha o Esponja para Base", price: 30, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 28, name: "Brocha para Polvos/Rubor", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 29, name: "Pincel para Sombras", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 30, name: "Beauty Blender Mini", price: 25, emoji: "💧", image: null, cat: "brochas" },
+            { id: 31, name: "Peine de Cejas y Pestañas", price: 20, emoji: "🪮", image: null, cat: "brochas" },
+            { id: 32, name: "Agua Micelar", price: 30, emoji: "💦", image: null, cat: "higiene" },
+            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 30, emoji: "🌿", image: null, cat: "higiene" },
+            { id: 34, name: "Parches para Acné/Ojeras", price: 20, emoji: "🩹", image: null, cat: "accesorios" },
+            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 20, emoji: "🎀", image: null, cat: "accesorios" },
+            { id: 36, name: "Bandana para Maquillaje", price: 25, emoji: "🧣", image: null, cat: "accesorios" }
         ];
+        const DEFAULT_PROMO_TIERS = [
+            { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye 5 figuritas — el maquillaje que te toque depende de la figurita que salga", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", count: 5 },
+            { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye 10 figuritas — el maquillaje depende de la figurita que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", count: 10 },
+            { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye 18 figuritas — el maquillaje depende de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", count: 18 },
+            { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye 23 figuritas — el maquillaje depende de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", count: 23 },
+            { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye 29 figuritas — el maquillaje depende de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", count: 29 },
+            { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye 32 figuritas — el maquillaje depende de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", count: 32 },
+            { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye 43 figuritas — el maquillaje depende de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", count: 43 }
+        ];
+        const DEFAULT_EGG = { name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 };
+        const DEFAULT_WHATSAPP = "527443196897";
+
+        let catalogProducts = DEFAULT_PRODUCTS.slice();
+        let currentEgg = { ...DEFAULT_EGG };
+        let shopWhatsApp = DEFAULT_WHATSAPP;
+        let db = null;
 
         // --- 2. RENDERIZADO VISUAL DE FIGURITAS (COMO LA IMAGEN DE REFERENCIA) ---
         function renderVisualBoard() {
@@ -1078,20 +1014,26 @@
             catalogProducts.forEach(prod => {
                 const item = document.createElement('div');
                 item.className = 'visual-item';
+                const visual = prod.image
+                    ? `<img src="${prod.image}" alt="${prod.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
+                    : `<div class="visual-emoji">${prod.emoji || '💄'}</div>`;
                 item.innerHTML = `
-                    <div class="visual-emoji">${prod.emoji}</div>
+                    ${visual}
                     <div class="visual-name">${prod.name.toUpperCase()}</div>
                 `;
                 grid.appendChild(item);
             });
 
-            // Agregar el Huevo Dorado Especial
+            // Agregar el Premio Especial (huevo dorado) configurado en el panel admin
             const goldenEgg = document.createElement('div');
             goldenEgg.className = 'visual-item';
             goldenEgg.style.borderColor = "var(--gold-accent)";
             goldenEgg.style.background = "#fffde7";
+            const eggVisual = currentEgg.image
+                ? `<img src="${currentEgg.image}" alt="${currentEgg.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
+                : `<div class="visual-emoji">${currentEgg.emoji || '🥚'}</div>`;
             goldenEgg.innerHTML = `
-                <div class="visual-emoji">🥚</div>
+                ${eggVisual}
                 <div class="visual-name" style="color:#d4af37;">PREMIO ESPECIAL</div>
             `;
             grid.appendChild(goldenEgg);
@@ -1103,9 +1045,12 @@
             catalogProducts.forEach(prod => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                const visual = prod.image
+                    ? `<img src="${prod.image}" alt="${prod.name}" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px;">`
+                    : `<div class="product-img-box">${prod.emoji || '💄'}</div>`;
                 card.innerHTML = `
                     <div>
-                        <div class="product-img-box">${prod.emoji}</div>
+                        ${visual}
                         <h4 style="font-family:'Fredoka'; color:var(--text-dark);">${prod.name}</h4>
                         <div style="font-size:1.2rem; font-weight:bold; color:var(--pink-dark); margin:10px 0;">$${prod.price}</div>
                     </div>
@@ -1115,14 +1060,64 @@
             });
         }
 
+        function renderAdsSection(ads) {
+            const section = document.getElementById('publicidadAdsSection');
+            const grid = document.getElementById('publicidadAdsGrid');
+            grid.innerHTML = '';
+            const images = ads ? [ads.image1, ads.image2].filter(Boolean) : [];
+            if (!images.length) {
+                section.style.display = 'none';
+                return;
+            }
+            section.style.display = 'block';
+            images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.style.width = '100%';
+                img.style.borderRadius = '16px';
+                img.style.boxShadow = '0 6px 18px rgba(0,0,0,0.12)';
+                img.style.objectFit = 'cover';
+                img.style.aspectRatio = '1';
+                grid.appendChild(img);
+            });
+        }
+
+        function renderPromoTiers(tiers) {
+            const container = document.getElementById('promoContainer');
+            container.innerHTML = '';
+            (tiers && tiers.length ? tiers : DEFAULT_PROMO_TIERS).forEach(tier => {
+                const card = document.createElement('div');
+                card.className = 'promo-card' + (tier.featured ? ' featured' : '');
+                const safeName = tier.name.replace(/'/g, "\\'");
+                card.innerHTML = `
+                    ${tier.featured ? '<span class="promo-fav-tag">⭐ FAVORITO DE LA CASA</span>' : ''}
+                    <div class="promo-name">${tier.name}</div>
+                    <div class="promo-price">$${tier.price}</div>
+                    <div class="promo-desc">${tier.desc}</div>
+                    <div class="promo-gift">${tier.gift}</div>
+                    <button class="promo-btn" onclick="sendPromoToWhatsApp('${safeName}', '$${tier.price}')">
+                        <i class="fa-brands fa-whatsapp"></i> Pedir
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         // --- 3. RULETA DE LA SUERTE (VISUAL) ---
         const wheelWrap = document.querySelector('.wheel-wrap');
         const wheel = document.getElementById('wheel');
-        const GOLDEN_EGG_VALUE = 150;
+        let wheelSegmentIds = null; // se llena desde db.wheel.segmentIds si existe
         let wheelRotation = 0;
 
         function buildWheel() {
-            const segments = catalogProducts.slice(0, 10);
+            let segments = catalogProducts;
+            if (wheelSegmentIds && wheelSegmentIds.length) {
+                const byId = wheelSegmentIds
+                    .map(id => catalogProducts.find(p => p.id === id))
+                    .filter(Boolean);
+                if (byId.length) segments = byId;
+            }
+            segments = segments.slice(0, 10);
             const segAngle = 360 / segments.length;
             const colors = ['#ffe0ec', '#ffffff'];
             const gradientParts = segments.map((p, i) => `${colors[i % 2]} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
@@ -1153,34 +1148,82 @@
         firebase.initializeApp(firebaseConfig);
         const dbFirestore = firebase.firestore();
 
+        // --- SINCRONIZACIÓN CON EL PANEL ADMIN ---
+        // admin.html guarda los cambios en localStorage Y en Firestore
+        // (colección site_config, documento "main"). Aquí escuchamos ese mismo
+        // documento en tiempo real: en cuanto Naye guarda algo en el panel admin
+        // (desde cualquier celular o computadora), esta página se actualiza sola,
+        // sin necesidad de recargarla.
+        function applyDB(data) {
+            if (!data) return;
+            db = data;
+
+            const announcementEl = document.getElementById('announcementText');
+            if (announcementEl && db.announcement) announcementEl.innerText = db.announcement;
+
+            if (db.hero) {
+                const t = document.getElementById('heroTitle');
+                const s = document.getElementById('heroSubtitle');
+                const b = document.getElementById('heroButton');
+                if (t && db.hero.title) t.innerText = db.hero.title;
+                if (s && db.hero.subtitle) s.innerText = db.hero.subtitle;
+                if (b && db.hero.button) b.innerText = db.hero.button;
+            }
+
+            if (db.promo) {
+                const eyebrow = document.getElementById('promoEyebrow');
+                const title = document.getElementById('promoTitle');
+                const desc = document.getElementById('promoDescription');
+                if (eyebrow && db.promo.eyebrow) eyebrow.innerText = db.promo.eyebrow;
+                if (title && db.promo.title) title.innerText = db.promo.title;
+                if (desc && db.promo.description) desc.innerText = db.promo.description;
+                renderPromoTiers(db.promo.tiers);
+            }
+
+            if (db.whatsapp) shopWhatsApp = db.whatsapp;
+
+            renderAdsSection(db.ads);
+
+            if (Array.isArray(db.products) && db.products.length) {
+                catalogProducts = db.products;
+            }
+
+            if (db.wheel) {
+                wheelSegmentIds = Array.isArray(db.wheel.segmentIds) ? db.wheel.segmentIds : null;
+                if (db.wheel.egg) currentEgg = { ...DEFAULT_EGG, ...db.wheel.egg };
+            }
+
+            renderVisualBoard();
+            renderProducts();
+            buildWheel();
+        }
+
+        function startDBSync() {
+            // Primero pinta lo que ya esté guardado en este navegador (instantáneo),
+            // y luego escucha Firestore para traer la versión más reciente y
+            // mantenerse sincronizado en tiempo real.
+            try {
+                const raw = localStorage.getItem(DB_KEY);
+                if (raw) applyDB(JSON.parse(raw));
+            } catch (e) { console.warn('No se pudo leer la copia local', e); }
+
+            dbFirestore.collection('site_config').doc('main').onSnapshot(snap => {
+                if (snap.exists) {
+                    const data = snap.data();
+                    applyDB(data);
+                    try { localStorage.setItem(DB_KEY, JSON.stringify(data)); } catch (e) { /* espacio lleno, se ignora */ }
+                }
+            }, err => console.error('No se pudo sincronizar con la nube', err));
+        }
+
         const DB_KEY = 'nayes_beauty_db';
         const CODE_SALT = "NAYES2026";
         const CODE_CHARSET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 
-        // Debe coincidir con los niveles por defecto del panel admin.
-        // Si Naye ya guardó cambios en el panel admin (mismo navegador/dominio),
-        // se usan esos niveles actualizados en su lugar.
-        const DEFAULT_SCOOP_TIERS = [
-            { name: "💗 Naye's Sweet Scoop", code: "SWEET", count: 5 },
-            { name: "💖 Naye's Glam Scoop", code: "GLAM", count: 10 },
-            { name: "✨ Naye's Glow Scoop", code: "GLOW", count: 15 },
-            { name: "👑 Mega Naye Scoop", code: "MEGA", count: 22 },
-            { name: "🌟 Ultimate Naye Scoop", code: "ULTRA", count: 26 },
-            { name: "👑 Naye's Queen Luxe", code: "QUEEN", count: 32 },
-            { name: "💎 Naye's VIP Diamond", code: "VIPD", count: 40 }
-        ];
-
         function loadScoopTiers() {
-            try {
-                const raw = localStorage.getItem(DB_KEY);
-                if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (parsed && parsed.promo && Array.isArray(parsed.promo.tiers) && parsed.promo.tiers.length) {
-                        return parsed.promo.tiers;
-                    }
-                }
-            } catch (e) { console.warn('No se pudo leer la configuración guardada, usando valores por defecto', e); }
-            return DEFAULT_SCOOP_TIERS;
+            return (db && db.promo && Array.isArray(db.promo.tiers) && db.promo.tiers.length)
+                ? db.promo.tiers
+                : DEFAULT_PROMO_TIERS;
         }
 
         function codeChecksum(str) {
@@ -1296,7 +1339,7 @@
             for (let i = 0; i < count; i++) {
                 // 10% de probabilidad de huevito dorado en scoops grandes
                 if (count >= 20 && Math.random() < 0.10 && !currentPrizes.some(p => p.isGold)) {
-                    currentPrizes.push({ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", isGold: true, price: GOLDEN_EGG_VALUE });
+                    currentPrizes.push({ name: currentEgg.name, emoji: currentEgg.emoji, isGold: true, price: currentEgg.value });
                 } else {
                     const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
                     currentPrizes.push({ ...prod, isGold: false });
@@ -1345,12 +1388,12 @@
         // --- PROMO NAYES SCOOPS ---
         function sendPromoToWhatsApp(scoopName, price) {
             let msg = `¡Hola! ✨ Me interesa la promoción Nayes Scoops: *${scoopName}* (${price}). ¿Me pasas la info de pago y entrega? 💄`;
-            window.open(`https://wa.me/527443196897?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         function sendScoopToWhatsApp() {
             let msg = `¡Hola! Hice una simulación en la página y me encantó. Quiero pedir una cucharita de ${lastSimulatedCount} productos. ¿Me pasas la info de pago? ✨`;
-            window.open(`https://wa.me/5217820000000?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         // --- 5. CARRITO DE COMPRAS ---
@@ -1419,13 +1462,17 @@
             cart = [];
             updateCart();
             toggleCart(false);
-            window.open(`https://wa.me/5217820000000?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         // --- 6. INICIAR ---
+        // Pinta primero con los valores de respaldo para que la página nunca se vea
+        // vacía, y luego startDBSync() los reemplaza con lo real en cuanto carga.
         renderVisualBoard();
         renderProducts();
+        renderPromoTiers(DEFAULT_PROMO_TIERS);
         buildWheel();
+        startDBSync();
     </script>
 </body>
 </html>

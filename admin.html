@@ -326,6 +326,29 @@
             <label>Texto del botón</label>
             <input type="text" id="f-hero-button">
         </div>
+
+        <div class="panel">
+            <h2>📸 Publicidad de tus Juegos en Vivo</h2>
+            <p class="hint" style="margin-bottom:15px;">Sube hasta 2 fotos (capturas de tus transmisiones, promos, etc.). Se muestran en una sección de la página pública.</p>
+            <div class="grid-2">
+                <div>
+                    <label>Foto 1</label>
+                    <div class="img-upload-row">
+                        <div class="img-preview" id="ad-preview-1">📷</div>
+                        <input type="file" accept="image/*" onchange="handleAdImageUpload(event, 1)">
+                        <button class="remove-btn" id="ad-remove-btn-1" style="display:none; position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeAdImage(1)">Quitar foto</button>
+                    </div>
+                </div>
+                <div>
+                    <label>Foto 2</label>
+                    <div class="img-upload-row">
+                        <div class="img-preview" id="ad-preview-2">📷</div>
+                        <input type="file" accept="image/*" onchange="handleAdImageUpload(event, 2)">
+                        <button class="remove-btn" id="ad-remove-btn-2" style="display:none; position:static; width:auto; padding:6px 12px; border-radius:12px;" onclick="removeAdImage(2)">Quitar foto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- TAB PROMOCIÓN -->
@@ -455,36 +478,61 @@
             subtitle: "Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!",
             button: "¡Quiero mi Cucharita! ✨"
         },
+        ads: {
+            image1: null,
+            image2: null
+        },
         promo: {
             eyebrow: "✨ LLEGÓ LA NUEVA EXPERIENCIA ✨",
             title: "Nayes Scoops 🎉",
-            description: "¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles.",
+            description: "¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. 🔴 ¡Cada Scoop se transmite en vivo para que veas salir tus figuritas y tu maquillaje en tiempo real! 🤩",
             tiers: [
-                { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Mínimo 5 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false, code: "SWEET", count: 5 },
-                { name: "💖 Naye's Glam Scoop", price: 195, desc: "Mínimo 10 tesoros de belleza", gift: "🎁 Incluye regalo adicional", featured: false, code: "GLAM", count: 10 },
-                { name: "✨ Naye's Glow Scoop", price: 250, desc: "Mínimo 15 tesoros VIP de belleza y cuidado personal", gift: "🎁 Incluye regalo adicional especial", featured: true, code: "GLOW", count: 15 },
-                { name: "👑 Mega Naye Scoop", price: 350, desc: "Mínimo 22 tesoros + 1 producto estelar", gift: "🎁 Incluye regalo sorpresa premium", featured: false, code: "MEGA", count: 22 },
-                { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Mínimo 26 tesoros + 2 productos estelares", gift: "🎁 Incluye regalo sorpresa deluxe", featured: false, code: "ULTRA", count: 26 },
-                { name: "👑 Naye's Queen Luxe", price: 500, desc: "Mínimo 32 tesoros + 3 productos estelares", gift: "🎁 Regalo super deluxe + empaque especial", featured: false, code: "QUEEN", count: 32 },
-                { name: "💎 Naye's VIP Diamond", price: 600, desc: "Mínimo 40 tesoros + Set estelar completo", gift: "🎁 La experiencia más grande y con más sorpresas", featured: false, code: "VIPD", count: 40 }
+                { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye 5 figuritas — el maquillaje que te toque depende de la figurita que salga", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", count: 5 },
+                { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye 10 figuritas — el maquillaje depende de la figurita que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", count: 10 },
+                { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye 18 figuritas — el maquillaje depende de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", count: 18 },
+                { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye 23 figuritas — el maquillaje depende de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", count: 23 },
+                { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye 29 figuritas — el maquillaje depende de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", count: 29 },
+                { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye 32 figuritas — el maquillaje depende de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", count: 32 },
+                { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye 43 figuritas — el maquillaje depende de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", count: 43 }
             ]
         },
         products: [
-            { id: 1, name: "Gloss de Labios", price: 35, emoji: "💖", image: null, cat: "labios" },
-            { id: 2, name: "Máscara Pestañas", price: 45, emoji: "🌸", image: null, cat: "ojos" },
-            { id: 3, name: "Labial en Barra", price: 40, emoji: "⭐", image: null, cat: "labios" },
-            { id: 4, name: "Delineador", price: 30, emoji: "🎀", image: null, cat: "ojos" },
-            { id: 5, name: "Tinta de Labios", price: 35, emoji: "🌼", image: null, cat: "labios" },
-            { id: 6, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
-            { id: 7, name: "Sombras de Ojos", price: 65, emoji: "🦋", image: null, cat: "ojos" },
-            { id: 8, name: "Rubor Mágico", price: 40, emoji: "💮", image: null, cat: "skincare" },
-            { id: 9, name: "Iluminador Shine", price: 50, emoji: "🍒", image: null, cat: "skincare" },
-            { id: 10, name: "Fijador Makeup", price: 55, emoji: "🍓", image: null, cat: "skincare" },
-            { id: 11, name: "Base Líquida", price: 70, emoji: "☁️", image: null, cat: "skincare" },
-            { id: 12, name: "Primer Facial", price: 45, emoji: "💎", image: null, cat: "skincare" },
-            { id: 13, name: "Corrector", price: 35, emoji: "🌙", image: null, cat: "skincare" },
-            { id: 14, name: "Esponja Beauty", price: 20, emoji: "💧", image: null, cat: "accesorios" },
-            { id: 15, name: "Aretes / Accesorios", price: 30, emoji: "🧸", image: null, cat: "accesorios" }
+            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 40, emoji: "💧", image: null, cat: "skincare" },
+            { id: 2, name: "Corrector de Ojeras Líquido", price: 30, emoji: "🌙", image: null, cat: "skincare" },
+            { id: 3, name: "Polvo Suelto Traslúcido", price: 30, emoji: "☁️", image: null, cat: "skincare" },
+            { id: 4, name: "Polvo Compacto", price: 30, emoji: "🍰", image: null, cat: "skincare" },
+            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 30, emoji: "✨", image: null, cat: "skincare" },
+            { id: 6, name: "Rubor (crema o compacto)", price: 30, emoji: "🌸", image: null, cat: "skincare" },
+            { id: 7, name: "Contorno (polvo o crema)", price: 35, emoji: "🍫", image: null, cat: "skincare" },
+            { id: 8, name: "Iluminador (líquido o polvo)", price: 40, emoji: "🍒", image: null, cat: "skincare" },
+            { id: 9, name: "Primer o Preparador Facial", price: 35, emoji: "💎", image: null, cat: "skincare" },
+            { id: 10, name: "Crema Hidratante Facial", price: 30, emoji: "🧴", image: null, cat: "skincare" },
+            { id: 11, name: "Paleta de Sombras", price: 45, emoji: "🦋", image: null, cat: "ojos" },
+            { id: 12, name: "Lápiz Delineador de Ojos", price: 25, emoji: "✏️", image: null, cat: "ojos" },
+            { id: 13, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
+            { id: 14, name: "Delineador Líquido o en Crema", price: 30, emoji: "🖊️", image: null, cat: "ojos" },
+            { id: 15, name: "Máscara de Pestañas (rímel)", price: 40, emoji: "🌟", image: null, cat: "ojos" },
+            { id: 16, name: "Pestañas Postizas", price: 35, emoji: "🪽", image: null, cat: "ojos" },
+            { id: 17, name: "Primer para Sombras", price: 30, emoji: "💫", image: null, cat: "ojos" },
+            { id: 18, name: "Gel Fijador de Cejas", price: 25, emoji: "🧊", image: null, cat: "ojos" },
+            { id: 19, name: "Pomada de Cejas", price: 25, emoji: "🍯", image: null, cat: "ojos" },
+            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 30, emoji: "⭐", image: null, cat: "labios" },
+            { id: 21, name: "Labial Nude", price: 30, emoji: "🤎", image: null, cat: "labios" },
+            { id: 22, name: "Labial Rojo", price: 30, emoji: "❤️", image: null, cat: "labios" },
+            { id: 23, name: "Tinta de Labios", price: 30, emoji: "🌼", image: null, cat: "labios" },
+            { id: 24, name: "Brillo Labial (gloss)", price: 25, emoji: "💖", image: null, cat: "labios" },
+            { id: 25, name: "Bálsamo Hidratante Labial", price: 25, emoji: "🍓", image: null, cat: "labios" },
+            { id: 26, name: "Mascarilla Labial (colágeno)", price: 30, emoji: "💋", image: null, cat: "labios" },
+            { id: 27, name: "Brocha o Esponja para Base", price: 30, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 28, name: "Brocha para Polvos/Rubor", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 29, name: "Pincel para Sombras", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 30, name: "Beauty Blender Mini", price: 25, emoji: "💧", image: null, cat: "brochas" },
+            { id: 31, name: "Peine de Cejas y Pestañas", price: 20, emoji: "🪮", image: null, cat: "brochas" },
+            { id: 32, name: "Agua Micelar", price: 30, emoji: "💦", image: null, cat: "higiene" },
+            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 30, emoji: "🌿", image: null, cat: "higiene" },
+            { id: 34, name: "Parches para Acné/Ojeras", price: 20, emoji: "🩹", image: null, cat: "accesorios" },
+            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 20, emoji: "🎀", image: null, cat: "accesorios" },
+            { id: 36, name: "Bandana para Maquillaje", price: 25, emoji: "🧣", image: null, cat: "accesorios" }
         ],
         wheel: {
             segmentIds: [1,2,3,4,5,6,7,8,9,10],
@@ -528,6 +576,7 @@
         // quita de la ruleta cualquier producto que ya no exista en el catálogo
         db.wheel.segmentIds = db.wheel.segmentIds.filter(id => db.products.some(p => p.id === id));
         if (!db.wheel.egg) db.wheel.egg = JSON.parse(JSON.stringify(DEFAULT_DB.wheel.egg));
+        if (!db.ads) db.ads = { image1: null, image2: null };
     }
     ensureWheelConfig();
 
@@ -551,6 +600,40 @@
         document.getElementById('f-promo-eyebrow').value = db.promo.eyebrow;
         document.getElementById('f-promo-title').value = db.promo.title;
         document.getElementById('f-promo-desc').value = db.promo.description;
+        fillAdImages();
+    }
+
+    function fillAdImages() {
+        if (!db.ads) db.ads = { image1: null, image2: null };
+        [1, 2].forEach(n => {
+            const preview = document.getElementById('ad-preview-' + n);
+            const removeBtn = document.getElementById('ad-remove-btn-' + n);
+            const img = db.ads['image' + n];
+            preview.innerHTML = img ? `<img src="${img}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">` : '📷';
+            removeBtn.style.display = img ? 'inline-block' : 'none';
+        });
+    }
+
+    function handleAdImageUpload(evt, n) {
+        const file = evt.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('Por favor sube un archivo de imagen (jpg/png).'); return; }
+        if (file.size > 1.5 * 1024 * 1024) {
+            if (!confirm('Esta imagen pesa más de 1.5MB, puede hacer que la página cargue lento o falle el guardado. ¿Continuar de todos modos?')) return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (!db.ads) db.ads = { image1: null, image2: null };
+            db.ads['image' + n] = e.target.result;
+            fillAdImages();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeAdImage(n) {
+        if (!db.ads) db.ads = { image1: null, image2: null };
+        db.ads['image' + n] = null;
+        fillAdImages();
     }
 
     function renderTiers() {
@@ -658,7 +741,7 @@
                     <div>
                         <label>Categoría</label>
                         <select onchange="updateProduct(${i}, 'cat', this.value)">
-                            ${['labios','ojos','skincare','accesorios'].map(c => `<option value="${c}" ${prod.cat===c?'selected':''}>${c}</option>`).join('')}
+                            ${['labios','ojos','skincare','brochas','higiene','accesorios'].map(c => `<option value="${c}" ${prod.cat===c?'selected':''}>${c}</option>`).join('')}
                         </select>
                     </div>
                     <div>
