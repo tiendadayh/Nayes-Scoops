@@ -173,6 +173,44 @@
 
     .hint { font-size: 0.78rem; color:#999; margin-top:4px; }
 
+    /* --- BUSCADOR Y CONTADOR DE PRODUCTOS --- */
+    .products-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+    }
+    .products-search-box {
+        flex: 1;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-cream);
+        border: 2px solid var(--pink-light);
+        border-radius: 15px;
+        padding: 10px 14px;
+    }
+    .products-search-box i { color: var(--pink-main); }
+    .products-search-box input {
+        border: none;
+        background: transparent;
+        padding: 0;
+        font-size: 0.95rem;
+    }
+    .products-search-box input:focus { outline: none; }
+    .products-count-badge {
+        background: var(--pink-main);
+        color: white;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 8px 16px;
+        border-radius: 20px;
+        white-space: nowrap;
+        box-shadow: 0 4px 10px rgba(255,107,158,0.3);
+    }
+
     /* --- CÓDIGOS DE CANJE --- */
     .code-tier-grid {
         display: grid;
@@ -221,6 +259,34 @@
     .codes-history-table { width:100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
     .codes-history-table th, .codes-history-table td { text-align:left; padding: 8px 6px; border-bottom: 1px solid var(--pink-light); }
     .codes-history-table th { color:#999; font-weight:700; font-size:0.78rem; text-transform: uppercase; }
+
+    /* --- AJUSTES DE DISEÑO PARA CELULAR --- */
+    @media (max-width: 640px) {
+        header { padding: 16px 5%; }
+        header h1 { font-size: 1.25rem; }
+        header a { font-size: 0.8rem; }
+
+        .tabs { gap: 6px; margin: 15px auto 0 auto; padding: 0 12px; }
+        .tab-btn { padding: 8px 14px; font-size: 0.82rem; }
+
+        .container { padding: 0 12px; margin: 15px auto; }
+        .panel { padding: 18px; border-radius: 16px; }
+        .panel h2 { font-size: 1.15rem; }
+
+        .grid-2 { gap: 10px; }
+
+        .products-toolbar { flex-direction: column; align-items: stretch; }
+        .products-count-badge { text-align: center; }
+
+        .code-tier-grid { grid-template-columns: repeat(2, 1fr); }
+
+        .save-bar { padding: 12px 4%; gap: 10px; }
+        .save-btn { padding: 12px 24px; font-size: 0.95rem; }
+        .reset-btn { padding: 12px 16px; font-size: 0.85rem; }
+
+        .codes-history-table { font-size: 0.78rem; }
+        .codes-history-table th, .codes-history-table td { padding: 6px 4px; }
+    }
 </style>
 </head>
 <body>
@@ -285,6 +351,15 @@
         <div class="panel">
             <h2>💄 Catálogo de Productos</h2>
             <p class="hint" style="margin-bottom:15px;">Puedes subir una foto JPG/PNG para cada producto. Si no subes foto, se muestra el emoji.</p>
+
+            <div class="products-toolbar">
+                <div class="products-search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="productSearchInput" placeholder="Buscar producto por nombre o categoría..." oninput="renderProductsAdmin()">
+                </div>
+                <span class="products-count-badge" id="productsCountBadge">0 productos</span>
+            </div>
+
             <div id="productsList"></div>
             <button class="add-btn" onclick="addProduct()">➕ Agregar producto</button>
         </div>
@@ -483,8 +558,29 @@
 
     function renderProductsAdmin() {
         const list = document.getElementById('productsList');
+        const badge = document.getElementById('productsCountBadge');
+        const query = (document.getElementById('productSearchInput').value || '').toLowerCase().trim();
+
+        const filtered = db.products
+            .map((prod, i) => ({ prod, i }))
+            .filter(({ prod }) => {
+                if (!query) return true;
+                return prod.name.toLowerCase().includes(query) || (prod.cat || '').toLowerCase().includes(query);
+            });
+
+        const total = db.products.length;
+        badge.innerText = query
+            ? `${filtered.length} de ${total} producto${total === 1 ? '' : 's'}`
+            : `${total} producto${total === 1 ? '' : 's'}`;
+
         list.innerHTML = '';
-        db.products.forEach((prod, i) => {
+
+        if (filtered.length === 0) {
+            list.innerHTML = `<p class="hint" style="text-align:center; padding:20px 0;">No se encontraron productos que coincidan con "${escAttr(query)}".</p>`;
+            return;
+        }
+
+        filtered.forEach(({ prod, i }) => {
             const div = document.createElement('div');
             div.className = 'card-item';
             const preview = prod.image ? `<img src="${prod.image}">` : (prod.emoji || '🎁');
@@ -557,6 +653,7 @@
     function addProduct() {
         const newId = db.products.length ? Math.max(...db.products.map(p => p.id)) + 1 : 1;
         db.products.push({ id: newId, name: "Nuevo producto", price: 30, emoji: "✨", image: null, cat: "accesorios" });
+        document.getElementById('productSearchInput').value = '';
         renderProductsAdmin();
     }
 
