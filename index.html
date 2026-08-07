@@ -1094,13 +1094,13 @@
             { id: 36, name: "Bandana para Maquillaje", price: 25, emoji: "🧣", image: null, cat: "accesorios" }
         ];
         const DEFAULT_PROMO_TIERS = [
-            { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye 5 figuritas — el maquillaje que te toque depende de la figurita que salga", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", count: 5 },
-            { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye 10 figuritas — el maquillaje depende de la figurita que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", count: 10 },
-            { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye 18 figuritas — el maquillaje depende de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", count: 18 },
-            { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye 23 figuritas — el maquillaje depende de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", count: 23 },
-            { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye 29 figuritas — el maquillaje depende de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", count: 29 },
-            { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye 32 figuritas — el maquillaje depende de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", count: 32 },
-            { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye 43 figuritas — el maquillaje depende de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", count: 43 }
+            { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye entre 5 y 8 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", min: 5, max: 8 },
+            { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye entre 10 y 13 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", min: 10, max: 13 },
+            { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye entre 15 y 19 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", min: 15, max: 19 },
+            { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye entre 20 y 24 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", min: 20, max: 24 },
+            { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye entre 25 y 31 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", min: 25, max: 31 },
+            { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye entre 30 y 37 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", min: 30, max: 37 },
+            { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye entre 35 y 43 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", min: 35, max: 43 }
         ];
         const DEFAULT_EGGS = [{ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }];
         const DEFAULT_EGG_CHANCE = 10;
@@ -1356,6 +1356,15 @@
             return CODE_CHARSET[sum % CODE_CHARSET.length];
         }
 
+        // Calcula un número al azar entre min y max (incluidos ambos) — así se
+        // decide "la suerte" de cuántas figuritas le tocan a la clienta.
+        function randomBetween(min, max) {
+            min = parseInt(min, 10) || 1;
+            max = parseInt(max, 10) || min;
+            if (max < min) max = min;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
         // Detecta a qué nivel pertenece un código válido a partir de su prefijo
         function findTierByCode(rawCode) {
             if (!rawCode) return null;
@@ -1405,7 +1414,7 @@
                     t.update(docRef, { used: true, usedAt: firebase.firestore.FieldValue.serverTimestamp() });
                 });
                 closeCodeModal();
-                takeScoop(tier.count);
+                takeScoop(randomBetween(tier.min, tier.max));
             } catch (e) {
                 if (e.message === 'NOT_FOUND') {
                     errorEl.innerText = '❌ Ese código no existe. Verifica que lo copiaste bien.';
