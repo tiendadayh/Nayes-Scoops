@@ -384,6 +384,8 @@
                 <span class="products-count-badge" id="productsCountBadge">0 productos</span>
             </div>
 
+            <button class="add-btn" style="background:white; color:var(--pink-dark); border:2px solid var(--pink-dark); margin-bottom:15px;" onclick="resetAllPricesAndQty()">🔄 Poner todos los precios y cantidades en 0</button>
+
             <div id="productsList"></div>
             <button class="add-btn" onclick="addProduct()">➕ Agregar producto</button>
         </div>
@@ -416,6 +418,12 @@
             <h3>Lista de huevos posibles</h3>
             <div id="eggsList"></div>
             <button class="add-btn" onclick="addEgg()">🥚 Agregar huevo</button>
+        </div>
+
+        <div class="panel">
+            <h2>🎮 Botones Demo (gratis, sin código)</h2>
+            <p class="hint" style="margin-bottom:15px;">Son los 4 botones que cualquier visitante puede presionar para probar la ruleta gratis, sin comprar. Configura el texto de cada uno y cuántas figuritas le pueden tocar (rango, igual que los niveles de la promoción).</p>
+            <div id="demoList"></div>
         </div>
     </div>
 
@@ -484,61 +492,67 @@
             title: "Nayes Scoops 🎉",
             description: "¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. 🔴 ¡Cada Scoop se transmite en vivo para que veas salir tus figuritas y tu maquillaje en tiempo real! 🤩",
             tiers: [
-                { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye entre 5 y 8 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", min: 5, max: 8 },
-                { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye entre 10 y 13 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", min: 10, max: 13 },
-                { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye entre 15 y 19 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", min: 15, max: 19 },
-                { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye entre 20 y 24 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", min: 20, max: 24 },
-                { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye entre 25 y 31 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", min: 25, max: 31 },
-                { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye entre 30 y 37 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", min: 30, max: 37 },
-                { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye entre 35 y 43 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", min: 35, max: 43 }
+                { name: "💗 Naye's One Scoop", price: 100, desc: "Incluye entre 5 y 8 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 1 huevito oro sorpresa", featured: false, code: "One", min: 5, max: 8, eggCount: 1 },
+                { name: "💖 Naye's Two Scoop", price: 195, desc: "Incluye entre 10 y 14 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 1 huevito oro sorpresa", featured: false, code: "Two", min: 10, max: 14, eggCount: 1 },
+                { name: "✨ Naye's Three Scoop", price: 250, desc: "Incluye entre 15 y 20 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 2 huevitos de oro sorpresas", featured: true, code: "Three", min: 15, max: 20, eggCount: 2 },
+                { name: "🌸 Naye's Four Scoop", price: 310, desc: "Incluye entre 20 y 24 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 2 huevitos de oro sorpresas", featured: false, code: "Four", min: 20, max: 24, eggCount: 2 },
+                { name: "🌟 Naye's Five Scoop", price: 380, desc: "Incluye entre 25 y 31 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 3 huevitos de oro sorpresa", featured: false, code: "Five", min: 25, max: 31, eggCount: 3 },
+                { name: "👑 Naye's Six Scoop", price: 440, desc: "Incluye entre 32 y 37 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 3 huevitos de oro sorpresa", featured: false, code: "Six", min: 32, max: 37, eggCount: 3 },
+                { name: "💎 Naye's Seven Scoop", price: 500, desc: "Incluye entre 38 y 43 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 4 huevitos de oro sorpresa", featured: false, code: "Seven", min: 38, max: 43, eggCount: 4 }
             ]
         },
         products: [
-            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 40, emoji: "💧", image: null, cat: "skincare" },
-            { id: 2, name: "Corrector de Ojeras Líquido", price: 30, emoji: "🌙", image: null, cat: "skincare" },
-            { id: 3, name: "Polvo Suelto Traslúcido", price: 30, emoji: "☁️", image: null, cat: "skincare" },
-            { id: 4, name: "Polvo Compacto", price: 30, emoji: "🍰", image: null, cat: "skincare" },
-            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 30, emoji: "✨", image: null, cat: "skincare" },
-            { id: 6, name: "Rubor (crema o compacto)", price: 30, emoji: "🌸", image: null, cat: "skincare" },
-            { id: 7, name: "Contorno (polvo o crema)", price: 35, emoji: "🍫", image: null, cat: "skincare" },
-            { id: 8, name: "Iluminador (líquido o polvo)", price: 40, emoji: "🍒", image: null, cat: "skincare" },
-            { id: 9, name: "Primer o Preparador Facial", price: 35, emoji: "💎", image: null, cat: "skincare" },
-            { id: 10, name: "Crema Hidratante Facial", price: 30, emoji: "🧴", image: null, cat: "skincare" },
-            { id: 11, name: "Paleta de Sombras", price: 45, emoji: "🦋", image: null, cat: "ojos" },
-            { id: 12, name: "Lápiz Delineador de Ojos", price: 25, emoji: "✏️", image: null, cat: "ojos" },
-            { id: 13, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
-            { id: 14, name: "Delineador Líquido o en Crema", price: 30, emoji: "🖊️", image: null, cat: "ojos" },
-            { id: 15, name: "Máscara de Pestañas (rímel)", price: 40, emoji: "🌟", image: null, cat: "ojos" },
-            { id: 16, name: "Pestañas Postizas", price: 35, emoji: "🪽", image: null, cat: "ojos" },
-            { id: 17, name: "Primer para Sombras", price: 30, emoji: "💫", image: null, cat: "ojos" },
-            { id: 18, name: "Gel Fijador de Cejas", price: 25, emoji: "🧊", image: null, cat: "ojos" },
-            { id: 19, name: "Pomada de Cejas", price: 25, emoji: "🍯", image: null, cat: "ojos" },
-            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 30, emoji: "⭐", image: null, cat: "labios" },
-            { id: 21, name: "Labial Nude", price: 30, emoji: "🤎", image: null, cat: "labios" },
-            { id: 22, name: "Labial Rojo", price: 30, emoji: "❤️", image: null, cat: "labios" },
-            { id: 23, name: "Tinta de Labios", price: 30, emoji: "🌼", image: null, cat: "labios" },
-            { id: 24, name: "Brillo Labial (gloss)", price: 25, emoji: "💖", image: null, cat: "labios" },
-            { id: 25, name: "Bálsamo Hidratante Labial", price: 25, emoji: "🍓", image: null, cat: "labios" },
-            { id: 26, name: "Mascarilla Labial (colágeno)", price: 30, emoji: "💋", image: null, cat: "labios" },
-            { id: 27, name: "Brocha o Esponja para Base", price: 30, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 28, name: "Brocha para Polvos/Rubor", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 29, name: "Pincel para Sombras", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 30, name: "Beauty Blender Mini", price: 25, emoji: "💧", image: null, cat: "brochas" },
-            { id: 31, name: "Peine de Cejas y Pestañas", price: 20, emoji: "🪮", image: null, cat: "brochas" },
-            { id: 32, name: "Agua Micelar", price: 30, emoji: "💦", image: null, cat: "higiene" },
-            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 30, emoji: "🌿", image: null, cat: "higiene" },
-            { id: 34, name: "Parches para Acné/Ojeras", price: 20, emoji: "🩹", image: null, cat: "accesorios" },
-            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 20, emoji: "🎀", image: null, cat: "accesorios" },
-            { id: 36, name: "Bandana para Maquillaje", price: 25, emoji: "🧣", image: null, cat: "accesorios" }
+            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 0, qty: 0, emoji: "💧", image: null, cat: "skincare" },
+            { id: 2, name: "Corrector de Ojeras Líquido", price: 0, qty: 0, emoji: "🌙", image: null, cat: "skincare" },
+            { id: 3, name: "Polvo Suelto Traslúcido", price: 0, qty: 0, emoji: "☁️", image: null, cat: "skincare" },
+            { id: 4, name: "Polvo Compacto", price: 0, qty: 0, emoji: "🍰", image: null, cat: "skincare" },
+            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 0, qty: 0, emoji: "✨", image: null, cat: "skincare" },
+            { id: 6, name: "Rubor (crema o compacto)", price: 0, qty: 0, emoji: "🌸", image: null, cat: "skincare" },
+            { id: 7, name: "Contorno (polvo o crema)", price: 0, qty: 0, emoji: "🍫", image: null, cat: "skincare" },
+            { id: 8, name: "Iluminador (líquido o polvo)", price: 0, qty: 0, emoji: "🍒", image: null, cat: "skincare" },
+            { id: 9, name: "Primer o Preparador Facial", price: 0, qty: 0, emoji: "💎", image: null, cat: "skincare" },
+            { id: 10, name: "Crema Hidratante Facial", price: 0, qty: 0, emoji: "🧴", image: null, cat: "skincare" },
+            { id: 11, name: "Paleta de Sombras", price: 0, qty: 0, emoji: "🦋", image: null, cat: "ojos" },
+            { id: 12, name: "Lápiz Delineador de Ojos", price: 0, qty: 0, emoji: "✏️", image: null, cat: "ojos" },
+            { id: 13, name: "Lápiz de Cejas", price: 0, qty: 0, emoji: "👑", image: null, cat: "ojos" },
+            { id: 14, name: "Delineador Líquido o en Crema", price: 0, qty: 0, emoji: "🖊️", image: null, cat: "ojos" },
+            { id: 15, name: "Máscara de Pestañas (rímel)", price: 0, qty: 0, emoji: "🌟", image: null, cat: "ojos" },
+            { id: 16, name: "Pestañas Postizas", price: 0, qty: 0, emoji: "🪽", image: null, cat: "ojos" },
+            { id: 17, name: "Primer para Sombras", price: 0, qty: 0, emoji: "💫", image: null, cat: "ojos" },
+            { id: 18, name: "Gel Fijador de Cejas", price: 0, qty: 0, emoji: "🧊", image: null, cat: "ojos" },
+            { id: 19, name: "Pomada de Cejas", price: 0, qty: 0, emoji: "🍯", image: null, cat: "ojos" },
+            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 0, qty: 0, emoji: "⭐", image: null, cat: "labios" },
+            { id: 21, name: "Labial Nude", price: 0, qty: 0, emoji: "🤎", image: null, cat: "labios" },
+            { id: 22, name: "Labial Rojo", price: 0, qty: 0, emoji: "❤️", image: null, cat: "labios" },
+            { id: 23, name: "Tinta de Labios", price: 0, qty: 0, emoji: "🌼", image: null, cat: "labios" },
+            { id: 24, name: "Brillo Labial (gloss)", price: 0, qty: 0, emoji: "💖", image: null, cat: "labios" },
+            { id: 25, name: "Bálsamo Hidratante Labial", price: 0, qty: 0, emoji: "🍓", image: null, cat: "labios" },
+            { id: 26, name: "Mascarilla Labial (colágeno)", price: 0, qty: 0, emoji: "💋", image: null, cat: "labios" },
+            { id: 27, name: "Brocha o Esponja para Base", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 28, name: "Brocha para Polvos/Rubor", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 29, name: "Pincel para Sombras", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 30, name: "Beauty Blender Mini", price: 0, qty: 0, emoji: "💧", image: null, cat: "brochas" },
+            { id: 31, name: "Peine de Cejas y Pestañas", price: 0, qty: 0, emoji: "🪮", image: null, cat: "brochas" },
+            { id: 32, name: "Agua Micelar", price: 0, qty: 0, emoji: "💦", image: null, cat: "higiene" },
+            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 0, qty: 0, emoji: "🌿", image: null, cat: "higiene" },
+            { id: 34, name: "Parches para Acné/Ojeras", price: 0, qty: 0, emoji: "🩹", image: null, cat: "accesorios" },
+            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 0, qty: 0, emoji: "🎀", image: null, cat: "accesorios" },
+            { id: 36, name: "Bandana para Maquillaje", price: 0, qty: 0, emoji: "🧣", image: null, cat: "accesorios" }
         ],
         wheel: {
             segmentIds: [1,2,3,4,5,6,7,8,9,10],
-            eggChance: 10,
-            eggMinCount: 20,
+            eggChance: 40,
+            eggMinCount: 5,
             eggs: [
                 { id: 1, name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }
             ]
-        }
+        },
+        demo: [
+            { label: "🥄 1 Scoop", min: 5, max: 8 },
+            { label: "🥄 2 Scoop", min: 10, max: 14 },
+            { label: "🥄 3 Scoop", min: 15, max: 20 },
+            { label: "🥄 4 Scoop", min: 20, max: 24 }
+        ]
     };
 
     function loadDB() {
@@ -570,9 +584,22 @@
                 }
             }
             delete tier.count;
+            // Migra niveles viejos sin huevos garantizados: intenta leer el número
+            // de huevitos que promete el texto del regalo, si no, asume 1.
+            if (typeof tier.eggCount !== 'number') {
+                const eggMatch = (tier.gift || '').match(/(\d+)\s*huevit/i);
+                tier.eggCount = eggMatch ? parseInt(eggMatch[1], 10) : 1;
+            }
         });
     }
     ensureTierCodeFields();
+
+    function ensureProductsQty() {
+        db.products.forEach(prod => {
+            if (typeof prod.qty !== 'number') prod.qty = 0;
+        });
+    }
+    ensureProductsQty();
 
     function ensureWheelConfig() {
         if (!db.wheel) {
@@ -593,6 +620,23 @@
     }
     ensureWheelConfig();
 
+    function ensureDemoConfig() {
+        if (!Array.isArray(db.demo)) db.demo = [];
+        // Siempre deben ser exactamente 4 botones demo (fijos), rellenando con
+        // los valores por defecto si falta alguno, y recortando si sobran.
+        const defaults = DEFAULT_DB.demo;
+        while (db.demo.length < 4) {
+            db.demo.push(JSON.parse(JSON.stringify(defaults[db.demo.length] || defaults[0])));
+        }
+        db.demo = db.demo.slice(0, 4);
+        db.demo.forEach((d, i) => {
+            if (typeof d.label !== 'string') d.label = defaults[i].label;
+            if (typeof d.min !== 'number') d.min = defaults[i].min;
+            if (typeof d.max !== 'number') d.max = defaults[i].max;
+        });
+    }
+    ensureDemoConfig();
+
     function showTab(name) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
@@ -603,6 +647,8 @@
             renderWheelProductsList();
             renderEggsList();
             fillEggGlobalForm();
+            ensureDemoConfig();
+            renderDemoAdmin();
         }
     }
 
@@ -687,6 +733,9 @@
                     </div>
                 </div>
                 <div class="hint">Al girar la ruleta con este nivel, la clienta gana una cantidad al azar entre el mínimo y el máximo — así entra la suerte.</div>
+                <label>Huevos de oro garantizados 🥚</label>
+                <input type="number" value="${tier.eggCount}" min="0" oninput="updateTier(${i}, 'eggCount', this.value)">
+                <div class="hint">Cuántos huevos de oro se lleva SEGURO la clienta al canjear un código de este nivel (debe coincidir con lo que dice el texto del regalo). Ej: 2 huevitos = pon 2 aquí.</div>
                 <div class="checkbox-row">
                     <input type="checkbox" id="feat-${i}" ${tier.featured ? 'checked' : ''} onchange="updateTier(${i}, 'featured', this.checked)">
                     <label for="feat-${i}">⭐ Marcar como "Favorito de la casa"</label>
@@ -698,7 +747,7 @@
     }
 
     function updateTier(i, field, value) {
-        if (field === 'price' || field === 'min' || field === 'max') value = parseInt(value, 10) || 0;
+        if (field === 'price' || field === 'min' || field === 'max' || field === 'eggCount') value = parseInt(value, 10) || 0;
         db.promo.tiers[i][field] = value;
         if (field === 'name' || field === 'price') renderCodeTierGrid();
     }
@@ -711,7 +760,7 @@
 
     function addTier() {
         const newIndex = db.promo.tiers.length;
-        db.promo.tiers.push({ name: "Nuevo Nivel", price: 100, desc: "Descripción del nivel", gift: "🎁 Incluye regalo", featured: false, code: "NIVEL" + (newIndex + 1), min: 10, max: 10 });
+        db.promo.tiers.push({ name: "Nuevo Nivel", price: 100, desc: "Descripción del nivel", gift: "🎁 Incluye regalo", featured: false, code: "NIVEL" + (newIndex + 1), min: 10, max: 10, eggCount: 1 });
         renderTiers();
     }
 
@@ -767,6 +816,12 @@
                         <input type="text" value="${escAttr(prod.emoji || '')}" oninput="updateProduct(${i}, 'emoji', this.value)" maxlength="4">
                     </div>
                 </div>
+                <div class="grid-2">
+                    <div>
+                        <label>Cantidad en existencia</label>
+                        <input type="number" min="0" value="${prod.qty || 0}" oninput="updateProduct(${i}, 'qty', this.value)">
+                    </div>
+                </div>
                 <label>Foto del producto (JPG/PNG)</label>
                 <div class="img-upload-row">
                     <div class="img-preview" id="preview-${i}">${preview}</div>
@@ -780,7 +835,15 @@
 
     function updateProduct(i, field, value) {
         if (field === 'price') value = parseFloat(value) || 0;
+        if (field === 'qty') value = parseInt(value, 10) || 0;
         db.products[i][field] = value;
+    }
+
+    function resetAllPricesAndQty() {
+        if (!confirm('Esto pondrá el precio y la cantidad de TODOS tus productos en 0. ¿Continuar?')) return;
+        db.products.forEach(prod => { prod.price = 0; prod.qty = 0; });
+        renderProductsAdmin();
+        showToast('🔄 Precios y cantidades en 0 (recuerda dar "Guardar cambios")');
     }
 
     function handleImageUpload(evt, i) {
@@ -814,7 +877,7 @@
 
     function addProduct() {
         const newId = db.products.length ? Math.max(...db.products.map(p => p.id)) + 1 : 1;
-        db.products.push({ id: newId, name: "Nuevo producto", price: 30, emoji: "✨", image: null, cat: "accesorios" });
+        db.products.push({ id: newId, name: "Nuevo producto", price: 0, qty: 0, emoji: "✨", image: null, cat: "accesorios" });
         document.getElementById('productSearchInput').value = '';
         renderProductsAdmin();
     }
@@ -933,6 +996,36 @@
         renderEggsList();
     }
 
+    function renderDemoAdmin() {
+        const list = document.getElementById('demoList');
+        if (!list) return;
+        list.innerHTML = '';
+        db.demo.forEach((d, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-item';
+            div.innerHTML = `
+                <label>Texto del botón ${i + 1}</label>
+                <input type="text" value="${escAttr(d.label)}" oninput="updateDemo(${i}, 'label', this.value)">
+                <div class="grid-2">
+                    <div>
+                        <label>Mínimo de figuritas</label>
+                        <input type="number" value="${d.min}" min="1" oninput="updateDemo(${i}, 'min', this.value)">
+                    </div>
+                    <div>
+                        <label>Máximo de figuritas</label>
+                        <input type="number" value="${d.max}" min="1" oninput="updateDemo(${i}, 'max', this.value)">
+                    </div>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function updateDemo(i, field, value) {
+        if (field === 'min' || field === 'max') value = parseInt(value, 10) || 1;
+        db.demo[i][field] = value;
+    }
+
     async function saveAll() {
         db.announcement = document.getElementById('f-announcement').value;
         db.whatsapp = document.getElementById('f-whatsapp').value.replace(/[^0-9]/g, '');
@@ -977,6 +1070,7 @@
         renderWheelProductsList();
         renderEggsList();
         fillEggGlobalForm();
+        renderDemoAdmin();
         showToast('↩️ Valores originales restaurados (recuerda dar "Guardar cambios")');
     }
 
@@ -1017,8 +1111,9 @@
 
     function generateScoopCode(prefix) {
         const body = randomCodeBody(4);
-        const check = codeChecksum(prefix + body);
-        return `${prefix}-${body}-${check}`;
+        const upperPrefix = String(prefix || '').toUpperCase();
+        const check = codeChecksum(upperPrefix + body);
+        return `${upperPrefix}-${body}-${check}`;
     }
 
     function renderCodeTierGrid() {
@@ -1050,6 +1145,7 @@
                 tier: tier.code,
                 min: tier.min,
                 max: tier.max,
+                eggCount: tier.eggCount || 0,
                 label: tier.name,
                 used: false,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1144,6 +1240,7 @@
                 if (remote && remote.promo && Array.isArray(remote.promo.tiers) && remote.promo.tiers.length) {
                     db = remote;
                     ensureTierCodeFields();
+                    ensureProductsQty();
                     ensureWheelConfig();
                 }
             }
@@ -1156,6 +1253,7 @@
         renderWheelProductsList();
         renderEggsList();
         fillEggGlobalForm();
+        renderDemoAdmin();
         renderCodeTierGrid();
         renderCodesHistory();
     }

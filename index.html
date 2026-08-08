@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- DETALLES TÉCNICOS (SEO) -->
+    <meta name="description"
+        content="Descubre la experiencia Nayes Scoops en Acapulco. Maquillaje sorpresa en cucharadas mágicas, dinámicas en vivo y los mejores cosméticos.">
+    <meta property="og:title" content="Nayes Beauty & Scoops - Acapulco">
+    <meta property="og:description"
+        content="¡Prueba tu suerte! Cucharadas mágicas llenas de tus cosméticos favoritos. Envíos en Acapulco.">
+    <meta property="og:type" content="website">
+
     <title>Nayes Beauty & Scoops - Acapulco</title>
 
     <!-- Fuentes e Íconos -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Librería de Confeti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -84,6 +96,7 @@
             display: flex;
             list-style: none;
             gap: 20px;
+            align-items: center;
         }
 
         .nav-links a {
@@ -94,7 +107,44 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover { color: var(--pink-main); }
+        .nav-links a:hover {
+            color: var(--pink-main);
+        }
+
+        /* ESTILOS INDICADOR EN VIVO */
+        .live-badge {
+            background: #ff1744;
+            color: white !important;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem !important;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulseLive 1.5s infinite;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes pulseLive {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 23, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 23, 68, 0);
+            }
+        }
 
         .nav-toggle-btn {
             display: none;
@@ -111,7 +161,12 @@
             flex-shrink: 0;
         }
 
-        .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
 
         .cart-icon-btn {
             position: relative;
@@ -124,11 +179,15 @@
             cursor: pointer;
             font-size: 1.1rem;
             transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(255,107,158,0.2);
+            box-shadow: 0 4px 10px rgba(255, 107, 158, 0.2);
             flex-shrink: 0;
         }
 
-        .cart-icon-btn:hover { transform: scale(1.05); background: var(--pink-main); color: white; }
+        .cart-icon-btn:hover {
+            transform: scale(1.05);
+            background: var(--pink-main);
+            color: white;
+        }
 
         .cart-badge {
             position: absolute;
@@ -171,7 +230,7 @@
             background: white;
             padding: 10px 20px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             border: 2px solid var(--pink-light);
         }
 
@@ -195,7 +254,7 @@
             font-weight: 600;
         }
 
-        /* --- NUEVA DINÁMICA DE PASOS --- */
+        /* --- DINÁMICA DE PASOS --- */
         .steps-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -234,7 +293,7 @@
             font-family: 'Fredoka', cursive;
             font-size: 1.5rem;
             border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .step-icon {
@@ -252,385 +311,6 @@
         .step-desc {
             font-size: 0.85rem;
             color: #666;
-        }
-
-        /* --- PAQUETES SCOOPS --- */
-        .scoops-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .scoop-card {
-            background: white;
-            border-radius: 30px;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(255, 107, 158, 0.15);
-            position: relative;
-            border-top: 10px solid;
-            transition: transform 0.2s;
-        }
-
-        .scoop-card:hover { transform: translateY(-8px); }
-        .card-mini { border-color: #ff9fb8; }
-        .card-std { border-color: #81d4fa; }
-        .card-prem { border-color: #ce93d8; }
-        .card-glam { border-color: #ffd54f; }
-
-        .scoop-icon { font-size: 4rem; margin-bottom: 10px; }
-        .scoop-title { font-family: 'Fredoka', cursive; font-size: 1.5rem; color: var(--text-dark); }
-        .scoop-price { font-size: 2.2rem; font-weight: 700; color: var(--pink-dark); margin: 5px 0; }
-        
-        .scoop-items-badge {
-            background: var(--pink-light);
-            color: var(--pink-dark);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .buy-btn {
-            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 107, 158, 0.4);
-            transition: transform 0.2s;
-        }
-        .buy-btn:hover { transform: scale(1.05); }
-
-        /* --- TABLA VISUAL DE FIGURITAS (COMO LA IMAGEN) --- */
-        .game-wrapper {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 900px) {
-            .game-wrapper { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 600px) {
-            #publicidadAdsGrid { grid-template-columns: 1fr !important; }
-        }
-
-        .board-section, .game-section {
-            background: white;
-            border-radius: 30px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(255, 107, 158, 0.15);
-            border: 4px solid var(--pink-light);
-        }
-
-        .board-title {
-            text-align: center;
-            font-family: 'Fredoka', cursive;
-            color: white;
-            background: var(--pink-main);
-            padding: 10px;
-            border-radius: 20px;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(255, 107, 158, 0.3);
-        }
-
-        .equivalents-visual-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 15px;
-            max-height: 500px;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .visual-item {
-            background: var(--bg-cream);
-            border: 2px solid var(--pink-light);
-            border-radius: 15px;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        .visual-emoji { font-size: 2.5rem; margin-bottom: 5px; }
-        .visual-name { font-size: 0.75rem; font-weight: bold; color: var(--text-dark); line-height: 1.1; }
-
-        /* --- RULETA DE LA SUERTE --- */
-        .wheel-wrap {
-            width: 240px;
-            height: 240px;
-            margin: 10px auto 25px auto;
-            position: relative;
-        }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 8px solid var(--pink-main);
-            position: relative;
-            box-shadow: 0 10px 25px rgba(255, 107, 158, 0.35), inset 0 0 15px rgba(0,0,0,0.1);
-            transition: transform 3.2s cubic-bezier(0.15, 0.75, 0.2, 1);
-        }
-
-        .wheel-seg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 30px;
-            height: 30px;
-            margin-left: -15px;
-            margin-top: -15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
-        }
-
-        .wheel-pointer {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.8rem;
-            color: var(--pink-dark);
-            z-index: 5;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: white;
-            border: 4px solid var(--gold-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            z-index: 4;
-        }
-
-        .wheel-wrap.extracting .wheel-center {
-            animation: pulseCenter 0.6s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseCenter {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            100% { transform: translate(-50%, -50%) scale(1.15); }
-        }
-
-        .controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-
-        .game-btn {
-            background: white;
-            color: var(--pink-dark);
-            border: 3px solid var(--pink-light);
-            padding: 12px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .game-btn:hover:not(:disabled) { background: var(--pink-light); border-color: var(--pink-main); }
-        .game-btn:disabled { background: #eee !important; border-color:#ccc; cursor: not-allowed; opacity: 0.7; }
-
-        /* --- CANJE DE CÓDIGO (Naye Scoop pagado) --- */
-        .redeem-code-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--pink-dark), var(--pink-main));
-            color: white;
-            border: none;
-            padding: 13px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-bottom: 18px;
-            box-shadow: 0 6px 15px rgba(255,107,158,0.35);
-            transition: transform 0.15s;
-        }
-        .redeem-code-btn:hover { transform: translateY(-2px); }
-
-        .code-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(74,74,74,0.55);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .code-modal-overlay.open { display: flex; }
-        .code-modal-box {
-            background: white;
-            border-radius: 22px;
-            padding: 28px 24px;
-            max-width: 380px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-            border: 3px solid var(--pink-light);
-            position: relative;
-        }
-        .code-modal-box h3 {
-            font-family: 'Fredoka', cursive;
-            color: var(--pink-dark);
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-        }
-        .code-modal-box p { color: #777; font-size: 0.9rem; margin-bottom: 16px; }
-        .code-modal-close {
-            position: absolute;
-            top: 12px; right: 14px;
-            background: none; border: none;
-            font-size: 1.3rem; color: #aaa; cursor: pointer;
-        }
-        #codeModalInput {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid var(--pink-light);
-            border-radius: 14px;
-            font-size: 1.1rem;
-            text-align: center;
-            letter-spacing: 2px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--pink-dark);
-            margin-bottom: 8px;
-        }
-        #codeModalInput:focus { outline: none; border-color: var(--pink-main); }
-        .code-modal-error {
-            color: #e53935;
-            font-size: 0.85rem;
-            font-weight: 600;
-            min-height: 18px;
-            margin-bottom: 10px;
-        }
-        .code-modal-confirm-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .code-modal-confirm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-        .basket-container {
-            background: #fff;
-            border: 3px dashed var(--pink-main);
-            border-radius: 20px;
-            padding: 15px;
-            min-height: 250px;
-        }
-
-        .basket-items {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 250px;
-            overflow-y: auto;
-            padding: 5px;
-        }
-
-        .basket-items li {
-            background: var(--bg-cream);
-            padding: 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            border: 2px solid var(--pink-light);
-        }
-
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- PRODUCTOS / MERCANCÍA --- */
-        .products-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px 15px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border: 2px solid var(--pink-light);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-img-box {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            background: var(--bg-cream);
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px auto;
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .cart-drawer {
-            position: fixed; top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%;
-            background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.15); z-index: 2000;
-            transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px;
-        }
-        .cart-drawer.open { right: 0; }
-        
-        .whatsapp-share-btn {
-            background: #25D366; color: white; border: none; width: 100%; padding: 12px;
-            margin-top: 15px; border-radius: 15px; font-weight: bold; font-size: 1rem;
-            cursor: pointer; display: none; text-align:center;
         }
 
         /* --- PROMO DESTACADA: NAYES SCOOPS --- */
@@ -655,7 +335,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
             background-size: 22px 22px;
             pointer-events: none;
         }
@@ -675,7 +355,7 @@
         .promo-banner-inner h2 {
             font-family: 'Fredoka', cursive;
             font-size: 2.3rem;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
             margin-bottom: 8px;
         }
 
@@ -706,7 +386,9 @@
             position: relative;
         }
 
-        .promo-card:hover { transform: translateY(-6px); }
+        .promo-card:hover {
+            transform: translateY(-6px);
+        }
 
         .promo-card.featured {
             border-color: var(--gold-accent);
@@ -725,7 +407,7 @@
             font-weight: 700;
             padding: 4px 12px;
             border-radius: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
             white-space: nowrap;
         }
 
@@ -773,9 +455,714 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .promo-btn:hover { transform: scale(1.05); }
+
+        .promo-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- TABLA VISUAL DE FIGURITAS --- */
+        .game-wrapper {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+        }
+
+        .board-section,
+        .game-section {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 158, 0.15);
+            border: 4px solid var(--pink-light);
+        }
+
+        .board-title {
+            text-align: center;
+            font-family: 'Fredoka', cursive;
+            color: white;
+            background: var(--pink-main);
+            padding: 10px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(255, 107, 158, 0.3);
+        }
+
+        .equivalents-visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .visual-item {
+            background: var(--bg-cream);
+            border: 2px solid var(--pink-light);
+            border-radius: 15px;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .visual-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .visual-name {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            line-height: 1.1;
+        }
+
+        /* --- RULETA DE LA SUERTE --- */
+        .wheel-wrap {
+            width: 240px;
+            height: 240px;
+            margin: 10px auto 25px auto;
+            position: relative;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid var(--pink-main);
+            position: relative;
+            box-shadow: 0 10px 25px rgba(255, 107, 158, 0.35), inset 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 5.8s cubic-bezier(0.12, 0.7, 0.1, 1);
+        }
+
+        .wheel-seg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            margin-left: -15px;
+            margin-top: -15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.2));
+        }
+
+        .wheel-seg-egg {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 5px var(--gold-accent)) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.25));
+            animation: eggGlow 1s infinite alternate ease-in-out;
+        }
+
+        @keyframes eggGlow {
+            0% {
+                filter: drop-shadow(0 0 3px var(--gold-accent)) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.25));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 9px var(--gold-accent)) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.25));
+            }
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            color: var(--pink-dark);
+            z-index: 5;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--gold-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 4;
+        }
+
+        .wheel-wrap.extracting .wheel-center {
+            animation: pulseCenter 0.6s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseCenter {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .game-btn {
+            background: white;
+            color: var(--pink-dark);
+            border: 3px solid var(--pink-light);
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .game-btn:hover:not(:disabled) {
+            background: var(--pink-light);
+            border-color: var(--pink-main);
+        }
+
+        .game-btn:disabled {
+            background: #eee !important;
+            border-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* --- CANJE DE CÓDIGO --- */
+        .redeem-code-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--pink-dark), var(--pink-main));
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 15px rgba(255, 107, 158, 0.35);
+            transition: transform 0.15s;
+        }
+
+        .redeem-code-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .code-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 74, 74, 0.55);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .code-modal-overlay.open {
+            display: flex;
+        }
+
+        .code-modal-box {
+            background: white;
+            border-radius: 22px;
+            padding: 28px 24px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            border: 3px solid var(--pink-light);
+            position: relative;
+        }
+
+        .code-modal-box h3 {
+            font-family: 'Fredoka', cursive;
+            color: var(--pink-dark);
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .code-modal-box p {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .code-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        #codeModalInput {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--pink-light);
+            border-radius: 14px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--pink-dark);
+            margin-bottom: 8px;
+        }
+
+        #codeModalInput:focus {
+            outline: none;
+            border-color: var(--pink-main);
+        }
+
+        .code-modal-error {
+            color: #e53935;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-height: 18px;
+            margin-bottom: 10px;
+        }
+
+        .code-modal-confirm-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .code-modal-confirm-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .history-modal-box {
+            background: white;
+            border-radius: 22px;
+            padding: 26px 22px;
+            max-width: 420px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            border: 3px solid var(--pink-light);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .history-modal-box h3 {
+            font-family: 'Fredoka', cursive;
+            color: var(--pink-dark);
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .history-modal-box p.history-sub {
+            color: #888;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: var(--bg-cream);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .history-item.is-extra {
+            background: #fffde7;
+            border: 1px solid var(--gold-accent);
+        }
+
+        .history-total-bar {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 2px dashed var(--pink-light);
+            text-align: center;
+            font-weight: 700;
+            color: var(--pink-dark);
+        }
+
+        .view-history-btn {
+            width: 100%;
+            background: white;
+            color: var(--pink-dark);
+            border: 2px solid var(--pink-dark);
+            padding: 12px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .basket-container {
+            background: #fff;
+            border: 3px dashed var(--pink-main);
+            border-radius: 20px;
+            padding: 15px;
+            min-height: 250px;
+        }
+
+        .basket-items {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .basket-items li {
+            background: var(--bg-cream);
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            border: 2px solid var(--pink-light);
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .egg-win-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .egg-win-overlay.show {
+            animation: eggOverlayFade 2.4s ease forwards;
+        }
+
+        @keyframes eggOverlayFade {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .egg-win-card {
+            background: linear-gradient(145deg, #fffde7, #fff3c4);
+            border: 4px solid var(--gold-accent);
+            border-radius: 24px;
+            padding: 26px 34px;
+            text-align: center;
+            box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.25), 0 15px 40px rgba(0, 0, 0, 0.25);
+            max-width: 85vw;
+        }
+
+        .egg-win-overlay.show .egg-win-card {
+            animation: eggWinPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes eggWinPop {
+            0% { transform: scale(0.3) rotate(-8deg); }
+            55% { transform: scale(1.12) rotate(4deg); }
+            75% { transform: scale(0.96) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .egg-win-icon {
+            font-size: 3.2rem;
+            display: block;
+            margin-bottom: 8px;
+            animation: eggWinIconWobble 1s ease-in-out infinite;
+        }
+
+        .egg-win-icon img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        @keyframes eggWinIconWobble {
+            0%, 100% { transform: rotate(-8deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.08); }
+        }
+
+        .egg-win-tag {
+            font-family: 'Fredoka', sans-serif;
+            color: #b8860b;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .egg-win-name {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--pink-dark);
+            font-size: 1.3rem;
+            margin-top: 4px;
+        }
+
+        .whatsapp-share-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            text-align: center;
+        }
+
+        /* --- TESTIMONIOS (CLIENTAS FELICES) --- */
+        .testimonio-card {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 3px solid var(--pink-light);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .testimonio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonio-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonio-text {
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .testimonio-author {
+            color: var(--pink-dark);
+            margin-top: 15px;
+            font-weight: 700;
+            font-family: 'Fredoka', cursive;
+        }
+
+        /* --- FILTROS DE CATÁLOGO --- */
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--pink-light);
+            color: var(--pink-dark);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--pink-main);
+            color: white;
+            border-color: var(--pink-main);
+            box-shadow: 0 6px 15px rgba(255, 107, 158, 0.3);
+        }
+
+        /* --- PRODUCTOS / MERCANCÍA --- */
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid var(--pink-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-img-box {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: var(--bg-cream);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 158, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        .wa-floating-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1500;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .wa-floating-btn:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* --- FOOTER REDES --- */
+        footer {
+            background: var(--pink-light);
+            padding: 50px 20px 80px 20px;
+            /* Margen inferior extra para que no estorbe el botón de WA */
+            text-align: center;
+            margin-top: 60px;
+            border-top: 4px dashed var(--pink-main);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
 
         /* --- AJUSTES GENERALES PARA CELULAR --- */
+        @media (max-width: 900px) {
+            .game-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -788,71 +1175,141 @@
                 background: var(--glass-bg);
                 backdrop-filter: blur(12px);
                 border-bottom: 2px solid var(--pink-light);
-                box-shadow: 0 10px 20px rgba(255,107,158,0.15);
+                box-shadow: 0 10px 20px rgba(255, 107, 158, 0.15);
             }
-            .nav-links.open { display: flex; }
-            .nav-links li { width: 100%; }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
             .nav-links a {
                 display: block;
                 padding: 14px 6%;
                 border-top: 1px solid var(--pink-light);
                 font-size: 0.95rem;
             }
-            .nav-toggle-btn { display: flex; }
-            .cart-icon-btn { padding: 8px 12px; font-size: 1rem; }
 
-            .steps-container { gap: 12px; padding: 0 15px; }
-            .step-card { padding: 15px; }
-            .step-icon { font-size: 2.8rem; margin: 10px 0; }
-            .step-title { font-size: 1.05rem; }
+            .nav-toggle-btn {
+                display: flex;
+            }
 
-            .scoops-container { padding: 0 15px; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); }
-            .scoop-card { padding: 22px 14px; border-radius: 22px; }
-            .scoop-icon { font-size: 3rem; }
-            .scoop-title { font-size: 1.15rem; }
-            .scoop-price { font-size: 1.7rem; }
+            .cart-icon-btn {
+                padding: 8px 12px;
+                font-size: 1rem;
+            }
 
-            .game-wrapper { margin: 20px auto; padding: 0 15px; gap: 18px; }
-            .board-section, .game-section { padding: 18px; border-radius: 22px; }
-            .board-title { font-size: 1.05rem; padding: 8px; }
-            .equivalents-visual-grid { grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; max-height: 320px; }
-            .visual-emoji { font-size: 2rem; }
-            .visual-name { font-size: 0.68rem; }
+            .live-badge {
+                align-self: center;
+                margin: 10px 0;
+            }
 
-            .wheel-wrap { width: 210px; height: 210px; }
-            .wheel-seg { width: 26px; height: 26px; margin-left: -13px; margin-top: -13px; font-size: 1.2rem; }
-            .wheel-center { width: 40px; height: 40px; font-size: 1.1rem; }
-            .wheel-pointer { font-size: 1.5rem; top: -12px; }
+            .steps-container {
+                gap: 12px;
+                padding: 0 15px;
+            }
 
-            .controls { gap: 8px; }
-            .game-btn { padding: 11px 6px; font-size: 0.82rem; }
+            .step-card {
+                padding: 15px;
+            }
 
-            .products-grid { padding: 0 15px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-            .product-card { padding: 15px 10px; }
-            .product-img-box { width: 90px; height: 90px; font-size: 3rem; }
+            .game-wrapper {
+                margin: 20px auto;
+                padding: 0 15px;
+                gap: 18px;
+            }
 
-            .promo-banner { padding: 0 15px; }
-            .promo-banner-inner { padding: 26px 18px; border-radius: 24px; }
-            .promo-banner-inner h2 { font-size: 1.7rem; }
-            .promo-banner-inner p { font-size: 0.92rem; }
-            .promo-container { padding: 0 15px; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-            .promo-card { padding: 20px 14px; }
-            .promo-price { font-size: 1.6rem; }
+            .board-section,
+            .game-section {
+                padding: 18px;
+                border-radius: 22px;
+            }
 
-            .code-modal-box { padding: 22px 18px; border-radius: 18px; }
-            .cart-drawer { max-width: 100%; padding: 16px; }
+            .equivalents-visual-grid {
+                grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+                max-height: 320px;
+            }
+
+            .wheel-wrap {
+                width: 210px;
+                height: 210px;
+            }
+
+            .wheel-seg {
+                width: 26px;
+                height: 26px;
+                margin-left: -13px;
+                margin-top: -13px;
+                font-size: 1.2rem;
+            }
+
+            .wheel-center {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .wheel-pointer {
+                font-size: 1.5rem;
+                top: -12px;
+            }
+
+            .products-grid {
+                padding: 0 15px;
+                gap: 14px;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+
+            .promo-container {
+                padding: 0 15px;
+                gap: 16px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .cart-drawer {
+                max-width: 100%;
+                padding: 16px;
+            }
+
+            .wa-floating-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 2rem;
+                bottom: 15px;
+                right: 15px;
+            }
         }
 
         @media (max-width: 380px) {
-            .wheel-wrap { width: 185px; height: 185px; }
-            .wheel-seg { width: 22px; height: 22px; margin-left: -11px; margin-top: -11px; font-size: 1.05rem; }
-            .wheel-center { width: 36px; height: 36px; font-size: 1rem; }
-            .controls { grid-template-columns: 1fr; }
-            .equivalents-visual-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); }
-        }
+            .wheel-wrap {
+                width: 185px;
+                height: 185px;
+            }
 
+            .wheel-seg {
+                width: 22px;
+                height: 22px;
+                margin-left: -11px;
+                margin-top: -11px;
+                font-size: 1.05rem;
+            }
+
+            .wheel-center {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="announcement-bar" id="announcementBar">
@@ -868,6 +1325,12 @@
             <li><a href="#dinamica" onclick="closeMobileNav()">¿Cómo Funciona?</a></li>
             <li><a href="#juego" onclick="closeMobileNav()">🎡 Ruleta</a></li>
             <li><a href="#productos" onclick="closeMobileNav()">Catálogo</a></li>
+            <!-- INDICADOR EN VIVO (Oculto por defecto, se activa desde DB) -->
+            <li>
+                <a href="#juego" class="live-badge" id="liveBadge" style="display:none;" onclick="closeMobileNav()">
+                    <span class="live-dot"></span> EN VIVO
+                </a>
+            </li>
         </ul>
         <div class="nav-right">
             <button class="cart-icon-btn" onclick="toggleCart()">
@@ -882,39 +1345,39 @@
 
     <section class="hero">
         <h1 id="heroTitle">Makeup Sorpresa 💖</h1>
-        <p id="heroSubtitle">Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en tu cucharada mágica!</p>
-        <a href="#juego" class="buy-btn" id="heroButton" style="display:inline-block; width:auto; padding:15px 40px;">¡Quiero mi Cucharita! ✨</a>
+        <p id="heroSubtitle">Más que maquillaje, una experiencia llena de emoción. ¡Descubre qué maravillas te tocan en
+            tu cucharada mágica!</p>
+        <a href="#juego" class="buy-btn" id="heroButton"
+            style="display:inline-block; width:auto; padding:15px 40px;">¡Quiero mi Cucharita! ✨</a>
     </section>
 
-    <!-- PUBLICIDAD DE JUEGOS EN VIVO -->
     <section id="publicidadAdsSection" style="display:none; margin-top:40px;">
         <div class="section-title">
             <h2>📸 Nuestros Juegos en Vivo</h2>
         </div>
-        <div id="publicidadAdsGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:0 auto; padding:0 20px;">
+        <div id="publicidadAdsGrid"
+            style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:0 auto; padding:0 20px;">
         </div>
     </section>
 
-    <!-- PROMOCIÓN NAYES SCOOPS -->
     <section id="nayes-promo" style="margin-top: 50px; padding-bottom: 10px;">
         <div class="promo-banner">
             <div class="promo-banner-inner">
                 <span class="promo-eyebrow" id="promoEyebrow">✨ LLEGÓ LA NUEVA EXPERIENCIA ✨</span>
                 <h2 id="promoTitle">Nayes Scoops 🎉</h2>
-                <p id="promoDescription">¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa (Beauty Scoops) llenas de tesoros de belleza, cosméticos y accesorios increíbles. 🔴 ¡Cada Scoop se transmite en vivo para que veas salir tus figuritas y tu maquillaje en tiempo real! 🤩</p>
+                <p id="promoDescription">¡Abre, descubre y enamórate! Prueba suerte con nuestras Cucharadas Sorpresa
+                    llenas de tesoros de belleza. 🔴 ¡Cada Scoop se transmite en vivo para que veas salir tus figuritas!
+                </p>
             </div>
         </div>
 
-        <div class="promo-container" id="promoContainer">
-            <!-- Se llena dinámicamente con JS a partir de lo configurado en el panel admin -->
-        </div>
+        <div class="promo-container" id="promoContainer"></div>
 
         <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:20px;">
             ✨ Edición limitada. No te quedes sin tu cucharada llena de sorpresas ✨
         </p>
     </section>
 
-    <!-- NUEVA SECCIÓN CÓMO FUNCIONA -->
     <section id="dinamica" style="margin-top: 60px;">
         <div class="section-title">
             <h2>¿Cómo Funciona tu Scoop? 🎀</h2>
@@ -932,7 +1395,7 @@
                 <div class="step-number">2</div>
                 <div class="step-icon">🎥</div>
                 <div class="step-title">La Cucharada</div>
-                <div class="step-desc">Sacamos tus bolitas/figuritas de la bandeja mágica y lo grabamos.</div>
+                <div class="step-desc">Sacamos tus figuritas de la bandeja mágica y lo grabamos.</div>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
@@ -949,7 +1412,39 @@
         </div>
     </section>
 
-    <!-- SIMULADOR CON MENÚ VISUAL DE FIGURITAS -->
+    <!-- NUEVA SECCIÓN DE TESTIMONIOS -->
+    <section id="testimonios" style="margin-top: 60px;">
+        <div class="section-title">
+            <h2>Clientas Felices 💕</h2>
+            <p>Lo que dicen nuestras chicas después de recibir su Scoop</p>
+        </div>
+        <div
+            style="max-width:1100px; margin:0 auto; padding:0 20px; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:25px;">
+
+            <div class="testimonio-card">
+                <div class="testimonio-emoji">😍</div>
+                <p class="testimonio-text">"¡Me encantó mi Scoop! Me salieron 3 paletas de sombras y una tinta hermosa.
+                    Súper recomendado, es muy emocionante."</p>
+                <div class="testimonio-author">- María G.</div>
+            </div>
+
+            <div class="testimonio-card">
+                <div class="testimonio-emoji">💖</div>
+                <p class="testimonio-text">"Qué emoción ver mi Scoop en vivo. Aparte todo me llegó súper rápido y súper
+                    bien empaquetado hasta mi casa."</p>
+                <div class="testimonio-author">- Ana P.</div>
+            </div>
+
+            <div class="testimonio-card">
+                <div class="testimonio-emoji">✨</div>
+                <p class="testimonio-text">"¡Me gané el huevito de oro! Me llegó un set de brochas espectacular que no
+                    me esperaba. Definitivamente volveré a comprar."</p>
+                <div class="testimonio-author">- Sofía R.</div>
+            </div>
+
+        </div>
+    </section>
+
     <section id="juego">
         <div class="section-title">
             <h2>🎡 Ruleta de la Suerte</h2>
@@ -959,15 +1454,15 @@
         <div class="game-wrapper">
             <div class="board-section">
                 <div class="board-title">CADA FIGURITA REPRESENTA UN PRODUCTO 💕</div>
-                <p style="text-align:center; font-size:0.85rem; color:#666; margin-bottom:15px;">Revisa nuestra tabla de equivalencias mágicas:</p>
-                <div class="equivalents-visual-grid" id="boardGrid">
-                    <!-- Se llena con JS -->
-                </div>
+                <p style="text-align:center; font-size:0.85rem; color:#666; margin-bottom:15px;">Revisa nuestra tabla de
+                    equivalencias mágicas:</p>
+                <div class="equivalents-visual-grid" id="boardGrid"></div>
             </div>
 
             <div class="game-section">
                 <div style="text-align:center; margin-bottom:10px;">
-                    <span style="font-family:'Fredoka'; font-size:1.5rem; color:var(--pink-dark);">🎡 Gira y descubre</span>
+                    <span style="font-family:'Fredoka'; font-size:1.5rem; color:var(--pink-dark);">🎡 Gira y
+                        descubre</span>
                 </div>
 
                 <div class="wheel-wrap">
@@ -976,49 +1471,103 @@
                     <div class="wheel-center">✨</div>
                 </div>
 
-                <button class="redeem-code-btn" onclick="openCodeModal()"><i class="fa-solid fa-ticket"></i> 🎟️ Ya tengo mi código, ¡canjéalo aquí!</button>
+                <div class="egg-win-overlay" id="eggWinOverlay">
+                    <div class="egg-win-card">
+                        <span class="egg-win-icon" id="eggWinIcon">🥚</span>
+                        <div class="egg-win-tag" id="eggWinTag">✨ Premio Extra ✨</div>
+                        <div class="egg-win-name" id="eggWinName">¡Ganaste un huevo dorado!</div>
+                    </div>
+                </div>
 
-                <p style="text-align:center; font-size:0.8rem; color:#999; margin:-10px 0 12px 0;">O prueba la ruleta gratis sin comprar (demo):</p>
+                <button class="redeem-code-btn" onclick="openCodeModal()"><i class="fa-solid fa-ticket"></i> 🎟️ Ya
+                    tengo mi código, ¡canjéalo aquí!</button>
 
-                <div class="controls">
-                    <button class="game-btn" onclick="takeScoop(7)">🥄 Mini Scoop</button>
-                    <button class="game-btn" onclick="takeScoop(10)">🥣 Estándar</button>
-                    <button class="game-btn" onclick="takeScoop(20)">💖 Premium</button>
-                    <button class="game-btn" onclick="takeScoop(30)">👑 Glam VIP</button>
+                <p style="text-align:center; font-size:0.8rem; color:#999; margin:-10px 0 4px 0;">O prueba la ruleta
+                    gratis sin comprar (demo):</p>
+                <p id="demoSpinsInfo" style="text-align:center; font-size:0.78rem; color:var(--pink-dark); font-weight:600; margin:0 0 12px 0;"></p>
+
+                <div class="controls" id="demoControls">
+                    <button class="game-btn" id="demoBtn0" onclick="spinDemo(0)">🥄 Mini Scoop</button>
+                    <button class="game-btn" id="demoBtn1" onclick="spinDemo(1)">🥣 Estándar</button>
+                    <button class="game-btn" id="demoBtn2" onclick="spinDemo(2)">💖 Premium</button>
+                    <button class="game-btn" id="demoBtn3" onclick="spinDemo(3)">👑 Glam VIP</button>
                 </div>
 
                 <div class="basket-container">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                         <h3 style="font-family:'Fredoka'; color:var(--pink-dark);">🛒 Te tocó:</h3>
-                        <span id="basketTotal" style="display:none; font-weight:700; color:var(--pink-dark); background:var(--pink-light); padding:4px 12px; border-radius:15px; font-size:0.9rem;"></span>
+                        <span id="basketTotal"
+                            style="display:none; font-weight:700; color:var(--pink-dark); background:var(--pink-light); padding:4px 12px; border-radius:15px; font-size:0.9rem;"></span>
                     </div>
-                    
-                    <div id="loadingStatus" style="display:none; text-align:center; color:var(--pink-main); font-weight:bold; margin-bottom:10px;">
+
+                    <div id="loadingStatus"
+                        style="display:none; text-align:center; color:var(--pink-main); font-weight:bold; margin-bottom:10px;">
                         <i class="fa-solid fa-spinner fa-spin"></i> Girando la ruleta...
                     </div>
 
+                    <div id="basketSummary"
+                        style="display:none; text-align:center; font-size:0.85rem; color:#888; margin-bottom:10px; line-height:1.5;">
+                    </div>
+
                     <ul class="basket-items" id="basketList">
-                        <li style="color:#888; justify-content:center; border:none; box-shadow:none; background:transparent;">Presiona un botón arriba para girar la ruleta ✨</li>
+                        <li
+                            style="color:#888; justify-content:center; border:none; box-shadow:none; background:transparent;">
+                            Presiona un botón arriba para girar la ruleta ✨</li>
                     </ul>
 
                     <button class="whatsapp-share-btn" id="wsShareBtn" onclick="sendScoopToWhatsApp()">
                         <i class="fa-brands fa-whatsapp"></i> ¡Pedir un Scoop real por WhatsApp!
+                    </button>
+
+                    <button class="view-history-btn" id="viewHistoryBtn" style="display:none;" onclick="openHistoryModal()">
+                        📋 Ver todo lo que llevo ganado
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CATÁLOGO INDIVIDUAL -->
     <section id="productos">
         <div class="section-title">
             <h2>Cosméticos Disponibles 💄</h2>
             <p>¿No quieres la dinámica? ¡No hay problema! Puedes comprar por separado</p>
         </div>
+
+        <!-- NUEVOS FILTROS DE CATÁLOGO -->
+        <div class="filters-container">
+            <button class="filter-btn active" onclick="filterCatalog('todos')">Todos</button>
+            <button class="filter-btn" onclick="filterCatalog('skincare')">Skin Care</button>
+            <button class="filter-btn" onclick="filterCatalog('ojos')">Ojos</button>
+            <button class="filter-btn" onclick="filterCatalog('labios')">Labios</button>
+            <button class="filter-btn" onclick="filterCatalog('brochas')">Brochas</button>
+            <button class="filter-btn" onclick="filterCatalog('accesorios')">Accesorios</button>
+        </div>
+
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
-    <!-- MODAL: CANJEAR CÓDIGO -->
+    <!-- FOOTER CON REDES SOCIALES -->
+    <footer>
+        <h3 style="font-family:'Fredoka'; color:var(--pink-dark); font-size:1.5rem;">¡Únete a nuestra comunidad! ✨</h3>
+        <p style="color:#666; font-size:0.9rem; margin-top:5px;">Síguenos para no perderte ninguno de nuestros Lives y
+            promociones exclusivas.</p>
+
+        <div class="social-links">
+            <a href="https://instagram.com/yanetderomeosantos?igsh=MWRmZ2szOHJqeW92Zw%3D%3D" style="color:#E1306C;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com/nayeli.terrazas6" style="color:#000000;"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://facebook.com/share/199Qs64ELm/" style="color:#1877F2;"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+
+        <p style="margin-top:20px; color:#888; font-size:0.8rem;">© 2026 Nayes Beauty & Scoops. Acapulco, México. Todos
+            los derechos reservados.</p>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/521234567890" class="wa-floating-btn" id="floatingWaBtn" target="_blank" aria-label="Chat en WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- MODALES Y CARRITO (Ocultos) -->
     <div class="code-modal-overlay" id="codeModalOverlay">
         <div class="code-modal-box">
             <button class="code-modal-close" onclick="closeCodeModal()">✕</button>
@@ -1026,21 +1575,33 @@
             <p>Escribe el código que te dio Naye cuando pagaste tu Scoop</p>
             <input type="text" id="codeModalInput" placeholder="EJ: SWEET-A1B2-C" maxlength="14">
             <div class="code-modal-error" id="codeModalError"></div>
-            <button class="code-modal-confirm-btn" id="codeModalConfirmBtn" onclick="confirmCodeAndSpin()">🎡 Canjear y girar</button>
+            <button class="code-modal-confirm-btn" id="codeModalConfirmBtn" onclick="confirmCodeAndSpin()">🎡 Canjear y
+                girar</button>
         </div>
     </div>
 
-    <!-- CARRITO OCULTO -->
-    <div class="cart-drawer" id="cartDrawer">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--pink-light); padding-bottom:10px;">
-            <h3 style="font-family:'Fredoka'; color:var(--pink-dark);">Tu Bolsita 🛍️</h3>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+    <div class="code-modal-overlay" id="historyModalOverlay">
+        <div class="history-modal-box">
+            <button class="code-modal-close" onclick="closeHistoryModal()">✕</button>
+            <h3>📋 Todo lo que llevas ganado</h3>
+            <p class="history-sub">Resumen de todos tus giros en esta sesión</p>
+            <div id="historyModalList"></div>
+            <div class="history-total-bar" id="historyModalTotal"></div>
         </div>
-        
-        <div id="cartItemsList" style="flex:1; overflow-y:auto; padding:15px 0; display:flex; flex-direction:column; gap:10px;"></div>
+    </div>
 
+    <div class="cart-drawer" id="cartDrawer">
+        <div
+            style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--pink-light); padding-bottom:10px;">
+            <h3 style="font-family:'Fredoka'; color:var(--pink-dark);">Tu Bolsita 🛍️</h3>
+            <button onclick="toggleCart()"
+                style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+        </div>
+        <div id="cartItemsList"
+            style="flex:1; overflow-y:auto; padding:15px 0; display:flex; flex-direction:column; gap:10px;"></div>
         <div style="border-top:2px solid var(--pink-light); padding-top:15px;">
-            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:15px;">
+            <div
+                style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:15px;">
                 <span>Total:</span>
                 <span id="cartTotal">$0 MXN</span>
             </div>
@@ -1051,114 +1612,113 @@
     </div>
 
     <script>
-        // --- 1. BASE DE DATOS DE PRODUCTOS Y "FIGURITAS" ---
-        // Estos son solo valores de respaldo (por si aún no carga la nube ni hay nada
-        // guardado en este navegador). En cuanto carguen los datos reales del panel
-        // admin (localStorage + Firebase), se reemplazan automáticamente.
         const DEFAULT_PRODUCTS = [
-            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 40, emoji: "💧", image: null, cat: "skincare" },
-            { id: 2, name: "Corrector de Ojeras Líquido", price: 30, emoji: "🌙", image: null, cat: "skincare" },
-            { id: 3, name: "Polvo Suelto Traslúcido", price: 30, emoji: "☁️", image: null, cat: "skincare" },
-            { id: 4, name: "Polvo Compacto", price: 30, emoji: "🍰", image: null, cat: "skincare" },
-            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 30, emoji: "✨", image: null, cat: "skincare" },
-            { id: 6, name: "Rubor (crema o compacto)", price: 30, emoji: "🌸", image: null, cat: "skincare" },
-            { id: 7, name: "Contorno (polvo o crema)", price: 35, emoji: "🍫", image: null, cat: "skincare" },
-            { id: 8, name: "Iluminador (líquido o polvo)", price: 40, emoji: "🍒", image: null, cat: "skincare" },
-            { id: 9, name: "Primer o Preparador Facial", price: 35, emoji: "💎", image: null, cat: "skincare" },
-            { id: 10, name: "Crema Hidratante Facial", price: 30, emoji: "🧴", image: null, cat: "skincare" },
-            { id: 11, name: "Paleta de Sombras", price: 45, emoji: "🦋", image: null, cat: "ojos" },
-            { id: 12, name: "Lápiz Delineador de Ojos", price: 25, emoji: "✏️", image: null, cat: "ojos" },
-            { id: 13, name: "Lápiz de Cejas", price: 25, emoji: "👑", image: null, cat: "ojos" },
-            { id: 14, name: "Delineador Líquido o en Crema", price: 30, emoji: "🖊️", image: null, cat: "ojos" },
-            { id: 15, name: "Máscara de Pestañas (rímel)", price: 40, emoji: "🌟", image: null, cat: "ojos" },
-            { id: 16, name: "Pestañas Postizas", price: 35, emoji: "🪽", image: null, cat: "ojos" },
-            { id: 17, name: "Primer para Sombras", price: 30, emoji: "💫", image: null, cat: "ojos" },
-            { id: 18, name: "Gel Fijador de Cejas", price: 25, emoji: "🧊", image: null, cat: "ojos" },
-            { id: 19, name: "Pomada de Cejas", price: 25, emoji: "🍯", image: null, cat: "ojos" },
-            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 30, emoji: "⭐", image: null, cat: "labios" },
-            { id: 21, name: "Labial Nude", price: 30, emoji: "🤎", image: null, cat: "labios" },
-            { id: 22, name: "Labial Rojo", price: 30, emoji: "❤️", image: null, cat: "labios" },
-            { id: 23, name: "Tinta de Labios", price: 30, emoji: "🌼", image: null, cat: "labios" },
-            { id: 24, name: "Brillo Labial (gloss)", price: 25, emoji: "💖", image: null, cat: "labios" },
-            { id: 25, name: "Bálsamo Hidratante Labial", price: 25, emoji: "🍓", image: null, cat: "labios" },
-            { id: 26, name: "Mascarilla Labial (colágeno)", price: 30, emoji: "💋", image: null, cat: "labios" },
-            { id: 27, name: "Brocha o Esponja para Base", price: 30, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 28, name: "Brocha para Polvos/Rubor", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 29, name: "Pincel para Sombras", price: 25, emoji: "🖌️", image: null, cat: "brochas" },
-            { id: 30, name: "Beauty Blender Mini", price: 25, emoji: "💧", image: null, cat: "brochas" },
-            { id: 31, name: "Peine de Cejas y Pestañas", price: 20, emoji: "🪮", image: null, cat: "brochas" },
-            { id: 32, name: "Agua Micelar", price: 30, emoji: "💦", image: null, cat: "higiene" },
-            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 30, emoji: "🌿", image: null, cat: "higiene" },
-            { id: 34, name: "Parches para Acné/Ojeras", price: 20, emoji: "🩹", image: null, cat: "accesorios" },
-            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 20, emoji: "🎀", image: null, cat: "accesorios" },
-            { id: 36, name: "Bandana para Maquillaje", price: 25, emoji: "🧣", image: null, cat: "accesorios" }
+            { id: 1, name: "Base de Maquillaje (sachet/minitalla)", price: 0, qty: 0, emoji: "💧", image: null, cat: "skincare" },
+            { id: 2, name: "Corrector de Ojeras Líquido", price: 0, qty: 0, emoji: "🌙", image: null, cat: "skincare" },
+            { id: 3, name: "Polvo Suelto Traslúcido", price: 0, qty: 0, emoji: "☁️", image: null, cat: "skincare" },
+            { id: 4, name: "Polvo Compacto", price: 0, qty: 0, emoji: "🍰", image: null, cat: "skincare" },
+            { id: 5, name: "Polvo de Hadas (brillo facial/corporal)", price: 0, qty: 0, emoji: "✨", image: null, cat: "skincare" },
+            { id: 6, name: "Rubor (crema o compacto)", price: 0, qty: 0, emoji: "🌸", image: null, cat: "skincare" },
+            { id: 7, name: "Contorno (polvo o crema)", price: 0, qty: 0, emoji: "🍫", image: null, cat: "skincare" },
+            { id: 8, name: "Iluminador (líquido o polvo)", price: 0, qty: 0, emoji: "🍒", image: null, cat: "skincare" },
+            { id: 9, name: "Primer o Preparador Facial", price: 0, qty: 0, emoji: "💎", image: null, cat: "skincare" },
+            { id: 10, name: "Crema Hidratante Facial", price: 0, qty: 0, emoji: "🧴", image: null, cat: "skincare" },
+            { id: 11, name: "Paleta de Sombras", price: 0, qty: 0, emoji: "🦋", image: null, cat: "ojos" },
+            { id: 12, name: "Lápiz Delineador de Ojos", price: 0, qty: 0, emoji: "✏️", image: null, cat: "ojos" },
+            { id: 13, name: "Lápiz de Cejas", price: 0, qty: 0, emoji: "👑", image: null, cat: "ojos" },
+            { id: 14, name: "Delineador Líquido o en Crema", price: 0, qty: 0, emoji: "🖊️", image: null, cat: "ojos" },
+            { id: 15, name: "Máscara de Pestañas (rímel)", price: 0, qty: 0, emoji: "🌟", image: null, cat: "ojos" },
+            { id: 16, name: "Pestañas Postizas", price: 0, qty: 0, emoji: "🪽", image: null, cat: "ojos" },
+            { id: 17, name: "Primer para Sombras", price: 0, qty: 0, emoji: "💫", image: null, cat: "ojos" },
+            { id: 18, name: "Gel Fijador de Cejas", price: 0, qty: 0, emoji: "🧊", image: null, cat: "ojos" },
+            { id: 19, name: "Pomada de Cejas", price: 0, qty: 0, emoji: "🍯", image: null, cat: "ojos" },
+            { id: 20, name: "Labial en Barra (mate o cremoso)", price: 0, qty: 0, emoji: "⭐", image: null, cat: "labios" },
+            { id: 21, name: "Labial Nude", price: 0, qty: 0, emoji: "🤎", image: null, cat: "labios" },
+            { id: 22, name: "Labial Rojo", price: 0, qty: 0, emoji: "❤️", image: null, cat: "labios" },
+            { id: 23, name: "Tinta de Labios", price: 0, qty: 0, emoji: "🌼", image: null, cat: "labios" },
+            { id: 24, name: "Brillo Labial (gloss)", price: 0, qty: 0, emoji: "💖", image: null, cat: "labios" },
+            { id: 25, name: "Bálsamo Hidratante Labial", price: 0, qty: 0, emoji: "🍓", image: null, cat: "labios" },
+            { id: 26, name: "Mascarilla Labial (colágeno)", price: 0, qty: 0, emoji: "💋", image: null, cat: "labios" },
+            { id: 27, name: "Brocha o Esponja para Base", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 28, name: "Brocha para Polvos/Rubor", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 29, name: "Pincel para Sombras", price: 0, qty: 0, emoji: "🖌️", image: null, cat: "brochas" },
+            { id: 30, name: "Beauty Blender Mini", price: 0, qty: 0, emoji: "💧", image: null, cat: "brochas" },
+            { id: 31, name: "Peine de Cejas y Pestañas", price: 0, qty: 0, emoji: "🪮", image: null, cat: "brochas" },
+            { id: 32, name: "Agua Micelar", price: 0, qty: 0, emoji: "💦", image: null, cat: "higiene" },
+            { id: 33, name: "Mascarilla Facial (arcilla/hidratante)", price: 0, qty: 0, emoji: "🌿", image: null, cat: "higiene" },
+            { id: 34, name: "Parches para Acné/Ojeras", price: 0, qty: 0, emoji: "🩹", image: null, cat: "accesorios" },
+            { id: 35, name: "Pinzas o Ganchos para Cabello", price: 0, qty: 0, emoji: "🎀", image: null, cat: "accesorios" },
+            { id: 36, name: "Bandana para Maquillaje", price: 0, qty: 0, emoji: "🧣", image: null, cat: "accesorios" }
         ];
         const DEFAULT_PROMO_TIERS = [
-            { name: "💗 Naye's Sweet Scoop", price: 100, desc: "Incluye entre 5 y 8 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + sorpresa de huevitos de oro", featured: false, code: "SWEET", min: 5, max: 8 },
-            { name: "💖 Naye's Glam Scoop", price: 270, desc: "Incluye entre 10 y 13 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos dorados sorpresa", featured: false, code: "GLAM", min: 10, max: 13 },
-            { name: "✨ Naye's Glow Scoop", price: 320, desc: "Incluye entre 15 y 19 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuras que salgan", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: true, code: "GLOW", min: 15, max: 19 },
-            { name: "👑 Mega Naye Scoop", price: 380, desc: "Incluye entre 20 y 24 figuritas — la cantidad depende de tu suerte, y el maquillaje de lo que te toque", gift: "🎁 + huevitos de oro con sorpresas grandes", featured: false, code: "MEGA", min: 20, max: 24 },
-            { name: "🌟 Ultimate Naye Scoop", price: 400, desc: "Incluye entre 25 y 31 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figura que te toque", gift: "🎁 + huevitos de oro que salgan en tu cucharita, sorpresa", featured: false, code: "ULTRA", min: 25, max: 31 },
-            { name: "👑 Naye's Queen Luxe", price: 430, desc: "Incluye entre 30 y 37 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + huevitos de oro sorpresa", featured: false, code: "QUEEN", min: 30, max: 37 },
-            { name: "💎 Naye's VIP Diamond", price: 500, desc: "Incluye entre 35 y 43 figuritas — la cantidad depende de tu suerte, y el maquillaje de la figurita que salga", gift: "🎁 + huevitos de oro, premios y sorpresas", featured: false, code: "VIPD", min: 35, max: 43 }
+            { name: "💗 Naye's One Scoop", price: 100, desc: "Incluye entre 5 y 8 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 1 huevito oro sorpresa", featured: false, code: "One", min: 5, max: 8, eggCount: 1 },
+            { name: "💖 Naye's Two Scoop", price: 195, desc: "Incluye entre 10 y 14 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 1 huevito oro sorpresa", featured: false, code: "Two", min: 10, max: 14, eggCount: 1 },
+            { name: "✨ Naye's Three Scoop", price: 250, desc: "Incluye entre 15 y 20 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 2 huevitos de oro sorpresas", featured: true, code: "Three", min: 15, max: 20, eggCount: 2 },
+            { name: "🌸 Naye's Four Scoop", price: 310, desc: "Incluye entre 20 y 24 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 2 huevitos de oro sorpresas", featured: false, code: "Four", min: 20, max: 24, eggCount: 2 },
+            { name: "🌟 Naye's Five Scoop", price: 380, desc: "Incluye entre 25 y 31 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 3 huevitos de oro sorpresa", featured: false, code: "Five", min: 25, max: 31, eggCount: 3 },
+            { name: "👑 Naye's Six Scoop", price: 440, desc: "Incluye entre 32 y 37 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 3 huevitos de oro sorpresa", featured: false, code: "Six", min: 32, max: 37, eggCount: 3 },
+            { name: "💎 Naye's Seven Scoop", price: 500, desc: "Incluye entre 38 y 43 figuritas — la cantidad depende de tu suerte, y el maquillaje de las figuritas que salgan", gift: "🎁 + 4 huevitos de oro sorpresa", featured: false, code: "Seven", min: 38, max: 43, eggCount: 4 }
         ];
-        const DEFAULT_EGGS = [{ name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }];
-        const DEFAULT_EGG_CHANCE = 10;
-        const DEFAULT_EGG_MINCOUNT = 20;
+        const DEFAULT_DEMO = [
+            { label: "🥄 1 Scoop", min: 5, max: 8 },
+            { label: "🥄 2 Scoop", min: 10, max: 14 },
+            { label: "🥄 3 Scoop", min: 15, max: 20 },
+            { label: "🥄 4 Scoop", min: 20, max: 24 }
+        ];
+        const DEFAULT_EGGS = [{ id: 1, name: "¡SET ESPECIAL DE SKINCARE!", emoji: "🥚", image: null, value: 150 }];
+        const DEFAULT_EGG_CHANCE = 40;
+        const DEFAULT_EGG_MINCOUNT = 5;
         const DEFAULT_WHATSAPP = "527443196897";
 
         let catalogProducts = DEFAULT_PRODUCTS.slice();
+        let currentDemoTiers = DEFAULT_DEMO.slice();
         let currentEggs = DEFAULT_EGGS.slice();
         let eggChance = DEFAULT_EGG_CHANCE;
         let eggMinCount = DEFAULT_EGG_MINCOUNT;
         let shopWhatsApp = DEFAULT_WHATSAPP;
+        let currentFilter = 'todos'; // Variable para el filtro de productos
         let db = null;
 
-        // --- 2. RENDERIZADO VISUAL DE FIGURITAS (COMO LA IMAGEN DE REFERENCIA) ---
         function renderVisualBoard() {
             const grid = document.getElementById('boardGrid');
             grid.innerHTML = '';
-            
             catalogProducts.forEach(prod => {
                 const item = document.createElement('div');
                 item.className = 'visual-item';
-                const visual = prod.image
-                    ? `<img src="${prod.image}" alt="${prod.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
-                    : `<div class="visual-emoji">${prod.emoji || '💄'}</div>`;
-                item.innerHTML = `
-                    ${visual}
-                    <div class="visual-name">${prod.name.toUpperCase()}</div>
-                `;
+                const visual = prod.image ? `<img src="${prod.image}" alt="${prod.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">` : `<div class="visual-emoji">${prod.emoji || '💄'}</div>`;
+                item.innerHTML = `${visual}<div class="visual-name">${prod.name.toUpperCase()}</div>`;
                 grid.appendChild(item);
             });
-
-            // Agrega los Premios Extra (huevos dorados) configurados en el panel admin.
-            // Son EXTRA a las figuritas normales, por eso se muestran aparte y en dorado.
             currentEggs.forEach(egg => {
                 const goldenEgg = document.createElement('div');
                 goldenEgg.className = 'visual-item';
                 goldenEgg.style.borderColor = "var(--gold-accent)";
                 goldenEgg.style.background = "#fffde7";
-                const eggVisual = egg.image
-                    ? `<img src="${egg.image}" alt="${egg.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">`
-                    : `<div class="visual-emoji">${egg.emoji || '🥚'}</div>`;
-                goldenEgg.innerHTML = `
-                    ${eggVisual}
-                    <div class="visual-name" style="color:#d4af37;">PREMIO EXTRA</div>
-                `;
+                const eggVisual = egg.image ? `<img src="${egg.image}" alt="${egg.name}" style="width:48px; height:48px; object-fit:cover; border-radius:10px; margin-bottom:5px;">` : `<div class="visual-emoji">${egg.emoji || '🥚'}</div>`;
+                goldenEgg.innerHTML = `${eggVisual}<div class="visual-name" style="color:#d4af37;">PREMIO EXTRA</div>`;
                 grid.appendChild(goldenEgg);
             });
         }
 
+        // FUNCIÓN MODIFICADA PARA APLICAR EL FILTRO
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
-            catalogProducts.forEach(prod => {
+
+            // Filtramos los productos según la categoría seleccionada
+            const filteredProducts = currentFilter === 'todos'
+                ? catalogProducts
+                : catalogProducts.filter(p => p.cat === currentFilter);
+
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #888; padding: 20px;">No hay productos en esta categoría por el momento.</p>';
+                return;
+            }
+
+            filteredProducts.forEach(prod => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                const visual = prod.image
-                    ? `<img src="${prod.image}" alt="${prod.name}" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px;">`
-                    : `<div class="product-img-box">${prod.emoji || '💄'}</div>`;
+                const visual = prod.image ? `<img src="${prod.image}" alt="${prod.name}" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px;">` : `<div class="product-img-box">${prod.emoji || '💄'}</div>`;
                 card.innerHTML = `
                     <div>
                         ${visual}
@@ -1171,24 +1731,33 @@
             });
         }
 
+        // Lógica para cambiar de filtro
+        function filterCatalog(categoria) {
+            currentFilter = categoria;
+
+            // Actualizar botones visualmente
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const btnCat = btn.innerText.toLowerCase().replace(' ', '');
+                if (btnCat === categoria || (categoria === 'todos' && btn.innerText === 'Todos')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderProducts();
+        }
+
         function renderAdsSection(ads) {
             const section = document.getElementById('publicidadAdsSection');
             const grid = document.getElementById('publicidadAdsGrid');
             grid.innerHTML = '';
             const images = ads ? [ads.image1, ads.image2].filter(Boolean) : [];
-            if (!images.length) {
-                section.style.display = 'none';
-                return;
-            }
+            if (!images.length) { section.style.display = 'none'; return; }
             section.style.display = 'block';
             images.forEach(src => {
                 const img = document.createElement('img');
                 img.src = src;
-                img.style.width = '100%';
-                img.style.borderRadius = '16px';
-                img.style.boxShadow = '0 6px 18px rgba(0,0,0,0.12)';
-                img.style.objectFit = 'cover';
-                img.style.aspectRatio = '1';
+                img.style.width = '100%'; img.style.borderRadius = '16px'; img.style.boxShadow = '0 6px 18px rgba(0,0,0,0.12)'; img.style.objectFit = 'cover'; img.style.aspectRatio = '1';
                 grid.appendChild(img);
             });
         }
@@ -1206,53 +1775,79 @@
                     <div class="promo-price">$${tier.price}</div>
                     <div class="promo-desc">${tier.desc}</div>
                     <div class="promo-gift">${tier.gift}</div>
-                    <button class="promo-btn" onclick="sendPromoToWhatsApp('${safeName}', '$${tier.price}')">
-                        <i class="fa-brands fa-whatsapp"></i> Pedir
-                    </button>
+                    <button class="promo-btn" onclick="sendPromoToWhatsApp('${safeName}', '$${tier.price}')"><i class="fa-brands fa-whatsapp"></i> Pedir</button>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // --- 3. RULETA DE LA SUERTE (VISUAL) ---
         const wheelWrap = document.querySelector('.wheel-wrap');
         const wheel = document.getElementById('wheel');
-        let wheelSegmentIds = null; // se llena desde db.wheel.segmentIds si existe
+        let wheelSegmentIds = null;
         let wheelRotation = 0;
+        let wheelSegments = [];
 
         function buildWheel() {
-            let segments = catalogProducts;
+            let productSegments = catalogProducts;
             if (wheelSegmentIds && wheelSegmentIds.length) {
-                const byId = wheelSegmentIds
-                    .map(id => catalogProducts.find(p => p.id === id))
-                    .filter(Boolean);
-                if (byId.length) segments = byId;
+                const byId = wheelSegmentIds.map(id => catalogProducts.find(p => p.id === id)).filter(Boolean);
+                if (byId.length) productSegments = byId;
             }
-            segments = segments.slice(0, 10);
-            const segAngle = 360 / segments.length;
-            const colors = ['#ffe0ec', '#ffffff'];
-            const gradientParts = segments.map((p, i) => `${colors[i % 2]} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
-            wheel.style.background = `conic-gradient(${gradientParts.join(',')})`;
+            const eggSlots = currentEggs.length ? Math.min(2, currentEggs.length) : 0;
+            productSegments = productSegments.slice(0, Math.max(1, 10 - eggSlots));
 
-            // El radio se calcula según el tamaño real de la ruleta (que cambia en
-            // celulares chicos por CSS) para que las figuritas siempre queden bien
-            // acomodadas dentro del círculo, sin importar el tamaño de pantalla.
+            // Reparte los huevos en lados opuestos de la ruleta en vez de dejarlos
+            // pegados uno junto al otro al final.
+            const total = productSegments.length + eggSlots;
+            const spacing = eggSlots ? Math.floor(total / eggSlots) : 0;
+            const eggPositions = new Set();
+            for (let i = 0; i < eggSlots; i++) eggPositions.add(i * spacing);
+
+            wheelSegments = [];
+            let productIdx = 0, eggIdx = 0;
+            for (let i = 0; i < total; i++) {
+                if (eggPositions.has(i) && eggIdx < eggSlots) {
+                    wheelSegments.push({ type: 'egg', data: currentEggs[eggIdx % currentEggs.length] });
+                    eggIdx++;
+                } else {
+                    wheelSegments.push({ type: 'product', data: productSegments[productIdx % productSegments.length] });
+                    productIdx++;
+                }
+            }
+
+            const segAngle = 360 / wheelSegments.length;
+            const colors = ['#ffe0ec', '#ffffff'];
+            const gradientParts = wheelSegments.map((seg, i) => {
+                const color = seg.type === 'egg' ? '#fff3c4' : colors[i % 2];
+                return `${color} ${i * segAngle}deg ${(i + 1) * segAngle}deg`;
+            });
+            wheel.style.background = `conic-gradient(${gradientParts.join(',')})`;
             const radius = (wheel.clientWidth / 2) * 0.71;
 
-            wheel.innerHTML = segments.map((p, i) => {
+            wheel.innerHTML = wheelSegments.map((seg, i) => {
                 const mid = segAngle * i + segAngle / 2;
-                return `<div class="wheel-seg" style="transform: rotate(${mid}deg) translate(0, -${radius}px);">
-                            <span style="display:inline-block; transform: rotate(${-mid}deg);">${p.emoji}</span>
+                const emoji = seg.type === 'egg' ? (seg.data.emoji || '🥚') : seg.data.emoji;
+                const eggClass = seg.type === 'egg' ? ' wheel-seg-egg' : '';
+                return `<div class="wheel-seg${eggClass}" style="transform: rotate(${mid}deg) translate(0, -${radius}px);">
+                            <span style="display:inline-block; transform: rotate(${-mid}deg);">${emoji}</span>
                         </div>`;
             }).join('');
         }
 
-        function spinWheel() {
-            wheelRotation += 1080 + Math.floor(Math.random() * 360);
+        function spinWheel(targetIndex) {
+            if (!wheelSegments.length) { wheel.style.transform = `rotate(${wheelRotation}deg)`; return; }
+            if (typeof targetIndex !== 'number' || targetIndex < 0 || targetIndex >= wheelSegments.length) {
+                targetIndex = Math.floor(Math.random() * wheelSegments.length);
+            }
+            const segAngle = 360 / wheelSegments.length;
+            const mid = segAngle * targetIndex + segAngle / 2;
+            const desiredMod = ((-mid % 360) + 360) % 360;
+            const currentMod = ((wheelRotation % 360) + 360) % 360;
+            let delta = ((desiredMod - currentMod) % 360 + 360) % 360;
+            wheelRotation += (6 * 360) + delta;
             wheel.style.transform = `rotate(${wheelRotation}deg)`;
         }
 
-        // --- SISTEMA DE CANJE DE CÓDIGOS (conectado con el panel admin) ---
         const firebaseConfig = {
             apiKey: "AIzaSyBjKQvfXBW5R10u75a6gqxw5FgwGQ55YgU",
             authDomain: "nayes-beauty.firebaseapp.com",
@@ -1264,335 +1859,344 @@
         firebase.initializeApp(firebaseConfig);
         const dbFirestore = firebase.firestore();
 
-        // --- SINCRONIZACIÓN CON EL PANEL ADMIN ---
-        // admin.html guarda los cambios en localStorage Y en Firestore
-        // (colección site_config, documento "main"). Aquí escuchamos ese mismo
-        // documento en tiempo real: en cuanto Naye guarda algo en el panel admin
-        // (desde cualquier celular o computadora), esta página se actualiza sola,
-        // sin necesidad de recargarla.
         function applyDB(data) {
             if (!data) return;
             db = data;
 
-            const announcementEl = document.getElementById('announcementText');
-            if (announcementEl && db.announcement) announcementEl.innerText = db.announcement;
-
-            if (db.hero) {
-                const t = document.getElementById('heroTitle');
-                const s = document.getElementById('heroSubtitle');
-                const b = document.getElementById('heroButton');
-                if (t && db.hero.title) t.innerText = db.hero.title;
-                if (s && db.hero.subtitle) s.innerText = db.hero.subtitle;
-                if (b && db.hero.button) b.innerText = db.hero.button;
+            // Mostrar el botón de EN VIVO si db.isLive es verdadero (Punto 2)
+            const liveBadge = document.getElementById('liveBadge');
+            if (liveBadge) {
+                liveBadge.style.display = db.isLive ? 'flex' : 'none';
+                // Si quieres que el botón te lleve a Tiktok:
+                if (db.liveUrl) liveBadge.href = db.liveUrl;
             }
 
+            if (db.announcement) document.getElementById('announcementText').innerText = db.announcement;
+            if (db.hero) {
+                if (db.hero.title) document.getElementById('heroTitle').innerText = db.hero.title;
+                if (db.hero.subtitle) document.getElementById('heroSubtitle').innerText = db.hero.subtitle;
+                if (db.hero.button) document.getElementById('heroButton').innerText = db.hero.button;
+            }
             if (db.promo) {
-                const eyebrow = document.getElementById('promoEyebrow');
-                const title = document.getElementById('promoTitle');
-                const desc = document.getElementById('promoDescription');
-                if (eyebrow && db.promo.eyebrow) eyebrow.innerText = db.promo.eyebrow;
-                if (title && db.promo.title) title.innerText = db.promo.title;
-                if (desc && db.promo.description) desc.innerText = db.promo.description;
+                if (db.promo.eyebrow) document.getElementById('promoEyebrow').innerText = db.promo.eyebrow;
+                if (db.promo.title) document.getElementById('promoTitle').innerText = db.promo.title;
+                if (db.promo.description) document.getElementById('promoDescription').innerText = db.promo.description;
                 renderPromoTiers(db.promo.tiers);
             }
-
-            if (db.whatsapp) shopWhatsApp = db.whatsapp;
+            if (db.whatsapp) {
+                shopWhatsApp = db.whatsapp;
+                // Actualizar el link del botón flotante (Punto 1)
+                document.getElementById('floatingWaBtn').href = `https://wa.me/${shopWhatsApp}`;
+            }
 
             renderAdsSection(db.ads);
 
-            if (Array.isArray(db.products) && db.products.length) {
-                catalogProducts = db.products;
-            }
+            if (Array.isArray(db.products) && db.products.length) catalogProducts = db.products;
 
             if (db.wheel) {
                 wheelSegmentIds = Array.isArray(db.wheel.segmentIds) ? db.wheel.segmentIds : null;
-                // Compatibilidad: admin puede mandar "eggs" (lista nueva) o el "egg" viejo (uno solo)
-                if (Array.isArray(db.wheel.eggs) && db.wheel.eggs.length) {
-                    currentEggs = db.wheel.eggs;
-                } else if (db.wheel.egg) {
-                    currentEggs = [db.wheel.egg];
-                }
+                if (Array.isArray(db.wheel.eggs) && db.wheel.eggs.length) currentEggs = db.wheel.eggs;
+                else if (db.wheel.egg) currentEggs = [db.wheel.egg];
                 if (typeof db.wheel.eggChance === 'number') eggChance = db.wheel.eggChance;
                 if (typeof db.wheel.eggMinCount === 'number') eggMinCount = db.wheel.eggMinCount;
             }
+            if (Array.isArray(db.demo) && db.demo.length) currentDemoTiers = db.demo;
+            renderDemoButtons();
 
             renderVisualBoard();
-            renderProducts();
+            renderProducts(); // Renderiza usando el filtro actual
             buildWheel();
         }
 
+        const DB_KEY = 'nayes_beauty_db';
         function startDBSync() {
-            // Primero pinta lo que ya esté guardado en este navegador (instantáneo),
-            // y luego escucha Firestore para traer la versión más reciente y
-            // mantenerse sincronizado en tiempo real.
-            try {
-                const raw = localStorage.getItem(DB_KEY);
-                if (raw) applyDB(JSON.parse(raw));
-            } catch (e) { console.warn('No se pudo leer la copia local', e); }
-
+            try { const raw = localStorage.getItem(DB_KEY); if (raw) applyDB(JSON.parse(raw)); } catch (e) { }
             dbFirestore.collection('site_config').doc('main').onSnapshot(snap => {
                 if (snap.exists) {
                     const data = snap.data();
                     applyDB(data);
-                    try { localStorage.setItem(DB_KEY, JSON.stringify(data)); } catch (e) { /* espacio lleno, se ignora */ }
+                    try { localStorage.setItem(DB_KEY, JSON.stringify(data)); } catch (e) { }
                 }
-            }, err => console.error('No se pudo sincronizar con la nube', err));
+            });
         }
 
-        const DB_KEY = 'nayes_beauty_db';
         const CODE_SALT = "NAYES2026";
         const CODE_CHARSET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-
-        function loadScoopTiers() {
-            return (db && db.promo && Array.isArray(db.promo.tiers) && db.promo.tiers.length)
-                ? db.promo.tiers
-                : DEFAULT_PROMO_TIERS;
+        const DEMO_SPIN_LIMIT = 3;
+        function getDemoSpinsUsed() { return parseInt(sessionStorage.getItem('nayes_demo_spins_used') || '0', 10); }
+        function updateDemoSpinsInfo() {
+            const used = getDemoSpinsUsed();
+            const left = Math.max(0, DEMO_SPIN_LIMIT - used);
+            const infoEl = document.getElementById('demoSpinsInfo');
+            const controlsEl = document.getElementById('demoControls');
+            if (!infoEl || !controlsEl) return;
+            if (left > 0) {
+                infoEl.innerText = `🎁 Te quedan ${left} giro${left === 1 ? '' : 's'} gratis de demo`;
+                controlsEl.querySelectorAll('.game-btn').forEach(b => b.disabled = false);
+            } else {
+                infoEl.innerHTML = `✨ Ya usaste tus giros gratis de demo. ¡Compra tu Scoop real y sigue ganando! 🎟️`;
+                controlsEl.querySelectorAll('.game-btn').forEach(b => b.disabled = true);
+            }
         }
-
-        function codeChecksum(str) {
-            let sum = 0;
-            for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 3);
-            for (let i = 0; i < CODE_SALT.length; i++) sum += CODE_SALT.charCodeAt(i);
-            return CODE_CHARSET[sum % CODE_CHARSET.length];
+        function loadScoopTiers() { return (db && db.promo && Array.isArray(db.promo.tiers) && db.promo.tiers.length) ? db.promo.tiers : DEFAULT_PROMO_TIERS; }
+        function codeChecksum(str) { let sum = 0; for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 3); for (let i = 0; i < CODE_SALT.length; i++) sum += CODE_SALT.charCodeAt(i); return CODE_CHARSET[sum % CODE_CHARSET.length]; }
+        function randomBetween(min, max) { min = parseInt(min, 10) || 1; max = parseInt(max, 10) || min; if (max < min) max = min; return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function spinDemo(i) {
+            if (getDemoSpinsUsed() >= DEMO_SPIN_LIMIT) { updateDemoSpinsInfo(); return; }
+            const tier = currentDemoTiers[i]; if (!tier) return;
+            sessionStorage.setItem('nayes_demo_spins_used', String(getDemoSpinsUsed() + 1));
+            updateDemoSpinsInfo();
+            takeScoop(randomBetween(tier.min, tier.max));
         }
+        function renderDemoButtons() { currentDemoTiers.forEach((tier, i) => { const btn = document.getElementById('demoBtn' + i); if (btn) btn.innerText = tier.label; }); }
 
-        // Calcula un número al azar entre min y max (incluidos ambos) — así se
-        // decide "la suerte" de cuántas figuritas le tocan a la clienta.
-        function randomBetween(min, max) {
-            min = parseInt(min, 10) || 1;
-            max = parseInt(max, 10) || min;
-            if (max < min) max = min;
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        // Detecta a qué nivel pertenece un código válido a partir de su prefijo
         function findTierByCode(rawCode) {
-            if (!rawCode) return null;
-            const code = rawCode.trim().toUpperCase();
-            const parts = code.split('-');
-            if (parts.length !== 3) return null;
-            const [prefix, body, check] = parts;
-            if (body.length !== 4) return null;
-            if (check !== codeChecksum(prefix + body)) return null;
-            const tiers = loadScoopTiers();
-            return tiers.find(t => (t.code || '').toUpperCase() === prefix) || null;
+            if (!rawCode) return null; const code = rawCode.trim().toUpperCase(); const parts = code.split('-');
+            if (parts.length !== 3 || parts[1].length !== 4 || parts[2] !== codeChecksum(parts[0] + parts[1])) return null;
+            return loadScoopTiers().find(t => (t.code || '').toUpperCase() === parts[0]) || null;
         }
 
-        function openCodeModal() {
-            document.getElementById('codeModalInput').value = '';
-            document.getElementById('codeModalError').innerText = '';
-            document.getElementById('codeModalOverlay').classList.add('open');
-            setTimeout(() => document.getElementById('codeModalInput').focus(), 100);
-        }
+        function openCodeModal() { document.getElementById('codeModalInput').value = ''; document.getElementById('codeModalError').innerText = ''; document.getElementById('codeModalOverlay').classList.add('open'); setTimeout(() => document.getElementById('codeModalInput').focus(), 100); }
+        function closeCodeModal() { document.getElementById('codeModalOverlay').classList.remove('open'); }
 
-        function closeCodeModal() {
-            document.getElementById('codeModalOverlay').classList.remove('open');
+        function openHistoryModal() {
+            const listEl = document.getElementById('historyModalList');
+            const totalEl = document.getElementById('historyModalTotal');
+            const grouped = {};
+            wonHistory.forEach(p => {
+                const key = p.name;
+                if (!grouped[key]) grouped[key] = { ...p, count: 0 };
+                grouped[key].count++;
+            });
+            const entries = Object.values(grouped);
+            if (!entries.length) {
+                listEl.innerHTML = '<p style="text-align:center; color:#888;">Todavía no has girado la ruleta.</p>';
+                totalEl.innerText = '';
+            } else {
+                listEl.innerHTML = entries.map(p => {
+                    const thumb = p.image ? `<img src="${p.image}" alt="${p.name}" style="width:30px; height:30px; object-fit:cover; border-radius:8px; margin-right:6px; vertical-align:middle;">` : '';
+                    const extraClass = p.isGold || p.isWheelBonus ? ' is-extra' : '';
+                    return `<div class="history-item${extraClass}"><span>${thumb}${p.emoji || ''} ${p.name}</span><strong>x${p.count}</strong></div>`;
+                }).join('');
+                const totalPieces = wonHistory.length;
+                const totalValue = wonHistory.reduce((sum, p) => sum + (p.price || 0), 0);
+                totalEl.innerText = `🏆 Total: ${totalPieces} pieza${totalPieces === 1 ? '' : 's'} ganada${totalPieces === 1 ? '' : 's'} · Valor: $${totalValue}`;
+            }
+            document.getElementById('historyModalOverlay').classList.add('open');
         }
+        function closeHistoryModal() { document.getElementById('historyModalOverlay').classList.remove('open'); }
 
         async function confirmCodeAndSpin() {
-            const input = document.getElementById('codeModalInput');
-            const errorEl = document.getElementById('codeModalError');
-            const confirmBtn = document.getElementById('codeModalConfirmBtn');
-            const rawCode = input.value.trim().toUpperCase();
-
+            const input = document.getElementById('codeModalInput'), errorEl = document.getElementById('codeModalError'), confirmBtn = document.getElementById('codeModalConfirmBtn'), rawCode = input.value.trim().toUpperCase();
             const tier = findTierByCode(rawCode);
-            if (!tier) {
-                errorEl.innerText = '❌ Código inválido. Revisa que lo hayas copiado bien.';
-                return;
-            }
-
-            errorEl.innerText = '';
-            confirmBtn.disabled = true;
-            confirmBtn.innerText = 'Verificando…';
-
+            if (!tier) { errorEl.innerText = '❌ Código inválido. Revisa que lo hayas copiado bien.'; return; }
+            errorEl.innerText = ''; confirmBtn.disabled = true; confirmBtn.innerText = 'Verificando…';
+            let codeData = null;
             try {
                 const docRef = dbFirestore.collection('scoop_codes').doc(rawCode);
                 await dbFirestore.runTransaction(async (t) => {
                     const doc = await t.get(docRef);
                     if (!doc.exists) throw new Error('NOT_FOUND');
                     if (doc.data().used) throw new Error('ALREADY_USED');
+                    codeData = doc.data();
                     t.update(docRef, { used: true, usedAt: firebase.firestore.FieldValue.serverTimestamp() });
                 });
                 closeCodeModal();
-                takeScoop(randomBetween(tier.min, tier.max));
+                const min = (codeData && typeof codeData.min === 'number') ? codeData.min : tier.min;
+                const max = (codeData && typeof codeData.max === 'number') ? codeData.max : tier.max;
+                const guaranteedEggs = (codeData && typeof codeData.eggCount === 'number') ? codeData.eggCount : (tier.eggCount || 0);
+                takeScoop(randomBetween(min, max), guaranteedEggs);
             } catch (e) {
-                if (e.message === 'NOT_FOUND') {
-                    errorEl.innerText = '❌ Ese código no existe. Verifica que lo copiaste bien.';
-                } else if (e.message === 'ALREADY_USED') {
-                    errorEl.innerText = '⚠️ Este código ya fue usado.';
-                } else {
-                    errorEl.innerText = '⚠️ No se pudo conectar. Revisa tu internet e intenta de nuevo.';
-                    console.error(e);
-                }
-            } finally {
-                confirmBtn.disabled = false;
-                confirmBtn.innerText = '🎡 Canjear y girar';
-            }
+                if (e.message === 'NOT_FOUND') errorEl.innerText = '❌ Ese código no existe.';
+                else if (e.message === 'ALREADY_USED') errorEl.innerText = '⚠️ Este código ya fue usado.';
+                else errorEl.innerText = '⚠️ Error de conexión.';
+            } finally { confirmBtn.disabled = false; confirmBtn.innerText = '🎡 Canjear y girar'; }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const input = document.getElementById('codeModalInput');
-            if (input) {
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') confirmCodeAndSpin();
-                });
-            }
+            if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter') confirmCodeAndSpin(); });
+            document.getElementById('floatingWaBtn').href = `https://wa.me/${shopWhatsApp}`;
+            updateDemoSpinsInfo();
         });
 
-        // --- 4. LÓGICA DEL SIMULADOR ---
-        let isExtracting = false;
-        let lastSimulatedCount = 0;
+        let isExtracting = false; let lastSimulatedCount = 0;
+        let wonHistory = [];
+        function setButtonsState(disabled) { document.querySelectorAll('.controls .game-btn').forEach(btn => btn.disabled = disabled); }
 
-        function setButtonsState(disabled) {
-            document.querySelectorAll('.controls .game-btn').forEach(btn => btn.disabled = disabled);
+        let eggBannerTimeout = null;
+        let sharedAudioCtx = null;
+        function playWinChime() {
+            try {
+                if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const ctx = sharedAudioCtx;
+                if (ctx.state === 'suspended') ctx.resume();
+                const now = ctx.currentTime;
+                const notes = [880, 1108.73, 1318.51]; // pequeño arpegio ascendente "ta-da"
+                notes.forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    const start = now + i * 0.11;
+                    gain.gain.setValueAtTime(0, start);
+                    gain.gain.linearRampToValueAtTime(0.18, start + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.35);
+                    osc.connect(gain).connect(ctx.destination);
+                    osc.start(start);
+                    osc.stop(start + 0.4);
+                });
+            } catch (e) { /* audio no disponible en este navegador, se ignora */ }
+        }
+        function showEggWinBanner(prize, tagText) {
+            const overlay = document.getElementById('eggWinOverlay');
+            const icon = document.getElementById('eggWinIcon');
+            const name = document.getElementById('eggWinName');
+            const tag = document.getElementById('eggWinTag');
+            icon.innerHTML = prize.image ? `<img src="${prize.image}" alt="${prize.name}">` : (prize.emoji || '🥚');
+            if (tag) tag.innerText = tagText || '✨ Premio Extra ✨';
+            name.innerText = `¡Ganaste ${prize.name}!`;
+            overlay.classList.remove('show');
+            void overlay.offsetWidth; // reinicia la animación aunque ya esté visible (varios premios seguidos)
+            overlay.classList.add('show');
+            confetti({ particleCount: 90, spread: 100, origin: { y: 0.5 }, colors: ['#ffd700', '#fff3c4', '#d4af37', '#ffffff'] });
+            playWinChime();
+            clearTimeout(eggBannerTimeout);
+            eggBannerTimeout = setTimeout(() => overlay.classList.remove('show'), 2400);
         }
 
-        function takeScoop(count) {
+        function takeScoop(count, guaranteedEggs) {
             if (isExtracting) return;
-            isExtracting = true;
-            lastSimulatedCount = count;
-            setButtonsState(true);
-            wheelWrap.classList.add('extracting');
-            spinWheel();
-
-            const list = document.getElementById('basketList');
-            const status = document.getElementById('loadingStatus');
-            const shareBtn = document.getElementById('wsShareBtn');
-            const totalBadge = document.getElementById('basketTotal');
-            
-            list.innerHTML = '';
-            shareBtn.style.display = 'none';
-            status.style.display = 'block';
-            totalBadge.style.display = 'none';
-
+            isExtracting = true; lastSimulatedCount = count; setButtonsState(true); wheelWrap.classList.add('extracting');
+            const list = document.getElementById('basketList'), status = document.getElementById('loadingStatus'), shareBtn = document.getElementById('wsShareBtn'), totalBadge = document.getElementById('basketTotal'), summaryEl = document.getElementById('basketSummary'), historyBtn = document.getElementById('viewHistoryBtn');
+            list.innerHTML = ''; shareBtn.style.display = 'none'; status.style.display = 'block'; totalBadge.style.display = 'none'; summaryEl.style.display = 'none'; summaryEl.innerHTML = '';
+            // Cada nueva tirada (demo o cupón) reinicia el listado/historial anterior en vez de acumularse.
+            wonHistory = [];
+            historyBtn.style.display = 'none';
             let currentPrizes = [];
-
-            // Primero se arma el paquete normal: todas las figuritas que la clienta
-            // ya ganó por su Scoop, sin quitarle ningún lugar al huevo.
-            for (let i = 0; i < count; i++) {
-                const prod = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
-                currentPrizes.push({ ...prod, isGold: false });
-            }
-
-            // Luego, aparte y EXTRA a todo lo del paquete, se checa si le tocan
-            // huevos dorados. Entre más grande el Scoop, más oportunidades tiene
-            // de que le salga más de uno si tiene suerte.
-            if (currentEggs.length && count >= eggMinCount) {
-                const rolls = Math.max(1, Math.floor(count / eggMinCount));
-                const wonEggs = [];
-                for (let i = 0; i < rolls; i++) {
-                    if (Math.random() * 100 < eggChance) {
-                        const egg = currentEggs[Math.floor(Math.random() * currentEggs.length)];
-                        wonEggs.push({ name: egg.name, emoji: egg.emoji, image: egg.image, isGold: true, price: egg.value });
+            for (let i = 0; i < count; i++) currentPrizes.push({ ...catalogProducts[Math.floor(Math.random() * catalogProducts.length)], isGold: false });
+            let wonEggs = [];
+            if (currentEggs.length) {
+                if (typeof guaranteedEggs === 'number') {
+                    // Viene de un cupón canjeado: se respeta el número exacto de huevos que ese nivel promete.
+                    for (let i = 0; i < guaranteedEggs; i++) {
+                        const pickedEgg = currentEggs[Math.floor(Math.random() * currentEggs.length)];
+                        wonEggs.push({ ...pickedEgg, isGold: true, price: pickedEgg.value || 150 });
+                    }
+                } else if (count >= eggMinCount) {
+                    // Demo sin cupón: se usa el sistema de probabilidad configurado en el admin.
+                    const rolls = Math.max(1, Math.floor(count / eggMinCount));
+                    for (let i = 0; i < rolls; i++) {
+                        if (Math.random() * 100 < eggChance) {
+                            const pickedEgg = currentEggs[Math.floor(Math.random() * currentEggs.length)];
+                            wonEggs.push({ ...pickedEgg, isGold: true, price: pickedEgg.value || 150 });
+                        }
                     }
                 }
-                currentPrizes.push(...wonEggs);
+                if (wonEggs.length) currentPrizes.push(...wonEggs);
             }
-
-            let revealed = 0;
-            let runningTotal = 0;
-            
-            // La ruleta gira ~3.2s antes de empezar a revelar los premios
+            // La ruleta gira de forma independiente y lo que salga es SIEMPRE un premio extra.
+            // Si cae en un huevo y ya venía uno del nivel, se lleva dos (o más); si cae en un
+            // producto, ese producto también se agrega como premio especial de la ruleta.
+            let wheelPrize = null;
+            let targetIndex = null;
+            if (wheelSegments.length) {
+                targetIndex = Math.floor(Math.random() * wheelSegments.length);
+                const landed = wheelSegments[targetIndex];
+                if (landed.type === 'egg') {
+                    wheelPrize = { ...landed.data, isGold: true, isWheelBonus: true, price: landed.data.value || 150 };
+                } else {
+                    wheelPrize = { ...landed.data, isGold: false, isWheelBonus: true };
+                }
+                currentPrizes.push(wheelPrize);
+            }
+            spinWheel(targetIndex);
+            const eggPiecesFromTier = wonEggs.length;
+            const wheelExtraCount = wheelPrize ? 1 : 0;
+            let revealed = 0, runningTotal = 0;
             setTimeout(() => {
                 const interval = setInterval(() => {
                     if (revealed < currentPrizes.length) {
-                        const p = currentPrizes[revealed];
-                        revealed++;
-                        runningTotal += p.price;
-
+                        const p = currentPrizes[revealed]; revealed++; runningTotal += (p.price || 0);
                         const li = document.createElement('li');
-                        if (p.isGold) {
-                            li.style.background = "#fffde7";
-                            li.style.borderColor = "var(--gold-accent)";
-                            li.innerHTML = `<span style="font-size:1.2rem;">${p.emoji} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐</span>`;
-                            confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+                        const thumb = p.image ? `<img src="${p.image}" alt="${p.name}" style="width:32px; height:32px; object-fit:cover; border-radius:8px; margin-right:6px; vertical-align:middle;">` : '';
+                        if (p.isWheelBonus) {
+                            li.style.background = p.isGold ? "#fffde7" : "#fff0f6";
+                            li.style.borderColor = p.isGold ? "var(--gold-accent)" : "var(--pink-dark)";
+                            li.innerHTML = `<span style="font-size:1.2rem;">${thumb}${p.emoji || ''} <strong>${p.name}</strong></span> <span style="color:${p.isGold ? 'var(--gold-accent)' : 'var(--pink-dark)'};">🎡 ¡EXTRA DE LA RULETA!</span>`;
+                            showEggWinBanner(p, p.isGold ? '✨ Premio Extra ✨' : '🎡 ¡Premio de la Ruleta!');
+                        } else if (p.isGold) {
+                            li.style.background = "#fffde7"; li.style.borderColor = "var(--gold-accent)";
+                            li.innerHTML = `<span style="font-size:1.2rem;">${thumb}${p.emoji || ''} <strong>${p.name}</strong></span> <span style="color:var(--gold-accent);">⭐ EXTRA</span>`;
+                            showEggWinBanner(p, '✨ Premio Extra ✨');
                         } else {
-                            li.innerHTML = `<span style="font-size:1.2rem;">${p.emoji} <strong>${p.name}</strong></span> <span style="color:var(--pink-dark); font-weight:bold;">$${p.price}</span>`;
+                            li.innerHTML = `<span style="font-size:1.2rem;">${thumb}${p.emoji || ''} <strong>${p.name}</strong></span> <span style="color:var(--pink-dark); font-weight:bold;">$${p.price}</span>`;
                         }
-                        
-                        list.appendChild(li);
-                        list.scrollTop = list.scrollHeight;
-                        totalBadge.style.display = 'inline-block';
-                        totalBadge.innerText = `Valor: $${runningTotal}`;
+                        list.appendChild(li); list.scrollTop = list.scrollHeight;
+                        totalBadge.style.display = 'inline-block'; totalBadge.innerText = `Valor: $${runningTotal}`;
                     } else {
-                        clearInterval(interval);
-                        wheelWrap.classList.remove('extracting');
-                        status.style.display = 'none';
-                        shareBtn.style.display = 'block';
+                        clearInterval(interval); wheelWrap.classList.remove('extracting'); status.style.display = 'none'; shareBtn.style.display = 'block';
                         totalBadge.innerText = `🎉 Valor total: $${runningTotal}`;
+                        const summaryParts = [`📦 <strong>${count}</strong> pieza${count === 1 ? '' : 's'} de tu Scoop`];
+                        if (eggPiecesFromTier > 0) summaryParts.push(`🥚 <strong>${eggPiecesFromTier}</strong> huevito${eggPiecesFromTier === 1 ? '' : 's'} de tu nivel`);
+                        if (wheelExtraCount > 0) summaryParts.push(`🎡 <strong>${wheelExtraCount}</strong> premio extra de la ruleta`);
+                        const countsByName = {};
+                        currentPrizes.forEach(p => { countsByName[p.name] = (countsByName[p.name] || 0) + 1; });
+                        const repeated = Object.entries(countsByName).filter(([, n]) => n > 1);
+                        let summaryHtml = `🏆 Total de mercancía ganada: <strong>${currentPrizes.length}</strong> pieza${currentPrizes.length === 1 ? '' : 's'}<br>` + summaryParts.join(' &nbsp;+&nbsp; ');
+                        if (repeated.length) {
+                            const repeatedText = repeated.map(([name, n]) => `${name} <strong>x${n}</strong>`).join(', ');
+                            summaryHtml += `<br>🔁 Se repitieron: ${repeatedText}`;
+                        }
+                        summaryEl.innerHTML = summaryHtml;
+                        summaryEl.style.display = 'block';
                         confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-                        isExtracting = false;
-                        setButtonsState(false);
+                        isExtracting = false; setButtonsState(false);
+                        wonHistory.push(...currentPrizes);
+                        document.getElementById('viewHistoryBtn').style.display = 'block';
                     }
-                }, 800); // Velocidad de revelación
-            }, 3200);
+                }, 800);
+            }, 5800);
         }
 
-        // --- PROMO NAYES SCOOPS ---
-        function sendPromoToWhatsApp(scoopName, price) {
-            let msg = `¡Hola! ✨ Me interesa la promoción Nayes Scoops: *${scoopName}* (${price}). ¿Me pasas la info de pago y entrega? 💄`;
-            window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
+        function sendPromoToWhatsApp(scoopName, price) { window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(`¡Hola! ✨ Me interesa la promoción Nayes Scoops: *${scoopName}* (${price}). ¿Me pasas la info de pago y entrega? 💄`)}`, '_blank'); }
         function sendScoopToWhatsApp() {
-            let msg = `¡Hola! Hice una simulación en la página y me encantó. Quiero pedir una cucharita de ${lastSimulatedCount} productos. ¿Me pasas la info de pago? ✨`;
+            const grouped = {};
+            wonHistory.forEach(p => { grouped[p.name] = (grouped[p.name] || 0) + 1; });
+            const piezasLines = Object.entries(grouped).map(([name, n]) => `• ${name}${n > 1 ? ` x${n}` : ''}`).join('\n');
+            const totalValue = wonHistory.reduce((sum, p) => sum + (p.price || 0), 0);
+            const msg = `¡Hola! Hice una simulación en la página y me encantó. Me tocaron ${lastSimulatedCount} productos:\n\n${piezasLines}\n\nValor total: $${totalValue}\n\n¿Me pasas la info de pago? ✨`;
             window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+            // Al mandar el pedido se reinicia el listado/historial para que no se junte con la próxima tirada.
+            wonHistory = [];
+            document.getElementById('viewHistoryBtn').style.display = 'none';
+            document.getElementById('basketSummary').style.display = 'none';
+            document.getElementById('basketSummary').innerHTML = '';
+            document.getElementById('basketList').innerHTML = '<li style="color:#888; justify-content:center; border:none; box-shadow:none; background:transparent;">Presiona un botón arriba para girar la ruleta ✨</li>';
+            document.getElementById('basketTotal').style.display = 'none';
+            document.getElementById('wsShareBtn').style.display = 'none';
         }
 
-        // --- 5. CARRITO DE COMPRAS ---
         let cart = [];
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-            toggleCart(true);
-            confetti({ particleCount: 30, spread: 40, origin: { y: 0.2, x: 0.9 } });
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
+        function addToCart(name, price) { cart.push({ name, price }); updateCart(); toggleCart(true); confetti({ particleCount: 30, spread: 40, origin: { y: 0.2, x: 0.9 } }); }
+        function removeFromCart(index) { cart.splice(index, 1); updateCart(); }
         function updateCart() {
             document.getElementById('cartCount').innerText = cart.length;
-            const list = document.getElementById('cartItemsList');
-            const totalEl = document.getElementById('cartTotal');
-            
-            if (cart.length === 0) {
-                list.innerHTML = '<p style="text-align:center; color:#888;">Tu bolsita está vacía</p>';
-                totalEl.innerText = '$0 MXN';
-                return;
-            }
-
-            list.innerHTML = '';
-            let total = 0;
+            const list = document.getElementById('cartItemsList'), totalEl = document.getElementById('cartTotal');
+            if (cart.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">Tu bolsita está vacía</p>'; totalEl.innerText = '$0 MXN'; return; }
+            list.innerHTML = ''; let total = 0;
             cart.forEach((item, i) => {
                 total += item.price;
                 const div = document.createElement('div');
-                div.style.display = 'flex';
-                div.style.justifyContent = 'space-between';
-                div.style.padding = '10px';
-                div.style.background = 'var(--bg-cream)';
-                div.style.borderRadius = '10px';
-                div.innerHTML = `
-                    <span>🎀 ${item.name}</span>
-                    <div style="font-weight:bold;">$${item.price} <button onclick="removeFromCart(${i})" style="margin-left:10px; background:none; border:none; color:red; cursor:pointer;">✕</button></div>
-                `;
+                div.style.cssText = 'display:flex; justify-content:space-between; padding:10px; background:var(--bg-cream); border-radius:10px;';
+                div.innerHTML = `<span>🎀 ${item.name}</span><div style="font-weight:bold;">$${item.price} <button onclick="removeFromCart(${i})" style="margin-left:10px; background:none; border:none; color:red; cursor:pointer;">✕</button></div>`;
                 list.appendChild(div);
             });
-
             totalEl.innerText = `$${total} MXN`;
         }
 
-        function toggleMobileNav() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
-
-        function closeMobileNav() {
-            document.getElementById('navLinks').classList.remove('open');
-        }
-
+        function toggleMobileNav() { document.getElementById('navLinks').classList.toggle('open'); }
+        function closeMobileNav() { document.getElementById('navLinks').classList.remove('open'); }
         function toggleCart(forceOpen = null) {
             const drawer = document.getElementById('cartDrawer');
             if (forceOpen === true) drawer.classList.add('open');
@@ -1602,28 +2206,15 @@
 
         function sendCartToWhatsApp() {
             if (cart.length === 0) return alert("Tu carrito está vacío");
-            let total = 0;
-            let msg = `¡Hola Nayes Beauty! ✨ Deseo hacer el siguiente pedido:\n\n`;
-            cart.forEach(i => { 
-                msg += `🛍️ ${i.name} ($${i.price})\n`; 
-                total += i.price;
-            });
+            let total = 0, msg = `¡Hola Nayes Beauty! ✨ Deseo hacer el siguiente pedido:\n\n`;
+            cart.forEach(i => { msg += `🛍️ ${i.name} ($${i.price})\n`; total += i.price; });
             msg += `\n*Total a pagar:* $${total} MXN\n\n¿Me indicas cómo realizo el pago y la entrega?`;
-            
-            cart = [];
-            updateCart();
-            toggleCart(false);
+            cart = []; updateCart(); toggleCart(false);
             window.open(`https://wa.me/${shopWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // --- 6. INICIAR ---
-        // Pinta primero con los valores de respaldo para que la página nunca se vea
-        // vacía, y luego startDBSync() los reemplaza con lo real en cuanto carga.
-        renderVisualBoard();
-        renderProducts();
-        renderPromoTiers(DEFAULT_PROMO_TIERS);
-        buildWheel();
-        startDBSync();
+        renderVisualBoard(); renderProducts(); renderPromoTiers(DEFAULT_PROMO_TIERS); buildWheel(); startDBSync();
     </script>
 </body>
+
 </html>
