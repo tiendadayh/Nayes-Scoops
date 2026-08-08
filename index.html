@@ -67,6 +67,50 @@
             letter-spacing: 1px;
         }
 
+        .live-banner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: linear-gradient(90deg, #d90429, #ef233c, #d90429);
+            color: white;
+            text-align: center;
+            padding: 12px 16px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .live-banner.show { display: flex; }
+
+        .live-banner-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            animation: liveDotPulse 1.2s infinite ease-in-out;
+        }
+
+        @keyframes liveDotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        .live-banner-text {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .live-banner-btn {
+            background: white;
+            color: #d90429;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
         nav {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -1316,6 +1360,12 @@
         <span id="announcementText">✨ ¡Bienvenidas a la experiencia de maquillaje más divertida de Acapulco! ✨</span>
     </div>
 
+    <div class="live-banner" id="liveBanner">
+        <span class="live-banner-dot"></span>
+        <span class="live-banner-text" id="liveBannerText">🔴 ¡Estamos EN VIVO ahora mismo! Ven a ver tu Scoop 🎥</span>
+        <a href="#" class="live-banner-btn" id="liveBannerBtn" target="_blank" rel="noopener">Ver transmisión</a>
+    </div>
+
     <nav>
         <a href="#" class="logo">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Nayes Scoops
@@ -1553,9 +1603,9 @@
             promociones exclusivas.</p>
 
         <div class="social-links">
-            <a href="https://instagram.com/yanetderomeosantos?igsh=MWRmZ2szOHJqeW92Zw%3D%3D" style="color:#E1306C;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com/@nayeli.terrazas6" style="color:#000000;"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://facebook.com/share/199Qs64ELm/" style="color:#1877F2;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="color:#E1306C;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" style="color:#000000;"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" style="color:#1877F2;"><i class="fa-brands fa-facebook"></i></a>
         </div>
 
         <p style="margin-top:20px; color:#888; font-size:0.8rem;">© 2026 Nayes Beauty & Scoops. Acapulco, México. Todos
@@ -1563,7 +1613,7 @@
     </footer>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
-    <a href="https://wa.me/521234567890" class="wa-floating-btn" id="floatingWaBtn" target="_blank" aria-label="Chat en WhatsApp">
+    <a href="#" class="wa-floating-btn" id="floatingWaBtn" target="_blank" aria-label="Chat en WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -1863,12 +1913,21 @@
             if (!data) return;
             db = data;
 
-            // Mostrar el botón de EN VIVO si db.isLive es verdadero (Punto 2)
+            // Banner y badge de EN VIVO, controlados desde el panel admin (db.live)
             const liveBadge = document.getElementById('liveBadge');
+            const liveBanner = document.getElementById('liveBanner');
+            const liveBannerText = document.getElementById('liveBannerText');
+            const liveBannerBtn = document.getElementById('liveBannerBtn');
+            const isLive = !!(db.live && db.live.active);
+            const liveUrl = (db.live && db.live.url) ? db.live.url : '#juego';
             if (liveBadge) {
-                liveBadge.style.display = db.isLive ? 'flex' : 'none';
-                // Si quieres que el botón te lleve a Tiktok:
-                if (db.liveUrl) liveBadge.href = db.liveUrl;
+                liveBadge.style.display = isLive ? 'flex' : 'none';
+                liveBadge.href = liveUrl;
+            }
+            if (liveBanner) {
+                liveBanner.classList.toggle('show', isLive);
+                if (db.live && db.live.text) liveBannerText.innerText = `🔴 ${db.live.text}`;
+                if (liveBannerBtn) liveBannerBtn.href = liveUrl;
             }
 
             if (db.announcement) document.getElementById('announcementText').innerText = db.announcement;

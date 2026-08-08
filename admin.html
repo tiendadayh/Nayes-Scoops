@@ -349,6 +349,18 @@
                 </div>
             </div>
         </div>
+        <div class="panel">
+            <h2>🔴 Transmisión en Vivo</h2>
+            <p class="hint" style="margin-bottom:15px;">Cuando actives esto, en tu página pública aparecerá un banner llamativo de "EN VIVO AHORA" con un botón que lleva directo a tu transmisión (Facebook, Instagram, TikTok, etc.). Actívalo cuando empieces y desactívalo cuando termines.</p>
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:600; color:var(--pink-dark);">
+                <input type="checkbox" id="f-live-active" style="width:20px; height:20px; cursor:pointer;">
+                🔴 Estoy en vivo ahora mismo
+            </label>
+            <label style="margin-top:14px;">Texto del banner</label>
+            <input type="text" id="f-live-text" placeholder="¡Estamos EN VIVO ahora mismo! Ven a ver tu Scoop 🎥">
+            <label>Link de tu transmisión (Facebook, Instagram, TikTok...)</label>
+            <input type="text" id="f-live-url" placeholder="https://facebook.com/tu_pagina/live">
+        </div>
     </div>
 
     <!-- TAB PROMOCIÓN -->
@@ -487,6 +499,11 @@
             image1: null,
             image2: null
         },
+        live: {
+            active: false,
+            text: "¡Estamos EN VIVO ahora mismo! Ven a ver tu Scoop 🎥",
+            url: ""
+        },
         promo: {
             eyebrow: "✨ LLEGÓ LA NUEVA EXPERIENCIA ✨",
             title: "Nayes Scoops 🎉",
@@ -601,6 +618,11 @@
     }
     ensureProductsQty();
 
+    function ensureLiveConfig() {
+        if (!db.live) db.live = JSON.parse(JSON.stringify(DEFAULT_DB.live));
+    }
+    ensureLiveConfig();
+
     function ensureWheelConfig() {
         if (!db.wheel) {
             db.wheel = JSON.parse(JSON.stringify(DEFAULT_DB.wheel));
@@ -661,6 +683,10 @@
         document.getElementById('f-promo-eyebrow').value = db.promo.eyebrow;
         document.getElementById('f-promo-title').value = db.promo.title;
         document.getElementById('f-promo-desc').value = db.promo.description;
+        ensureLiveConfig();
+        document.getElementById('f-live-active').checked = !!db.live.active;
+        document.getElementById('f-live-text').value = db.live.text;
+        document.getElementById('f-live-url').value = db.live.url;
         fillAdImages();
     }
 
@@ -1035,6 +1061,10 @@
         db.promo.eyebrow = document.getElementById('f-promo-eyebrow').value;
         db.promo.title = document.getElementById('f-promo-title').value;
         db.promo.description = document.getElementById('f-promo-desc').value;
+        ensureLiveConfig();
+        db.live.active = document.getElementById('f-live-active').checked;
+        db.live.text = document.getElementById('f-live-text').value;
+        db.live.url = document.getElementById('f-live-url').value;
         db.wheel.eggChance = parseInt(document.getElementById('f-egg-chance').value, 10) || 0;
         db.wheel.eggMinCount = parseInt(document.getElementById('f-egg-mincount').value, 10) || 1;
 
@@ -1241,6 +1271,7 @@
                     db = remote;
                     ensureTierCodeFields();
                     ensureProductsQty();
+                    ensureLiveConfig();
                     ensureWheelConfig();
                 }
             }
